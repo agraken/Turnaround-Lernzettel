@@ -361,9 +361,25 @@ tr:nth-child(even) td { background: #f8faff; }
   font-family: 'Fraunces', serif;
   font-size: 15px;
   color: var(--text);
-  margin-bottom: 12px;
+  margin-bottom: 0;
   font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: var(--grey);
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  user-select: none;
+  transition: background 0.2s;
 }
+.quiz-title:hover { background: #e0e7ff; }
+.quiz-title .toggle-arrow { font-size: 12px; opacity: 0.6; transition: transform 0.2s; }
+.quiz-section.open .quiz-title { border-radius: 8px 8px 0 0; margin-bottom: 0; }
+.quiz-section.open .quiz-title .toggle-arrow { transform: rotate(90deg); }
+.quiz-cards-wrapper { display: none; padding-top: 12px; }
+.quiz-section.open .quiz-cards-wrapper { display: block; }
 .quiz-card {
   background: var(--grey);
   border-radius: 10px;
@@ -781,6 +797,7 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 16px 0; }
   font-family: 'DM Sans', sans-serif;
 }
 #btn-lernzettel:hover { background: var(--blue); color: white; }
+#header-btns { display: flex; gap: 8px; align-items: center; }
 
 [data-theme="dark"] {
   --blue: #60a5fa;
@@ -834,8 +851,12 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 16px 0; }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 600px) {
-  #header-inner { gap: 8px; }
+  #header-inner { flex-wrap: wrap; padding: 6px 10px; gap: 4px; }
+  #header-title { flex: 1; font-size: 13px; }
   #nav-links { display: none; }
+  #header-btns { width: 100%; display: flex; gap: 5px; }
+  #header-btns button { flex: 1; padding: 6px 4px !important; font-size: 11px !important; }
+  #btn-darkmode { padding: 4px 8px !important; font-size: 15px !important; }
   .chapter-body { padding: 16px; }
   .pro-con { grid-template-columns: 1fr; }
   .result-score { font-size: 56px; }
@@ -865,9 +886,11 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 16px 0; }
       <a class="nav-link" href="#k11">11. Maßnahmen</a>
       <a class="nav-link" href="#k12">12. Sofort</a>
     </nav>
-    <button id="btn-lernzettel" onclick="showPage('lernzettel')">📚 Lernzettel</button>
-    <button id="btn-cards" onclick="showPage('cards')">🃏 Karteikarten</button>
-    <button id="btn-test" onclick="showPage('test')">📝 Abschlusstest</button>
+    <div id="header-btns">
+      <button id="btn-lernzettel" onclick="showPage('lernzettel')">📚 Lernzettel</button>
+      <button id="btn-cards" onclick="showPage('cards')">🃏 Karteikarten</button>
+      <button id="btn-test" onclick="showPage('test')">📝 Abschlusstest</button>
+    </div>
     <button id="btn-darkmode" onclick="toggleDarkMode()" title="Dark / Light Mode">🌙</button>
   </div>
 </header>
@@ -924,7 +947,8 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 16px 0; }
     </ul>
 
     <div class="quiz-section">
-      <div class="quiz-title">🧠 Teste dich – Kapitel 1</div>
+      <div class="quiz-title" onclick="toggleSection(this)">🧠 Teste dich – Kapitel 1 <span class="toggle-arrow">▶</span></div>
+      <div class="quiz-cards-wrapper">
       <div class="quiz-card open" style="margin-bottom:12px;">
         <div class="quiz-question" style="cursor:default;background:#e0e7ff;color:#3730a3;user-select:auto;">⚡ MC: Welche Frist gilt bei Zahlungsunfähigkeit (§ 15a InsO)? <span style="font-size:11px;font-weight:400;opacity:0.7">[Multiple Choice]</span></div>
         <div class="quiz-answer" style="display:block;padding:14px 16px;"><div id="mc_inline_0"></div><script>document.addEventListener("DOMContentLoaded",function(){renderMC("mc_inline_0",["1 Woche","2 Wochen","3 Wochen","4 Wochen","6 Wochen"],2,"3 Wochen bei Zahlungsunfähigkeit. 6 Wochen bei Überschuldung. Verstoß = strafbar nach §15a Abs.4 InsO.");});</script></div>
@@ -946,6 +970,7 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 16px 0; }
         <div class="quiz-question">Was besagt die Sorgfaltspflicht des Kaufmannes (§ 43 GmbHG)? <span class="arrow">▼</span></div>
         <div class="quiz-answer">Der GF muss die Sorgfalt eines <strong>ordentlichen Geschäftsmannes</strong> anwenden: Entscheidungen angemessen vorbereiten, auf gesicherten Erkenntnissen basieren und ein angemessenes Risikomanagement betreiben.</div>
       </div>
+    </div>
     </div>
   </div>
 </div>
@@ -986,7 +1011,8 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 16px 0; }
     </div>
 
     <div class="quiz-section">
-      <div class="quiz-title">🧠 Teste dich – Kapitel 2</div>
+      <div class="quiz-title" onclick="toggleSection(this)">🧠 Teste dich – Kapitel 2 <span class="toggle-arrow">▶</span></div>
+      <div class="quiz-cards-wrapper">
       <div class="quiz-card" onclick="toggleQuiz(this)">
         <div class="quiz-question">Welche Rechtsform ist laut Creditreform am häufigsten von Insolvenzen betroffen? <span class="arrow">▼</span></div>
         <div class="quiz-answer"><strong>GmbH</strong> – sie ist die häufigste Rechtsform bei Unternehmensinsolvenzen in Deutschland, gefolgt von Einzelunternehmen.</div>
@@ -995,6 +1021,7 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 16px 0; }
         <div class="quiz-question">Welcher Wirtschaftssektor weist die meisten Insolvenzen auf? <span class="arrow">▼</span></div>
         <div class="quiz-answer"><strong>Dienstleistungssektor</strong> – gefolgt von Handel und Bau. Junge Unternehmen sind überproportional häufig betroffen.</div>
       </div>
+    </div>
     </div>
   </div>
 </div>
@@ -1032,7 +1059,8 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 16px 0; }
     <div class="box-warn">🔑 <strong>Kernbotschaft:</strong> Je früher die Krise erkannt wird, desto größer ist der Handlungsspielraum. In der Strategischen Krise ist Restrukturierung noch vermeidbar. Ab der Liquiditätskrise ist eine Sanierung meist unausweichlich.</div>
 
     <div class="quiz-section">
-      <div class="quiz-title">🧠 Teste dich – Kapitel 3</div>
+      <div class="quiz-title" onclick="toggleSection(this)">🧠 Teste dich – Kapitel 3 <span class="toggle-arrow">▶</span></div>
+      <div class="quiz-cards-wrapper">
       <div class="quiz-card open" style="margin-bottom:12px;">
         <div class="quiz-question" style="cursor:default;background:#e0e7ff;color:#3730a3;user-select:auto;">⚡ MC: Was zeigt die linke Y-Achse im Krisenablauf-Diagramm (Folie 53)? <span style="font-size:11px;font-weight:400;opacity:0.7">[Multiple Choice]</span></div>
         <div class="quiz-answer" style="display:block;padding:14px 16px;"><div id="mc_inline_2"></div><script>document.addEventListener("DOMContentLoaded",function(){renderMC("mc_inline_2",["Handlungsbedarf (gering→groß)","Handlungsspielraum (groß→gering)","Liquidität","Zeit","Umsatzentwicklung"],1,"Y-Achse links: Handlungsspielraum (groß→gering). Y-Achse rechts: Handlungsbedarf (gering→groß). X-Achse: Zeit.");});</script></div>
@@ -1054,6 +1082,7 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 16px 0; }
         <div class="quiz-question">Warum ist die Strategische Krise so schwer zu erkennen? <span class="arrow">▼</span></div>
         <div class="quiz-answer">Weil finanzielle Kennzahlen kaum Hinweise geben – die Auswirkungen zeigen sich erst mit <strong>großer zeitlicher Verzögerung</strong>. Außerdem kann die Strategie richtig sein, aber die Umsetzung schlecht.</div>
       </div>
+    </div>
     </div>
   </div>
 </div>
@@ -1123,7 +1152,8 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 16px 0; }
     <p>Zusätzlich: <strong>Strategische Bestandsaufnahme</strong> (Markt, Wettbewerb, Branchenentwicklung, Marktpotenziale)</p>
 
     <div class="quiz-section">
-      <div class="quiz-title">🧠 Teste dich – Kapitel 4</div>
+      <div class="quiz-title" onclick="toggleSection(this)">🧠 Teste dich – Kapitel 4 <span class="toggle-arrow">▶</span></div>
+      <div class="quiz-cards-wrapper">
       <div class="quiz-card open" style="margin-bottom:12px;">
         <div class="quiz-question" style="cursor:default;background:#e0e7ff;color:#3730a3;user-select:auto;">⚡ MC: Welches ist die ERSTE Phase im Turnaround-Prozess und wie lange dauert sie? <span style="font-size:11px;font-weight:400;opacity:0.7">[Multiple Choice]</span></div>
         <div class="quiz-answer" style="display:block;padding:14px 16px;"><div id="mc_inline_4"></div><script>document.addEventListener("DOMContentLoaded",function(){renderMC("mc_inline_4",["Umsetzungsphase (6–24 Monate)","Insolvenzantrag","Konzeptphase (2–6 Wochen)","Bestellung des IV","Kapitalerhöhung"],2,"Konzeptphase (2-6 Wochen): Bestandsaufnahme + Grobkonzept. Dann Umsetzungsphase (6-24 Monate).");});</script></div>
@@ -1145,6 +1175,7 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 16px 0; }
         <div class="quiz-question">Welche drei Analysebereiche umfasst die finanzielle Bestandsaufnahme? <span class="arrow">▼</span></div>
         <div class="quiz-answer"><strong>1. Vermögenslage</strong> (Anlagenalter, Investitionen), <strong>2. Ertragslage</strong> (Rentabilität, Ergebnishöhe), <strong>3. Finanzlage</strong> (Kapitalstruktur, Liquidität, Cashflow).</div>
       </div>
+    </div>
     </div>
   </div>
 </div>
@@ -1179,7 +1210,8 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 16px 0; }
     </div>
 
     <div class="quiz-section">
-      <div class="quiz-title">🧠 Teste dich – Kapitel 5</div>
+      <div class="quiz-title" onclick="toggleSection(this)">🧠 Teste dich – Kapitel 5 <span class="toggle-arrow">▶</span></div>
+      <div class="quiz-cards-wrapper">
       <div class="quiz-card" onclick="toggleQuiz(this)">
         <div class="quiz-question">Nenne 3 Signale einer strategischen Krise im Bereich HR/Organisation. <span class="arrow">▼</span></div>
         <div class="quiz-answer"><strong>1.</strong> Überdurchschnittliche Fluktuation. <strong>2.</strong> Überalterung / wenig frisches Blut. <strong>3.</strong> Unklare Organisationsstruktur.</div>
@@ -1188,6 +1220,7 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 16px 0; }
         <div class="quiz-question">Warum ist die strategische Krise gefährlicher als sie auf den ersten Blick erscheint? <span class="arrow">▼</span></div>
         <div class="quiz-answer">Weil finanzielle Kennzahlen noch keine Warnsignale zeigen und die Folgen sich erst <strong>mit großer zeitlicher Verzögerung</strong> bemerkbar machen – wenn der Handlungsspielraum schon stark eingeschränkt ist.</div>
       </div>
+    </div>
     </div>
   </div>
 </div>
@@ -1273,7 +1306,8 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 16px 0; }
     </div>
 
     <div class="quiz-section">
-      <div class="quiz-title">🧠 Teste dich – Kapitel 6</div>
+      <div class="quiz-title" onclick="toggleSection(this)">🧠 Teste dich – Kapitel 6 <span class="toggle-arrow">▶</span></div>
+      <div class="quiz-cards-wrapper">
       <div class="quiz-card open" style="margin-bottom:12px;">
         <div class="quiz-question" style="cursor:default;background:#e0e7ff;color:#3730a3;user-select:auto;">⚡ MC: Was bedeutet ein kurzer Cash Conversion Cycle (CCC)? <span style="font-size:11px;font-weight:400;opacity:0.7">[Multiple Choice]</span></div>
         <div class="quiz-answer" style="display:block;padding:14px 16px;"><div id="mc_inline_6"></div><script>document.addEventListener("DOMContentLoaded",function(){renderMC("mc_inline_6",["Schlechtere Zahlungsmoral","Mehr gebundenes Kapital","Weniger gebundenes Kapital – bessere Liquidität","Hohes Insolvenzrisiko","Niedrige Umsatzrendite"],2,"Je kürzer CCC = je weniger Kapital im Betriebskreislauf gebunden. Ziel: DIV und DSO senken, DPO erhöhen.");});</script></div>
@@ -1295,6 +1329,7 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 16px 0; }
         <div class="quiz-question">Erkläre den Zielkonflikt beim Working Capital. <span class="arrow">▼</span></div>
         <div class="quiz-answer">Aus <strong>Risikosicht</strong>: hohes WC vorteilhaft (Liquidität, Lieferbereitschaft). Aus <strong>Rentabilitätssicht</strong>: niedriges WC vorteilhaft (weniger gebundenes Kapital, höhere Rendite).</div>
       </div>
+    </div>
     </div>
   </div>
 </div>
@@ -1378,7 +1413,8 @@ Zinsdeckungsgrad = EBIT / Zinsaufwand
 = Über-/Unterdeckung</code>
 
     <div class="quiz-section">
-      <div class="quiz-title">🧠 Teste dich – Kapitel 7</div>
+      <div class="quiz-title" onclick="toggleSection(this)">🧠 Teste dich – Kapitel 7 <span class="toggle-arrow">▶</span></div>
+      <div class="quiz-cards-wrapper">
       <div class="quiz-card open" style="margin-bottom:12px;">
         <div class="quiz-question" style="cursor:default;background:#e0e7ff;color:#3730a3;user-select:auto;">⚡ MC: ROI = Umsatzrendite x Kapitalumschlag. Umsatzrendite = 8%, Kapitalumschlag = 2 – was ist der ROI? <span style="font-size:11px;font-weight:400;opacity:0.7">[Multiple Choice]</span></div>
         <div class="quiz-answer" style="display:block;padding:14px 16px;"><div id="mc_inline_8"></div><script>document.addEventListener("DOMContentLoaded",function(){renderMC("mc_inline_8",["4%","8%","10%","16%","2%"],3,"ROI = 8% × 2 = 16%. Der Kapitalumschlag ist der zweite Stellhebel neben der Umsatzrendite.");});</script></div>
@@ -1400,6 +1436,7 @@ Zinsdeckungsgrad = EBIT / Zinsaufwand
         <div class="quiz-question">Was bedeutet ein Verschuldungsgrad von 2? Wie hoch ist dann die EK-Quote? <span class="arrow">▼</span></div>
         <div class="quiz-answer">FK = 2× EK. Bei Verschuldungsgrad 2: EK / (EK+FK) = 1/3 ≈ <strong>33%</strong> EK-Quote. Laut Creditreform gilt eine EK-Quote von mindestens 30% als ausreichend / nicht risikoerhöhend.</div>
       </div>
+    </div>
     </div>
   </div>
 </div>
@@ -1468,7 +1505,8 @@ Zinsdeckungsgrad = EBIT / Zinsaufwand
     </ol>
 
     <div class="quiz-section">
-      <div class="quiz-title">🧠 Teste dich – Kapitel 8</div>
+      <div class="quiz-title" onclick="toggleSection(this)">🧠 Teste dich – Kapitel 8 <span class="toggle-arrow">▶</span></div>
+      <div class="quiz-cards-wrapper">
       <div class="quiz-card open" style="margin-bottom:12px;">
         <div class="quiz-question" style="cursor:default;background:#e0e7ff;color:#3730a3;user-select:auto;">⚡ MC: Welche Mehrheit ist bei StaRUG je Gläubigergruppe erforderlich? <span style="font-size:11px;font-weight:400;opacity:0.7">[Multiple Choice]</span></div>
         <div class="quiz-answer" style="display:block;padding:14px 16px;"><div id="mc_inline_10"></div><script>document.addEventListener("DOMContentLoaded",function(){renderMC("mc_inline_10",["50%","60%","66,7%","75%","100%"],3,"75% der Stimmrechte in jeder Gruppe (§25 Abs.1 StaRUG). Stimmen alle zu: kein Gericht nötig. Stimmt Mehrheit zu: Gericht bestätigt auch für Ablehnende.");});</script></div>
@@ -1486,6 +1524,7 @@ Zinsdeckungsgrad = EBIT / Zinsaufwand
         <div class="quiz-question">Welche Mehrheit ist bei StaRUG für die Planannahme je Gruppe erforderlich? <span class="arrow">▼</span></div>
         <div class="quiz-answer"><strong>75% der Stimmrechte</strong> in jeder Gruppe (§ 25 Abs. 1 StaRUG). Stimmen alle Gläubiger zu, ist keine gerichtliche Einbeziehung nötig. Stimmt eine Mehrheit zu, wird der Plan dem Gericht zur Bestätigung vorgelegt.</div>
       </div>
+    </div>
     </div>
   </div>
 </div>
@@ -1584,7 +1623,8 @@ Zinsdeckungsgrad = EBIT / Zinsaufwand
 Schenkungsanfechtung: bis 4 Jahre vor Insolvenzantrag </code>
 
     <div class="quiz-section">
-      <div class="quiz-title">🧠 Teste dich – Kapitel 9</div>
+      <div class="quiz-title" onclick="toggleSection(this)">🧠 Teste dich – Kapitel 9 <span class="toggle-arrow">▶</span></div>
+      <div class="quiz-cards-wrapper">
       <div class="quiz-card open" style="margin-bottom:12px;">
         <div class="quiz-question" style="cursor:default;background:#e0e7ff;color:#3730a3;user-select:auto;">⚡ MC: Was prüft das Insolvenzgericht in Schritt 2 des Verfahrensablaufs? <span style="font-size:11px;font-weight:400;opacity:0.7">[Multiple Choice]</span></div>
         <div class="quiz-answer" style="display:block;padding:14px 16px;"><div id="mc_inline_11"></div><script>document.addEventListener("DOMContentLoaded",function(){renderMC("mc_inline_11",["Bonität des GF","Eröffnungsgrund (§§16ff.) UND hinreichende Masse (§26)","Den Insolvenzplan","Die Gläubigerliste","Den Jahresabschluss"],1,"Schritt 2: Eröffnungsgrund vorhanden? + Hinreichende Masse für Verfahrenskosten (§26)? Fehlt Masse → Abweisung.");});</script></div>
@@ -1610,6 +1650,7 @@ Schenkungsanfechtung: bis 4 Jahre vor Insolvenzantrag </code>
         <div class="quiz-question">Was unterscheidet Aussonderungsberechtigte von Absonderungsberechtigten im Insolvenzverfahren? <span class="arrow">▼</span></div>
         <div class="quiz-answer"><strong>Aussonderungsberechtigte (§ 47)</strong>: Eigentümer von Gegenständen beim Schuldner (Miete, Leasing, Eigentumsvorbehalt) – können Sachen herausverlangen. <strong>Absonderungsberechtigte (§ 51)</strong>: Inhaber von Sicherungsrechten (Pfandrechte, Hypotheken) – haben Recht auf vorrangige Befriedigung aus dem Erlös.</div>
       </div>
+    </div>
     </div>
   </div>
 </div>
@@ -1677,7 +1718,8 @@ Summenmehrheit: &gt; 50% der Forderungssumme
     </div>
 
     <div class="quiz-section">
-      <div class="quiz-title">🧠 Teste dich – Kapitel 10</div>
+      <div class="quiz-title" onclick="toggleSection(this)">🧠 Teste dich – Kapitel 10 <span class="toggle-arrow">▶</span></div>
+      <div class="quiz-cards-wrapper">
       <div class="quiz-card open" style="margin-bottom:12px;">
         <div class="quiz-question" style="cursor:default;background:#e0e7ff;color:#3730a3;user-select:auto;">⚡ MC: Wann wird ein Insolvenzplan ABGELEHNT? <span style="font-size:11px;font-weight:400;opacity:0.7">[Multiple Choice]</span></div>
         <div class="quiz-answer" style="display:block;padding:14px 16px;"><div id="mc_inline_13"></div><script>document.addEventListener("DOMContentLoaded",function(){renderMC("mc_inline_13",["Wenn ein Gläubiger widerspricht","Wenn ≤ Hälfte der Gruppen zustimmt","Wenn Schuldner widerspricht","Wenn keine Kopfmehrheit erreicht","Wenn IV den Plan ablehnt"],1,"Plan abgelehnt wenn ≤ Hälfte der Gruppen zustimmt. Alle stimmen zu → angenommen. Mehr als Hälfte aber nicht alle → Fiktion der Zustimmung möglich.");});</script></div>
@@ -1691,6 +1733,7 @@ Summenmehrheit: &gt; 50% der Forderungssumme
         <div class="quiz-question">Was regelt der gestaltende Teil des Insolvenzplans (§ 221 InsO)? <span class="arrow">▼</span></div>
         <div class="quiz-answer">Die <strong>konkreten Änderungen der Rechtsstellung</strong> der Beteiligten. Er gilt mit Rechtskraft für <strong>alle Beteiligten</strong> – also auch für Gläubiger, die dem Plan widersprochen haben .</div>
       </div>
+    </div>
     </div>
   </div>
 </div>
@@ -1797,7 +1840,8 @@ Summenmehrheit: &gt; 50% der Forderungssumme
     <div class="box-info">💡 <span class="tag-nicht">Nicht Klausur</span> Details wie Due Diligence, Ablaufprozess und Phasenmodell sind <strong>nicht prüfungsrelevant</strong>.</div>
 
     <div class="quiz-section">
-      <div class="quiz-title">🧠 Teste dich – Kapitel 11</div>
+      <div class="quiz-title" onclick="toggleSection(this)">🧠 Teste dich – Kapitel 11 <span class="toggle-arrow">▶</span></div>
+      <div class="quiz-cards-wrapper">
       <div class="quiz-card open" style="margin-bottom:12px;">
         <div class="quiz-question" style="cursor:default;background:#e0e7ff;color:#3730a3;user-select:auto;">⚡ MC: Welche 3 Funktionen hat Factoring? <span style="font-size:11px;font-weight:400;opacity:0.7">[Multiple Choice]</span></div>
         <div class="quiz-answer" style="display:block;padding:14px 16px;"><div id="mc_inline_14"></div><script>document.addEventListener("DOMContentLoaded",function(){renderMC("mc_inline_14",["Kredit, Tilgung, Zinsen","Finanzierungsfunktion, Dienstleistungsfunktion, Delkrederefunktion","Einkauf, Lager, Vertrieb","Produktion, Marketing, Service","Akquise, Bindung, Rückgewinnung"],1,"1. Finanzierungsfunktion (sofortige Liquidität). 2. Dienstleistungsfunktion (Mahnwesen, Buchhaltung). 3. Delkrederefunktion (100% Ausfallrisiko-Übernahme).");});</script></div>
@@ -1819,6 +1863,7 @@ Summenmehrheit: &gt; 50% der Forderungssumme
         <div class="quiz-question">Was ist der Unterschied zwischen Merger und Akquisition? <span class="arrow">▼</span></div>
         <div class="quiz-answer"><strong>Merger/Fusion:</strong> wirtschaftliche UND rechtliche Einheit (Verschmelzung). <strong>Akquisition:</strong> nur wirtschaftliche Einheit – das Zielunternehmen bleibt rechtlich bestehen. Asset Deal = Kauf von Vermögensgegenständen, Share Deal = Kauf von Kapitalanteilen.</div>
       </div>
+    </div>
     </div>
   </div>
 </div>
@@ -1876,7 +1921,8 @@ Summenmehrheit: &gt; 50% der Forderungssumme
     </ol>
 
     <div class="quiz-section">
-      <div class="quiz-title">🧠 Teste dich – Kapitel 12</div>
+      <div class="quiz-title" onclick="toggleSection(this)">🧠 Teste dich – Kapitel 12 <span class="toggle-arrow">▶</span></div>
+      <div class="quiz-cards-wrapper">
       <div class="quiz-card open" style="margin-bottom:12px;">
         <div class="quiz-question" style="cursor:default;background:#e0e7ff;color:#3730a3;user-select:auto;">⚡ MC: Welche Personalmaßnahme kommt bei Kostensenkung immer ZULETZT? <span style="font-size:11px;font-weight:400;opacity:0.7">[Multiple Choice]</span></div>
         <div class="quiz-answer" style="display:block;padding:14px 16px;"><div id="mc_inline_16"></div><script>document.addEventListener("DOMContentLoaded",function(){renderMC("mc_inline_16",["Boni kürzen","Einstellungsstopp","Kurzarbeit","Aufhebungsverträge","Betriebsbedingte Kündigungen"],4,"Reihenfolge: 1.Boni/Urlaubsgeld kürzen → 2.Einstellungsstopp → 3.Kurzarbeit → 4.Aufhebungsverträge → 5.Betriebsbedingte Kündigungen (letzter Schritt!).");});</script></div>
@@ -1894,6 +1940,7 @@ Summenmehrheit: &gt; 50% der Forderungssumme
         <div class="quiz-question">Nenne 4 organisatorische Sofortmaßnahmen zur Liquiditätsverbesserung. <span class="arrow">▼</span></div>
         <div class="quiz-answer"><strong>1.</strong> Investitionsverschiebung. <strong>2.</strong> Forderungsmanagement verbessern (Mahnwesen). <strong>3.</strong> Lageroptimierung / Just-in-time. <strong>4.</strong> Raummanagement (Untermiete, Kündigung). + Einkaufskonditionen verbessern.</div>
       </div>
+    </div>
     </div>
   </div>
 </div>
@@ -2056,6 +2103,9 @@ function showPage(page) {
 // ==================== QUIZ TOGGLE ====================
 function toggleQuiz(card) {
   card.classList.toggle('open');
+}
+function toggleSection(titleEl) {
+  titleEl.closest('.quiz-section').classList.toggle('open');
 }
 
 // ==================== SCROLL PROGRESS ====================
