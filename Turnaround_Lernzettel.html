@@ -4592,6 +4592,177 @@ var allQuestions = [
     must: false
   }
 
+,
+  // ===== MULTI-SELECT FRAGEN (mehrere richtige Antworten) =====
+  {
+    q: "Welche DREI Insolvenzgründe sind im deutschen Insolvenzrecht definiert?",
+    options: ["Zahlungsunfähigkeit (§17 InsO)","Überschuldung (§19 InsO)","Drohende Zahlungsunfähigkeit (§18 InsO)","Bilanzverlust (§20 InsO)","Eigenkapitalmangel (§21 InsO)","Kreditkündigung durch Hausbank"],
+    correct: [0,1,2],
+    explanation: "Die drei Insolvenzgründe: Zahlungsunfähigkeit (§17, Antragspflicht, 3 Wochen), Überschuldung (§19, Antragspflicht, 6 Wochen), drohende Zahlungsunfähigkeit (§18, Antragsrecht – freiwillig). Bilanzverlust, Eigenkapitalmangel und Kreditkündigung sind KEINE eigenständigen Insolvenzgründe.",
+    must: true
+  },
+  {
+    q: "Welche VIER Phasen durchläuft ein Unternehmen im Krisenablauf (in der richtigen Reihenfolge – wähle alle vier)?",
+    options: ["Strategische Krise","Erfolgskrise","Liquiditätskrise","Insolvenz","Restrukturierungskrise","Margenkrise"],
+    correct: [0,1,2,3],
+    explanation: "Krisenablauf nach Krystek/Müller-Stewens: 1. Strategische Krise (Potenziale gefährdet), 2. Erfolgskrise (Gewinnrückgang, Verluste), 3. Liquiditätskrise (Zahlungsunfähigkeit droht), 4. Insolvenz (Antragspflicht). Handlungsspielraum nimmt von Phase 1 zu 4 kontinuierlich ab.",
+    must: true
+  },
+  {
+    q: "Welche DREI Elemente bilden den Cash Conversion Cycle (CCC)?",
+    options: ["Days Sales Outstanding (DSO)","Days Inventory Outstanding (DIO)","Days Payable Outstanding (DPO)","Days Revenue Outstanding (DRO)","Debt Coverage Ratio","Cash Return Rate"],
+    correct: [0,1,2],
+    explanation: "CCC = DSO + DIO – DPO. DSO: Kundenzahlungsziel (Forderungslaufzeit). DIO: Lagerdauer. DPO: Lieferantenzahlungsziel. Je kürzer CCC, desto weniger Kapital ist im Working Capital gebunden. Alle anderen Optionen existieren nicht als CCC-Komponenten.",
+    must: true
+  },
+  {
+    q: "Welche ZWEI Größen multipliziert man im DuPont-Schema um den ROI zu erhalten?",
+    options: ["Umsatzrendite (Gewinn/Umsatz)","Kapitalumschlag (Umsatz/Gesamtkapital)","Eigenkapitalquote","Verschuldungsgrad","EBITDA-Marge","Liquiditätsgrad"],
+    correct: [0,1],
+    explanation: "ROI = Umsatzrendite × Kapitalumschlag = (Gewinn/Umsatz) × (Umsatz/Gesamtkapital) = Gewinn/Gesamtkapital. Das DuPont-Schema zerlegt den ROI in zwei steuerbare Hebel: Profitabilität (Umsatzrendite) und Effizienz (Kapitalumschlag).",
+    must: true
+  },
+  {
+    q: "Welche DREI Maßnahmen optimieren das Working Capital direkt?",
+    options: ["Forderungsmanagement verbessern (DSO senken)","Lagerbestände reduzieren (DIO senken)","Zahlungsziele bei Lieferanten verlängern (DPO erhöhen)","Neue Produktionsanlagen kaufen","Mitarbeiterzahl erhöhen","Werbemaßnahmen ausweiten"],
+    correct: [0,1,2],
+    explanation: "WC-Optimierung über drei Hebel: 1) Forderungsmanagement (DSO↓): schneller Geld von Kunden einziehen. 2) Vorratsmanagement (DIO↓): Lager abbauen, Just-in-time. 3) Verbindlichkeitsmanagement (DPO↑): Lieferantenzahlungsziele verlängern. Alle drei senken den CCC und setzen gebundenes Kapital frei.",
+    must: true
+  },
+  {
+    q: "Welche DREI Vorteile hat die außergerichtliche Sanierung gegenüber dem Insolvenzverfahren?",
+    options: ["Vertraulichkeit – kein öffentliches Register","Schnellere Umsetzung ohne Gerichtsverfahren","Geringere Kosten (kein IV, keine Gerichtsgebühren)","Alle Gläubiger müssen zwingend zustimmen","Automatischer Vollstreckungsstopp per Gesetz","Staatliche Finanzierung ist garantiert"],
+    correct: [0,1,2],
+    explanation: "Vorteile außergerichtliche Sanierung: 1) Vertraulichkeit (kein Insolvenzregister → Reputationsschutz). 2) Schnelligkeit (keine Gerichtsfristen, direkter Verhandlungsweg). 3) Kostengünstiger (kein IV-Honorar, keine Gerichtsgebühren). Nachteile: kein gesetzl. Vollstreckungsstopp, kein Zwang für nicht-kooperative Gläubiger.",
+    must: true
+  },
+  {
+    q: "Welche ZWEI Mehrheiten müssen beim Insolvenzplan in jeder Abstimmungsgruppe erreicht werden?",
+    options: ["Kopfmehrheit: mehr als die Hälfte der abstimmenden Gläubiger nach Anzahl","Summenmehrheit: mehr als die Hälfte der Forderungsbeträge","Einstimmigkeit aller Gläubiger","Zustimmung von mindestens 75% nach Köpfen","Zustimmung aller Massegläubiger","Zustimmung des Insolvenzgerichts vor der Abstimmung"],
+    correct: [0,1],
+    explanation: "Insolvenzplan-Abstimmung (§244 InsO): Doppelte Mehrheit erforderlich: 1) Kopfmehrheit (> 50% der abstimmenden Gläubiger nach Anzahl) UND 2) Summenmehrheit (> 50% der vertretenen Forderungsbeträge). Stimmt eine Gruppe nicht zu, kann das Obstruktionsverbot (§245 InsO) greifen.",
+    must: true
+  },
+  {
+    q: "Welche DREI Funktionen hat Factoring gleichzeitig?",
+    options: ["Finanzierungsfunktion (sofortiger Liquiditätszufluss)","Delkrederefunktion (Übernahme des Ausfallrisikos beim echten Factoring)","Dienstleistungsfunktion (Debitorenmanagement, Mahnwesen)","Investitionsfunktion (Kapitalanlage)","Steuervermeidungsfunktion","Personalvermittlungsfunktion"],
+    correct: [0,1,2],
+    explanation: "Factoring hat drei Kernfunktionen: 1) Finanzierungsfunktion: sofortige Liquidität durch Forderungsverkauf. 2) Delkrederefunktion (nur echtes Factoring): Factor übernimmt Ausfallrisiko. 3) Dienstleistungsfunktion: Factor übernimmt Debitorenbuchhaltung, Mahnwesen, Inkasso. Damit entlastet Factoring sowohl Liquidität als auch Administration.",
+    must: true
+  },
+  {
+    q: "Welche ZWEI Teile hat ein Insolvenzplan?",
+    options: ["Darstellender Teil (Ist-Situation, Analyse, Sanierungskonzept beschreiben)","Gestaltender Teil (rechtsverbindliche Änderungen von Gläubigerrechten)","Liquidationsteil","Steuerlicher Teil","Personalplan","Investitionsplan"],
+    correct: [0,1],
+    explanation: "Insolvenzplan: Darstellender Teil (§220 InsO): beschreibt Ist-Zustand, Krisenursachen, Maßnahmen – keine Rechtsänderungen. Gestaltender Teil (§221 InsO): regelt verbindlich die Eingriffe in Gläubigerrechte (Forderungskürzungen, Stundungen, Debt-Equity-Swap, Eigenkapitaländerungen) – bindet alle Gläubiger nach Gerichtsbestätigung.",
+    must: true
+  },
+  {
+    q: "Welche DREI Maßnahmen gehören zur operativen Sofortreaktion in den ersten Wochen der Krise?",
+    options: ["Liquiditätsstatus erstellen und tägliches Cash-Monitoring einführen","Nicht zahlungswirksame Ausgaben stoppen (Investitionen, Discretionary Spend)","Gespräche mit Hauptgläubigern (Banken, Lieferanten) aufnehmen","Langfristige Strategieentwicklung abschließen","Neue Produktlinien einführen","Börsengang vorbereiten"],
+    correct: [0,1,2],
+    explanation: "Operative Sofortmaßnahmen (erste 72h bis 4 Wochen): 1) Liquiditätsstatus: Was haben wir? Wie lange reicht es? 2) Ausgaben stoppen: Investitionen, Reisen, Marketing einfrieren. 3) Gläubigerkommunikation: Banken und Lieferanten proaktiv informieren, Vertrauen stabilisieren. Strategieentwicklung und Neuprodukte sind mittel-/langfristig – in der akuten Phase zu langsam.",
+    must: true
+  },
+  {
+    q: "Welche DREI Voraussetzungen muss das Obstruktionsverbot (§245 InsO) erfüllen, damit das Gericht eine ablehnende Gruppe überstimmen kann?",
+    options: ["Die Gruppe wird durch den Plan nicht schlechter gestellt als ohne Plan","Die Gruppe erhält eine angemessene Beteiligung am wirtschaftlichen Wert","Die Mehrheit der Abstimmungsgruppen hat dem Plan zugestimmt","Alle Gläubiger müssen den Plan unterstützen","Die Gruppe muss aus weniger als 3 Mitgliedern bestehen","Das Gericht muss den Plan selbst für fair halten (Ermessen)"],
+    correct: [0,1,2],
+    explanation: "Obstruktionsverbot/Cram-Down (§245 InsO): Drei kumulative Voraussetzungen: 1) Keine Schlechterstellung (Gruppe erhält mindestens so viel wie bei Regelinsolvenz). 2) Angemessene Wertbeteiligung (wirtschaftliche Fairness). 3) Mehrheit der Gruppen hat zugestimmt. Sind alle drei erfüllt, kann das Gericht die ablehnende Gruppe überstimmen.",
+    must: true
+  },
+  {
+    q: "Welche DREI Maßnahmen verbessern den Kapitalumschlag im DuPont-Schema?",
+    options: ["Working-Capital-Optimierung (WC senken)","Sale-and-lease-back (Anlagevermögen reduzieren)","Verkauf nicht betriebsnotwendiger Vermögenswerte","Erhöhung der Preise bei gleichbleibendem Kapital","Aufbau neuer Produktionskapazitäten","Einstellung zusätzlicher Mitarbeiter"],
+    correct: [0,1,2],
+    explanation: "Kapitalumschlag = Umsatz / Gesamtkapital. Verbesserung: Gesamtkapital senken oder Umsatz steigern. 1) WC-Optimierung (Forderungen↓, Lager↓, Verbindlichkeiten↑). 2) Sale-and-lease-back (Anlagevermögen verkaufen, zurückleasen). 3) Nicht betriebsnotwendige Assets veräußern. Preiserhöhungen erhöhen Umsatzrendite, nicht Kapitalumschlag.",
+    must: true
+  },
+  {
+    q: "Welche DREI Aussagen zur Eigenverwaltung (§270 InsO) sind korrekt?",
+    options: ["Schuldner behält Verwaltungs- und Verfügungsbefugnis","Ein Sachwalter überwacht den Schuldner (kein IV)","Eigenverwaltung ist möglich, wenn kein Nachteil für Gläubiger entsteht","Der Schuldner verliert sofort alle Entscheidungsbefugnisse","Eigenverwaltung erfordert Zustimmung aller Gläubiger","Eigenverwaltung ist nur bei Einzelunternehmen möglich"],
+    correct: [0,1,2],
+    explanation: "Eigenverwaltung (§§270 ff. InsO): 1) Schuldner behält Verwaltung/Verfügung – kein Kontrollverlust. 2) Sachwalter (statt IV) überwacht und kontrolliert. 3) Voraussetzung: kein Nachteil für Gläubiger, kooperativer Schuldner. Vorteil: Know-how bleibt, Management behält Kontrolle, oft bessere Sanierungsergebnisse.",
+    must: false
+  },
+  {
+    q: "Welche DREI Elemente enthält ein vollständiges Sanierungskonzept nach IDW S6?",
+    options: ["Analyse der Krisenursachen und Darstellung des Ist-Zustands","Leitbild des sanierten Unternehmens (Soll-Zustand)","Integrierte Finanzplanung (GuV, Bilanz, Liquidität)","Ausschließlich Personalmaßnahmen","Garantierte Gewinnprognose für 10 Jahre","Steuererklärung der letzten 5 Jahre"],
+    correct: [0,1,2],
+    explanation: "IDW S6 Kerninhalte: 1) Krisenursachenanalyse + Ist-Zustand (Bestandsaufnahme). 2) Leitbild des sanierten Unternehmens (Zielzustand). 3) Sanierungsmaßnahmen + integrierte Finanzplanung (GuV/Bilanz/Liquidität konsistent verknüpft) + Aussage zur Sanierungsfähigkeit/-würdigkeit. Alle drei müssen vorhanden sein für ein IDW S6-konformes Gutachten.",
+    must: false
+  },
+  {
+    q: "Welche ZWEI Formen des vorläufigen Insolvenzverwalters unterscheidet das Gesetz?",
+    options: ["Starker vorläufiger IV: Verfügungsbefugnis geht auf ihn über","Schwacher vorläufiger IV: Schuldner behält Verfügung unter Zustimmungsvorbehalt","Neutraler IV: hat nur Beratungsfunktion ohne Eingriffsbefugnisse","Gerichtlicher IV: wird direkt vom Richter ernannt","Gläubiger-IV: wird von der Gläubigerversammlung bestellt","Temporärer IV: handelt nur für 30 Tage"],
+    correct: [0,1],
+    explanation: "Vorläufiger IV (§21 InsO): Starker vorläufiger IV: allgemeines Verfügungsverbot für Schuldner → IV übernimmt vollständig. Schwacher vorläufiger IV: Schuldner darf verfügen, aber nur mit Zustimmung des IV (Zustimmungsvorbehalt). Wichtig: Verbindlichkeiten des starken vorläufigen IV können Masseverbindlichkeiten begründen.",
+    must: true
+  },
+  {
+    q: "Welche DREI Gläubigergruppen können im StaRUG unterschieden werden?",
+    options: ["Gesicherte Gläubiger (z.B. Banken mit Sicherheiten)","Ungesicherte Gläubiger (z.B. Lieferanten ohne Sicherheiten)","Gesellschafter (Inhaber von Anteilen)","Steuerberater des Unternehmens","Mitarbeiter in der Produktion","Externe Unternehmensberater"],
+    correct: [0,1,2],
+    explanation: "StaRUG-Gläubigergruppen (§9 StaRUG): Eingeteilt nach Art und Rang der Forderungen: gesicherte Gläubiger (Absonderungsberechtigte), ungesicherte Gläubiger, Gesellschafter. Jede Gruppe stimmt separat ab (75%-Mehrheit je Gruppe). Steuerberater, Berater und Mitarbeiter sind keine Gläubigergruppen im StaRUG-Sinne.",
+    must: true
+  },
+  {
+    q: "Welche DREI Sanierungsbeiträge können Gesellschafter leisten?",
+    options: ["Eigenkapitalzuführung (Kapitalerhöhung)","Forderungsverzicht auf Gesellschafterdarlehen","Rangrücktritt (Forderung tritt hinter alle anderen zurück)","Sofortige Liquidation des Unternehmens verlangen","Insolvenzantrag gegen das eigene Unternehmen stellen","Mitarbeiter eigenmächtig entlassen"],
+    correct: [0,1,2],
+    explanation: "Gesellschafter-Sanierungsbeiträge: 1) Kapitalerhöhung: frisches EK zuführen. 2) Forderungsverzicht: Gesellschafterdarlehen erlassen → Bilanzsanierung. 3) Rangrücktritt: Forderung wird im Rang zurückgestuft → zählt nicht als Verbindlichkeit in Überschuldungsprüfung. Alle drei stärken Eigenkapital und reduzieren Verschuldung.",
+    must: true
+  },
+  {
+    q: "Welche DREI Aussagen zu Sale-and-lease-back (SLB) sind korrekt?",
+    options: ["Sofortiger Liquiditätszufluss durch Verkauf","Nutzung des Vermögensgegenstands bleibt durch Rückleasingvertrag erhalten","Künftige Leasingverpflichtungen entstehen als laufende Kosten","Das Unternehmen erwirbt das Eigentum dauerhaft zurück","SLB verbessert automatisch den Jahresgewinn ohne Nebeneffekte","SLB ist nur bei Immobilien möglich"],
+    correct: [0,1,2],
+    explanation: "SLB-Merkmale: 1) Verkauf → sofortiger Liquiditätszufluss. 2) Rückleasingvertrag → Nutzung bleibt erhalten (kein operativer Einschnitt). 3) Leasingraten = laufende Kosten in Zukunft (kein kostenneutrales Instrument). Das Eigentum geht dauerhaft auf den Leasinggeber über (kein automatischer Rückkauf). Anwendbar auf Maschinen, Fuhrpark, Immobilien.",
+    must: true
+  },
+  {
+    q: "Welche DREI horizontalen M&A-Motive sind in der Praxis häufig?",
+    options: ["Skaleneffekte (Fixkostendegression durch höheres Volumen)","Marktanteilsgewinn und Erhöhung der Marktmacht","Elimination von Wettbewerbern und Konsolidierung","Diversifikation in völlig neue Branchen","Erschließung völlig neuer Technologien ohne Branchenbezug","Vermeidung von Steuerpflichten"],
+    correct: [0,1,2],
+    explanation: "Horizontale M&A-Motive (gleiche Branche): 1) Skaleneffekte: mehr Volumen senkt Stückkosten. 2) Marktmacht: höherer Marktanteil verbessert Verhandlungsposition. 3) Wettbewerbsreduktion: Konkurrent übernommen → weniger Preisdruck. Diversifikation ist ein konglomerales Motiv. Kartellrecht (GWB, EU-Fusionskontrolle) überprüft horizontale M&A kritisch.",
+    must: false
+  },
+  {
+    q: "Welche DREI Aussagen zur Insolvenzanfechtung sind korrekt?",
+    options: ["Der Insolvenzverwalter kann Zahlungen der Vergangenheit anfechten und zurückfordern","Vorsätzliche Benachteiligung (§133 InsO) kann bis zu 10 Jahre zurück angefochten werden","Kongruente Deckung (§130 InsO) kann bis zu 3 Monate vor Antragstellung angefochten werden","Anfechtung gilt nur für Zahlungen an Banken, nicht an Lieferanten","Alle Zahlungen der letzten 30 Jahre können angefochten werden","Anfechtung erfordert immer die Zustimmung der Gläubigerversammlung"],
+    correct: [0,1,2],
+    explanation: "Insolvenzanfechtung (§§129 ff. InsO): 1) IV kann vergangene Handlungen/Zahlungen anfechten → Rückforderung. 2) §133 (vorsätzliche Benachteiligung): 10 Jahre Rückwirkung. 3) §130 (kongruente Deckung): 3 Monate vor Antragstellung. Gilt für ALLE Zahlungsempfänger (Lieferanten, Banken, Gesellschafter). Keine 30-Jahres-Grenze.",
+    must: true
+  },
+  {
+    q: "Welche DREI Kennzahlen gehören zur Analyse der Kapitalstruktur?",
+    options: ["Eigenkapitalquote (EK / Gesamtkapital)","Verschuldungsgrad (FK / EK)","Entschuldungsdauer (Nettoverschuldung / op. Cashflow)","Umsatzrendite (Gewinn / Umsatz)","Days Sales Outstanding (Forderungen / Tagesumsatz)","Kapitalumschlag (Umsatz / Gesamtkapital)"],
+    correct: [0,1,2],
+    explanation: "Kapitalstrukturkennzahlen: 1) EK-Quote: Anteil EK an Gesamtkapital (je höher, desto stabiler). 2) Verschuldungsgrad: FK/EK-Verhältnis (je niedriger, desto besser; Banken: max. 2-3x). 3) Entschuldungsdauer: Nettoverschuldung/op. CF in Jahren (Banken: max. 3-4x). Umsatzrendite, DSO und Kapitalumschlag sind Rentabilitäts- bzw. Effizienz-/Liquiditätskennzahlen.",
+    must: true
+  },
+  {
+    q: "Welche DREI Aussagen zum Schutzschirmverfahren (§270b InsO) sind korrekt?",
+    options: ["Nur anwendbar bei drohender ZU oder Überschuldung – NICHT bei eingetretener ZU","Schuldner wählt vorläufigen Sachwalter selbst vor","Schutzzeitraum beträgt maximal 3 Monate","Kein Gutachten erforderlich – einfache Eigenerklärung genügt","Insolvenzgericht muss dem Schuldner keine Frist einräumen","Schutzschirm bedeutet automatische Insolvenzpläne"],
+    correct: [0,1,2],
+    explanation: "Schutzschirmverfahren: 1) Nur bei drohender ZU (§18) oder Überschuldung (§19) – bei eingetretener ZU nicht mehr möglich. 2) Schuldner schlägt vorläufigen Sachwalter vor (Einfluss auf Person). 3) Maximale Dauer: 3 Monate bis zur Vorlage des Insolvenzplans. Erforderlich: Sachverständigenbescheinigung (kein einfache Eigenerklärung).",
+    must: true
+  },
+  {
+    q: "Welche DREI Aufgaben hat der Insolvenzverwalter nach Verfahrenseröffnung?",
+    options: ["Insolvenzmasse sichern, verwalten und verwerten","Gläubigerforderungen prüfen und Insolvenztabelle erstellen","Entscheidung über Fortführung oder Liquidation des Betriebs","Insolvenzantrag beim Gericht zurückziehen","Alle Mitarbeiter sofort entlassen","Eigenkapital der Gesellschafter aufstocken"],
+    correct: [0,1,2],
+    explanation: "IV-Aufgaben: 1) Masse sichern/verwalten: Inventar aufnehmen, Vermögen schützen, Konten übernehmen. 2) Forderungsprüfung: angemeldete Forderungen prüfen, Insolvenztabelle erstellen. 3) Strategieentscheidung: Betrieb fortführen (Sanierung/Verkauf) oder liquidieren (höherer Erlös?). IV kann Insolvenzantrag nicht zurückziehen und muss keine EK-Aufstockung vornehmen.",
+    must: true
+  },
+  {
+    q: "Welche DREI Maßnahmen gehören zum strategischen Turnaround?",
+    options: ["Repositionierung im Markt (andere Zielgruppen, neue Märkte)","Portfoliobereinigung (Kerngeschäft fokussieren, Non-Core veräußern)","Geschäftsmodellinnovation (z.B. von Produkt zu Service)","Sofortige Kündigung aller Mitarbeiter","Jahresabschluss rückwirkend korrigieren","Kurzfristige Liquiditätssicherung durch Kontokorrent"],
+    correct: [0,1,2],
+    explanation: "Strategischer Turnaround (mittel-/langfristig): 1) Repositionierung: andere Märkte, Kundensegmente, Preispositionierung. 2) Portfoliobereinigung: Verkauf verlustbringender oder strategiefremder Bereiche. 3) Geschäftsmodellinnovation: fundamentale Veränderung des Erlösmodells. Massenentlassungen und Kontokorrent sind operative, nicht strategische Maßnahmen.",
+    must: true
+  }
+
 ];
 
 
@@ -4631,28 +4802,53 @@ function renderQuestion() {
   var q = currentQuestions[currentIndex];
   document.getElementById('q-counter-display').textContent = 'Frage ' + (currentIndex + 1) + ' von ' + currentQuestions.length;
   document.getElementById('q-pbar').style.width = ((currentIndex / currentQuestions.length) * 100) + '%';
-  document.getElementById('q-text').textContent = q.q;
-  
+
+  var isMulti = Array.isArray(q.correct);
+  document.getElementById('q-text').innerHTML = q.q + (isMulti ? ' <span style="font-size:11px;font-weight:500;color:#7c3aed;background:#ede9fe;padding:2px 7px;border-radius:10px;margin-left:6px;">Mehrere Antworten möglich</span>' : '');
+
   var opts = document.getElementById('answer-options');
   opts.innerHTML = '';
-  
-  // Shuffle options
-  var indices = [0,1,2,3,4];
+
+  var indices = [];
+  for (var i = 0; i < q.options.length; i++) indices.push(i);
   var shuffled = shuffleArray(indices);
-  
-  shuffled.forEach(function(origIdx) {
-    var btn = document.createElement('button');
-    btn.className = 'answer-btn';
-    btn.textContent = q.options[origIdx];
-    btn.dataset.orig = origIdx;
-    btn.onclick = function() { selectAnswer(this, q); };
-    opts.appendChild(btn);
-  });
-  
+
+  if (isMulti) {
+    shuffled.forEach(function(origIdx) {
+      var lbl = document.createElement('label');
+      lbl.className = 'answer-btn multi-lbl';
+      lbl.style.cssText = 'display:flex;align-items:center;gap:10px;cursor:pointer;';
+      var cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.dataset.orig = origIdx;
+      cb.style.cssText = 'width:18px;height:18px;flex-shrink:0;accent-color:#6d28d9;cursor:pointer;';
+      var span = document.createElement('span');
+      span.textContent = q.options[origIdx];
+      lbl.appendChild(cb);
+      lbl.appendChild(span);
+      opts.appendChild(lbl);
+    });
+    var checkBtn = document.createElement('button');
+    checkBtn.id = 'multi-check-btn';
+    checkBtn.className = 'mc-check-btn';
+    checkBtn.style.cssText = 'margin-top:12px;';
+    checkBtn.textContent = 'Antwort prüfen';
+    checkBtn.onclick = function() { checkMultiAnswer(q); };
+    opts.appendChild(checkBtn);
+  } else {
+    shuffled.forEach(function(origIdx) {
+      var btn = document.createElement('button');
+      btn.className = 'answer-btn';
+      btn.textContent = q.options[origIdx];
+      btn.dataset.orig = origIdx;
+      btn.onclick = function() { selectAnswer(this, q); };
+      opts.appendChild(btn);
+    });
+  }
+
   var fb = document.getElementById('feedback-box');
   fb.className = 'feedback-box';
   fb.innerHTML = '';
-  
   document.getElementById('next-btn').style.display = 'none';
   window.scrollTo(0, 0);
 }
@@ -4671,7 +4867,6 @@ function selectAnswer(btn, q) {
     btn.classList.add('wrong');
   }
   
-  // Show correct answer
   document.querySelectorAll('.answer-btn').forEach(function(b) {
     b.disabled = true;
     if (parseInt(b.dataset.orig) === q.correct && !isCorrect) {
@@ -4683,6 +4878,42 @@ function selectAnswer(btn, q) {
   fb.className = 'feedback-box show ' + (isCorrect ? 'ok' : 'nok');
   fb.innerHTML = (isCorrect ? '✅ <strong>Richtig!</strong> ' : '❌ <strong>Leider falsch.</strong> ') + q.explanation;
   
+  document.getElementById('next-btn').style.display = 'inline-block';
+  document.getElementById('next-btn').textContent = (currentIndex < currentQuestions.length - 1) ? 'Weiter →' : 'Ergebnis anzeigen →';
+}
+
+function checkMultiAnswer(q) {
+  if (answered) return;
+  answered = true;
+  var checkBtn = document.getElementById('multi-check-btn');
+  if (checkBtn) checkBtn.disabled = true;
+
+  var correctSet = q.correct.slice().sort().join(',');
+  var checkboxes = document.querySelectorAll('#answer-options input[type=checkbox]');
+  var chosen = [];
+  checkboxes.forEach(function(cb) { if (cb.checked) chosen.push(parseInt(cb.dataset.orig)); });
+  chosen.sort();
+  var isCorrect = (chosen.join(',') === correctSet);
+
+  if (isCorrect) score++;
+
+  // Highlight labels
+  document.querySelectorAll('#answer-options .multi-lbl').forEach(function(lbl) {
+    var cb = lbl.querySelector('input');
+    cb.disabled = true;
+    var origIdx = parseInt(cb.dataset.orig);
+    var isRight = q.correct.indexOf(origIdx) !== -1;
+    var wasChosen = cb.checked;
+    if (isRight && wasChosen) lbl.classList.add('correct');
+    else if (isRight && !wasChosen) lbl.classList.add('show-correct');
+    else if (!isRight && wasChosen) lbl.classList.add('wrong');
+  });
+
+  var fb = document.getElementById('feedback-box');
+  fb.className = 'feedback-box show ' + (isCorrect ? 'ok' : 'nok');
+  var hint = isCorrect ? '✅ <strong>Richtig!</strong> ' : '❌ <strong>Nicht ganz.</strong> Richtige Antworten sind grün markiert. ';
+  fb.innerHTML = hint + q.explanation;
+
   document.getElementById('next-btn').style.display = 'inline-block';
   document.getElementById('next-btn').textContent = (currentIndex < currentQuestions.length - 1) ? 'Weiter →' : 'Ergebnis anzeigen →';
 }
