@@ -869,6 +869,64 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 16px 0; }
   .result-score { font-size: 56px; }
   .test-hero h1 { font-size: 22px; }
 }
+
+.mnemonic-box {
+  background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+  border: 1.5px solid #fbbf24;
+  border-left: 5px solid #f59e0b;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin: 0 0 22px 0;
+}
+[data-theme="dark"] .mnemonic-box {
+  background: linear-gradient(135deg, #292310 0%, #2d2500 100%);
+  border-color: #b45309;
+  border-left-color: #d97706;
+}
+.mnemonic-box-title {
+  font-family: 'Fraunces', serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #92400e;
+  margin-bottom: 10px;
+  letter-spacing: 0.03em;
+}
+[data-theme="dark"] .mnemonic-box-title { color: #fbbf24; }
+.mnemonic-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.mnemonic-item:last-child { margin-bottom: 0; }
+.mnemonic-key {
+  font-family: 'Fraunces', serif;
+  font-size: 15px;
+  font-weight: 900;
+  color: #b45309;
+  background: #fef08a;
+  border-radius: 6px;
+  padding: 1px 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  letter-spacing: 0.04em;
+}
+[data-theme="dark"] .mnemonic-key { background: #3d2e00; color: #fcd34d; }
+.mnemonic-expansion {
+  font-size: 12px;
+  font-weight: 600;
+  color: #78350f;
+  line-height: 1.4;
+}
+[data-theme="dark"] .mnemonic-expansion { color: #fde68a; }
+.mnemonic-hint {
+  font-size: 11px;
+  color: #92400e;
+  opacity: 0.8;
+  line-height: 1.3;
+  margin-top: 2px;
+}
+[data-theme="dark"] .mnemonic-hint { color: #fcd34d; }
 </style>
 </head>
 <body>
@@ -912,6 +970,31 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 16px 0; }
     <span class="chapter-title">Grundlagen &amp; Geschäftsführung</span>
   </div>
   <div class="chapter-body">
+    <div class="mnemonic-box">
+      <div class="mnemonic-box-title">🧠 Merkhilfen</div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">ZÜD</span>
+        <div>
+          <div class="mnemonic-expansion">Zahlungsunfähigkeit · Überschuldung · Drohende ZU</div>
+          <div class="mnemonic-hint">Die drei Insolvenzgründe (§17, §19, §18 InsO)</div>
+        </div>
+      </div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">3 – 6</span>
+        <div>
+          <div class="mnemonic-expansion">3 Wochen bei ZU · 6 Wochen bei Überschuldung</div>
+          <div class="mnemonic-hint">Antragsfrist-Faustregel: ZU = 3, Ü = 6</div>
+        </div>
+      </div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">SoKaHa</span>
+        <div>
+          <div class="mnemonic-expansion">Sorgfalt · Kaufmann · Haftung</div>
+          <div class="mnemonic-hint">Business Judgment Rule: Grundlage für GF-Haftung bei Pflichtverletzung</div>
+        </div>
+      </div>
+    </div>
+
 
     <h3><span class="tag-klausur">Klausur</span>Sorgfaltspflicht des Kaufmannes</h3>
     <p>Der Geschäftsführer muss die Sorgfalt eines <strong>ordentlichen Geschäftsmannes</strong> in verantwortlich leitender Position bei selbständiger treuhänderischer Wahrnehmung fremder Vermögensinteressen beachten.</p>
@@ -988,6 +1071,24 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 16px 0; }
     <span class="chapter-title">Unternehmensinsolvenzen – Überblick</span>
   </div>
   <div class="chapter-body">
+    <div class="mnemonic-box">
+      <div class="mnemonic-box-title">🧠 Merkhilfen</div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">MaFiNa</span>
+        <div>
+          <div class="mnemonic-expansion">Management · Finanzierung · Nachfolge</div>
+          <div class="mnemonic-hint">Häufigste interne Insolvenzursachen laut Creditreform</div>
+        </div>
+      </div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">GmbH vorn</span>
+        <div>
+          <div class="mnemonic-expansion">GmbH = häufigste Insolvenzrechtsform</div>
+          <div class="mnemonic-hint">"GmbH steht vorn in der Statistik und fällt vorn"</div>
+        </div>
+      </div>
+    </div>
+
 
     <h3><span class="tag-klausur">Klausur</span>Wichtige Erkenntnisse aus Creditreform-Statistiken</h3>
     <div class="box-info">📊 Insolvenzzahlen haben ein <strong>10-Jahreshoch</strong> erreicht (Unternehmen &gt; 5 Jahre). Häufigst betroffener Sektor: <strong>Dienstleistungen</strong>, danach Handel und Bau. Häufigste Rechtsform: <strong>GmbH</strong>.</div>
@@ -1039,6 +1140,31 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 16px 0; }
     <span class="chapter-title">Unternehmenskrise ⭐ Schwerpunkt</span>
   </div>
   <div class="chapter-body">
+    <div class="mnemonic-box">
+      <div class="mnemonic-box-title">🧠 Merkhilfen</div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">SELI</span>
+        <div>
+          <div class="mnemonic-expansion">Strategisch · Erfolgskrise · Liquiditätskrise · Insolvenz</div>
+          <div class="mnemonic-hint">Die vier Krisenphasen. Handlungsspielraum sinkt von S→I kontinuierlich</div>
+        </div>
+      </div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">WoO</span>
+        <div>
+          <div class="mnemonic-expansion">Window of Opportunity</div>
+          <div class="mnemonic-hint">Handlungsfenster liegt in S und E – danach wird es teuer und die Optionen schwinden</div>
+        </div>
+      </div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">QiS</span>
+        <div>
+          <div class="mnemonic-expansion">Qualitative Signale in der Strategischen Krise</div>
+          <div class="mnemonic-hint">Strategische Krise: Signale sind weich & qualitativ – daher schwer zu erkennen</div>
+        </div>
+      </div>
+    </div>
+
 
     <h3><span class="tag-klausur">Klausur</span>Definition Unternehmenskrise (Witte/Krystek)</h3>
     <ul>
@@ -1100,6 +1226,31 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 16px 0; }
     <span class="chapter-title">Sanierung ⭐</span>
   </div>
   <div class="chapter-body">
+    <div class="mnemonic-box">
+      <div class="mnemonic-box-title">🧠 Merkhilfen</div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">BAKUM</span>
+        <div>
+          <div class="mnemonic-expansion">Bestandsaufnahme · Analyse · Konzept · Umsetzung · Monitoring</div>
+          <div class="mnemonic-hint">Die fünf Phasen des Turnaround-Prozesses</div>
+        </div>
+      </div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">WüFä</span>
+        <div>
+          <div class="mnemonic-expansion">Würdig VOR Fähig</div>
+          <div class="mnemonic-hint">Sanierungswürdigkeit (lohnt es sich?) und Sanierungsfähigkeit (geht es?) – beide müssen positiv sein</div>
+        </div>
+      </div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">IDW S6: ILM</span>
+        <div>
+          <div class="mnemonic-expansion">Ist-Analyse · Leitbild · Maßnahmen + Finanzplan</div>
+          <div class="mnemonic-hint">Die drei Kernbestandteile eines IDW S6-konformen Sanierungskonzepts</div>
+        </div>
+      </div>
+    </div>
+
 
     <h3><span class="tag-klausur">Klausur</span>Definition Sanierung (§ 8c Abs. 1a KStG)</h3>
     <p>Maßnahme zur Verhinderung oder Beseitigung von <strong>Zahlungsunfähigkeit/Überschuldung</strong> unter Erhalt der wesentlichen Betriebsstrukturen. Summe aller finanz-, leistungs- und gesellschaftswirtschaftlichen Maßnahmen zum Wiederaufbau des Leistungspotentials.</p>
@@ -1193,6 +1344,24 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 16px 0; }
     <span class="chapter-title">Strategische Krisen</span>
   </div>
   <div class="chapter-body">
+    <div class="mnemonic-box">
+      <div class="mnemonic-box-title">🧠 Merkhilfen</div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">MAKF</span>
+        <div>
+          <div class="mnemonic-expansion">Marktanteil · Absatz · Kundenzufriedenheit · F&amp;E</div>
+          <div class="mnemonic-hint">Frühindikatoren der strategischen Krise – weich, nicht in der Bilanz sichtbar</div>
+        </div>
+      </div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">Gap = Handle!</span>
+        <div>
+          <div class="mnemonic-expansion">Strategic Gap → Handlungsbedarf</div>
+          <div class="mnemonic-hint">Je größer die Lücke zwischen Ist-Prognose und Zielzustand, desto dringender</div>
+        </div>
+      </div>
+    </div>
+
 
     <h3>Warum sind strategische Krisen schwer erkennbar?</h3>
     <ul>
@@ -1238,6 +1407,31 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 16px 0; }
     <span class="chapter-title">Analyse – Bestandsaufnahme im Detail</span>
   </div>
   <div class="chapter-body">
+    <div class="mnemonic-box">
+      <div class="mnemonic-box-title">🧠 Merkhilfen</div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">UR × KU = ROI</span>
+        <div>
+          <div class="mnemonic-expansion">Umsatzrendite × Kapitalumschlag = ROI</div>
+          <div class="mnemonic-hint">DuPont-Formel: zwei Hebel – Marge (UR) und Effizienz (KU). Beide verbessern zusammen den ROI</div>
+        </div>
+      </div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">DSO + DIO − DPO = CCC</span>
+        <div>
+          <div class="mnemonic-expansion">Schuldner + Lager − Lieferant</div>
+          <div class="mnemonic-hint">Cash Conversion Cycle: je kleiner, desto weniger Kapital im WC gebunden</div>
+        </div>
+      </div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">FLV</span>
+        <div>
+          <div class="mnemonic-expansion">Forderungen ↓ · Lager ↓ · Verbindlichkeiten ↑</div>
+          <div class="mnemonic-hint">Die drei WC-Optimierungshebel für DSO, DIO und DPO</div>
+        </div>
+      </div>
+    </div>
+
 
     <h3>Analyse der Vermögensstruktur <span class="tag-nicht">Formeln nicht auswendig</span></h3>
     <p>Kennzahlen – nur <strong>Interpretation</strong> ist klausurrelevant:</p>
@@ -1347,6 +1541,31 @@ hr { border: none; border-top: 1px solid #e2e8f0; margin: 16px 0; }
     <span class="chapter-title">Ertrags-, Aufwands- &amp; Kapitalstrukturanalyse</span>
   </div>
   <div class="chapter-body">
+    <div class="mnemonic-box">
+      <div class="mnemonic-box-title">🧠 Merkhilfen</div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">JÜ + AB − INV ≈ CF</span>
+        <div>
+          <div class="mnemonic-expansion">Jahresüberschuss + Abschreibungen − Investitionen</div>
+          <div class="mnemonic-hint">Indirekte Cashflow-Formel (Praktikerformel) – grobe Annäherung an den operativen CF</div>
+        </div>
+      </div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">EVE</span>
+        <div>
+          <div class="mnemonic-expansion">Entschuldungsdauer · Verschuldungsgrad · EK-Quote</div>
+          <div class="mnemonic-hint">Drei Kapitalstruktur-Kennzahlen für Banken. Faustregel: Entschuldung max. 4×, Verschuldung max. 3×, EK mind. 20 %</div>
+        </div>
+      </div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">Covenant = Versprechen</span>
+        <div>
+          <div class="mnemonic-expansion">Kennzahlversprechen an die Bank</div>
+          <div class="mnemonic-hint">Covenants: Vertraglich fixierte Grenzwerte – Bruch kann zur Kreditkündigung führen</div>
+        </div>
+      </div>
+    </div>
+
 
     <h3>Ertrags- und Aufwandsstruktur</h3>
     <p>Ertragsstruktur: Differenzierung nach Sparten, Regionen, Kundengruppen.</p>
@@ -1454,6 +1673,31 @@ Zinsdeckungsgrad = EBIT / Zinsaufwand
     <span class="chapter-title">Sanierungsmöglichkeiten</span>
   </div>
   <div class="chapter-body">
+    <div class="mnemonic-box">
+      <div class="mnemonic-box-title">🧠 Merkhilfen</div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">VeKK</span>
+        <div>
+          <div class="mnemonic-expansion">Vertraulich · Eilig · Kostengünstig · Kontrolle behalten</div>
+          <div class="mnemonic-hint">Vier Vorteile der außergerichtlichen Sanierung vs. Insolvenzverfahren</div>
+        </div>
+      </div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">Drohend ✓ – Eingetreten ✗</span>
+        <div>
+          <div class="mnemonic-expansion">StaRUG nur bei drohender ZU</div>
+          <div class="mnemonic-hint">StaRUG: Drohende ZU erlaubt – eingetretene ZU sperrt das Verfahren</div>
+        </div>
+      </div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">75 % je Gruppe</span>
+        <div>
+          <div class="mnemonic-expansion">StaRUG-Stimmenmehrheit</div>
+          <div class="mnemonic-hint">Jede Gläubigergruppe braucht 75 % der Forderungsbeträge – sonst kein Plan</div>
+        </div>
+      </div>
+    </div>
+
 
     <h3><span class="tag-klausur">Klausur</span>Überblick: 3 Wege der Sanierung</h3>
     <div class="tbl-wrap">
@@ -1542,6 +1786,31 @@ Zinsdeckungsgrad = EBIT / Zinsaufwand
     <span class="chapter-title">Gerichtliches Insolvenzverfahren ⭐</span>
   </div>
   <div class="chapter-body">
+    <div class="mnemonic-box">
+      <div class="mnemonic-box-title">🧠 Merkhilfen</div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">APFGV</span>
+        <div>
+          <div class="mnemonic-expansion">Antrag · Prüfung · Forderungsanmeldung · Gläubigerversammlung · Verwertung</div>
+          <div class="mnemonic-hint">Die fünf Schritte des Insolvenzverfahrens in Reihenfolge</div>
+        </div>
+      </div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">AuAb · Ma · In · Nach</span>
+        <div>
+          <div class="mnemonic-expansion">Aussonderung · Absonderung · Masse · Insolvenzgläubiger · Nachrang</div>
+          <div class="mnemonic-hint">"Erst raus, dann gesichert, dann Kosten, dann alle, dann die letzten"</div>
+        </div>
+      </div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">Stark vs. Schwach</span>
+        <div>
+          <div class="mnemonic-expansion">Starker IV = volle Kontrolle · Schwacher IV = Zustimmungsvorbehalt</div>
+          <div class="mnemonic-hint">Vorläufiger IV: stark (Schuldner darf nicht) vs. schwach (Schuldner braucht Zustimmung)</div>
+        </div>
+      </div>
+    </div>
+
 
     <h3><span class="tag-klausur">Klausur</span>Insolvenzgründe</h3>
     <div class="tbl-wrap">
@@ -1668,6 +1937,31 @@ Schenkungsanfechtung: bis 4 Jahre vor Insolvenzantrag </code>
     <span class="chapter-title">Insolvenzplan</span>
   </div>
   <div class="chapter-body">
+    <div class="mnemonic-box">
+      <div class="mnemonic-box-title">🧠 Merkhilfen</div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">DaGe</span>
+        <div>
+          <div class="mnemonic-expansion">Darstellender Teil + Gestaltender Teil</div>
+          <div class="mnemonic-hint">Insolvenzplan: Dar. = Beschreibung, Ge. = Rechtseingriff. Nur der gestaltende Teil ist verbindlich</div>
+        </div>
+      </div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">Kopf + Summe > 50 %</span>
+        <div>
+          <div class="mnemonic-expansion">Doppelte Mehrheit je Gruppe erforderlich</div>
+          <div class="mnemonic-hint">Kopfmehrheit (Anzahl Gläubiger) UND Summenmehrheit (Forderungsbeträge) – beide > 50 %</div>
+        </div>
+      </div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">CrAmDown</span>
+        <div>
+          <div class="mnemonic-expansion">Obstruktionsverbot = Cram-Down</div>
+          <div class="mnemonic-hint">Gericht überstimmt ablehnende Gruppe wenn: nicht schlechtergestellt + angemessene Beteiligung + Mehrheit der Gruppen</div>
+        </div>
+      </div>
+    </div>
+
 
     <h3><span class="tag-klausur">Klausur</span>Aufbau des Insolvenzplans – 2 Teile</h3>
     <div class="tbl-wrap">
@@ -1751,6 +2045,31 @@ Summenmehrheit: &gt; 50% der Forderungssumme
     <span class="chapter-title">Sanierungsmaßnahmen ⭐</span>
   </div>
   <div class="chapter-body">
+    <div class="mnemonic-box">
+      <div class="mnemonic-box-title">🧠 Merkhilfen</div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">FiDelDi</span>
+        <div>
+          <div class="mnemonic-expansion">Finanzierung · Delkredere · Dienstleistung</div>
+          <div class="mnemonic-hint">Die drei Funktionen des Factorings – alle gleichzeitig, das unterscheidet es von anderen Instrumenten</div>
+        </div>
+      </div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">BEKA-B</span>
+        <div>
+          <div class="mnemonic-expansion">Boni · Einstellungsstopp · Kurzarbeit · Aufhebungsvertrag · Betriebsbedingte Kündigung</div>
+          <div class="mnemonic-hint">Reihenfolge Personalmaßnahmen – immer von mild nach hart!</div>
+        </div>
+      </div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">SLB</span>
+        <div>
+          <div class="mnemonic-expansion">Sell · Lease · Back</div>
+          <div class="mnemonic-hint">Sale-and-lease-back: Verkaufen → Liquidität kassieren → trotzdem weiter nutzen (Leasingvertrag)</div>
+        </div>
+      </div>
+    </div>
+
 
     <h3>Schwerpunkt: Liquidität &amp; Ertrag</h3>
     <div class="box-info">📌 Schwerpunkt liegt auf <strong>1. Liquidität</strong> (kurzfristige Zahlungsfähigkeit) und <strong>2. Erträge</strong> (nachhaltige Gewinne).</div>
@@ -1881,6 +2200,31 @@ Summenmehrheit: &gt; 50% der Forderungssumme
     <span class="chapter-title">Sofortmaßnahmen / Organisatorisch</span>
   </div>
   <div class="chapter-body">
+    <div class="mnemonic-box">
+      <div class="mnemonic-box-title">🧠 Merkhilfen</div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">HoVeKo</span>
+        <div>
+          <div class="mnemonic-expansion">Horizontal · Vertikal · Konglomerat</div>
+          <div class="mnemonic-hint">Die drei M&amp;A-Typen: gleiche Stufe / vor- oder nachgelagert / branchenfremd</div>
+        </div>
+      </div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">STDB-SCP</span>
+        <div>
+          <div class="mnemonic-expansion">Strategie · Target · Due Diligence · Bewertung · Signing · Closing · PMI</div>
+          <div class="mnemonic-hint">Der vollständige M&amp;A-Prozess in sieben Schritten</div>
+        </div>
+      </div>
+      <div class="mnemonic-item">
+        <span class="mnemonic-key">Cost vor Revenue</span>
+        <div>
+          <div class="mnemonic-expansion">Kostensynergien sind verlässlicher als Umsatzsynergien</div>
+          <div class="mnemonic-hint">Revenue Synergien werden oft überschätzt → Winner's Curse bei überhöhtem Kaufpreis</div>
+        </div>
+      </div>
+    </div>
+
 
     <h3><span class="tag-klausur">Klausur</span>Organisatorische Maßnahmen – Einige nennen und erläutern</h3>
 
