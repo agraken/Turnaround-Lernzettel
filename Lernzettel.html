@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Corporate Financial Management – Lernzettel</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap');
+:root {
+  --blue:#2a6ef5; --blue-dark:#1a4fc4; --blue-light:#e8f0fe;
+  --red:#e53935; --red-light:#ffebee; --green:#2e7d32; --green-light:#e8f5e9;
+  --orange:#e65100; --orange-light:#fff3e0;
+  --grey:#f4f6f8; --grey-dark:#9aa3b0;
+  --text:#1a2233; --text-light:#5c6475; --white:#ffffff;
+  --shadow:0 2px 12px rgba(42,110,245,.10); --radius:12px;
+}
+[data-theme="dark"] {
+  --blue:#60a5fa; --blue-dark:#3b82f6; --blue-light:#1e3a5f;
+  --red:#f87171; --red-light:#3b1111; --green:#4ade80; --green-light:#14532d;
+  --orange-light:#431407; --grey:#1e293b; --grey-dark:#64748b;
+  --text:#e2e8f0; --text-light:#94a3b8; --white:#0f172a;
+  --shadow:0 2px 12px rgba(0,0,0,.5);
+}
+[data-theme="dark"] body { background:#0a0f1e; }
+[data-theme="dark"] #header { background:#0f172a; border-color:#1e293b; }
+[data-theme="dark"] .chapter { background:#0f172a; }
+[data-theme="dark"] .chapter-body { background:#0f172a; color:var(--text); }
+[data-theme="dark"] .answer-btn { background:#1e293b; border-color:#334155; color:#e2e8f0; }
+[data-theme="dark"] .answer-btn:hover:not(:disabled) { background:#1e3a5f; border-color:var(--blue); }
+[data-theme="dark"] .question-card { background:#0f172a; }
+[data-theme="dark"] table td { border-color:#1e293b; }
+[data-theme="dark"] tr:nth-child(even) td { background:#0d1929; }
+[data-theme="dark"] .result-card { background:#0f172a; }
+[data-theme="dark"] .btn-secondary { background:#1e293b; color:#e2e8f0; }
+[data-theme="dark"] .flashcard-front { background:#0f172a; border-color:#334155; }
+[data-theme="dark"] .nav-link { background:#1e293b; color:#94a3b8; }
+[data-theme="dark"] .nav-link:hover { background:#1e3a5f; color:var(--blue); }
+[data-theme="dark"] #btn-darkmode { background:#1e293b; border-color:#334155; }
+[data-theme="dark"] p,[data-theme="dark"] li,[data-theme="dark"] td { color:#cbd5e1; }
+[data-theme="dark"] h3 { color:var(--blue); }
+[data-theme="dark"] .box-info { background:#1e3a5f; border-left-color:var(--blue); color:#bfdbfe; }
+[data-theme="dark"] .box-warn { background:#3f2f0a; border-left-color:#f59e0b; color:#fde68a; }
+[data-theme="dark"] .box-danger { background:#3b1111; border-left-color:var(--red); color:#fecaca; }
+[data-theme="dark"] .box-success { background:#14532d; border-left-color:#16a34a; color:#bbf7d0; }
+[data-theme="dark"] .fc-filter-btn { background:#1e293b; border-color:#334155; color:#94a3b8; }
+[data-theme="dark"] .fc-filter-btn.active { background:var(--blue); color:#0f172a; }
+[data-theme="dark"] .quiz-card-lern { background:#1e293b; border-color:#334155; }
+[data-theme="dark"] .quiz-answer-lern { background:#0f172a; border-color:#334155; color:#e2e8f0; }
+[data-theme="dark"] .quiz-question-lern:hover { background:#1e3a5f; }
+[data-theme="dark"] .subject-tab { background:#1e293b; color:#94a3b8; border-color:#334155; }
+[data-theme="dark"] .subject-tab.active { background:var(--blue); color:#0f172a; border-color:var(--blue); }
+[data-theme="dark"] .hero-chip { background:#1e3a5f; color:var(--blue); }
+[data-theme="dark"] .cards-hero { background:linear-gradient(135deg,#2e1065,#5b21b6); }
+[data-theme="dark"] .test-hero { background:linear-gradient(135deg,#0f2460,#1a4fc4); }
+
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:#f7f9fd;color:var(--text);font-size:15px;line-height:1.7;transition:background .3s,color .3s;}
+#progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--blue),#7c3aed);width:0%;z-index:9999;transition:width .1s;}
+
+/* SUBJECT TABS */
+#subject-bar{background:var(--white);border-bottom:2px solid #e2e8f0;text-align:center;padding:8px 16px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap;}
+.subject-tab{padding:7px 20px;border-radius:8px;border:2px solid #e2e8f0;background:var(--grey);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;cursor:pointer;text-decoration:none;display:inline-block;transition:all .2s;}
+.subject-tab.active{background:var(--blue);color:#fff;border-color:var(--blue);}
+.subject-tab:hover:not(.active){background:var(--blue-light);color:var(--blue);border-color:var(--blue);}
+
+/* HEADER */
+#header{position:sticky;top:40px;background:var(--white);border-bottom:1px solid #e2e8f0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+#header-inner{max-width:1100px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+#header-title{font-family:'Fraunces',serif;font-size:16px;color:var(--blue);font-weight:700;white-space:nowrap;margin-right:4px;}
+#nav-links{display:flex;gap:6px;flex-wrap:wrap;flex:1;}
+.nav-link{font-size:12px;padding:4px 10px;border-radius:20px;background:var(--grey);color:var(--text);text-decoration:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s,color .2s;white-space:nowrap;}
+.nav-link:hover{background:var(--blue-light);color:var(--blue);}
+#header-btns{display:flex;gap:8px;align-items:center;}
+#btn-darkmode{background:var(--grey);border:1px solid #e2e8f0;border-radius:20px;padding:5px 10px;font-size:16px;cursor:pointer;line-height:1;}
+.hbtn{padding:6px 16px;border-radius:20px;font-weight:600;font-size:13px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s;color:#fff;}
+#btn-learn{background:#059669;}
+#btn-learn:hover{background:#047857;}
+#btn-cards{background:#7c3aed;}
+#btn-cards:hover{background:#5b21b6;}
+#btn-test{background:var(--blue);}
+#btn-test:hover{background:var(--blue-dark);}
+
+/* PAGES */
+.page{display:none;}
+.page.active{display:block;}
+
+/* MAIN */
+#main{max-width:900px;margin:0 auto;padding:30px 20px 80px;}
+
+/* HERO */
+.hero{text-align:center;padding:40px 24px 28px;}
+.hero h1{font-family:'Fraunces',serif;font-size:34px;font-weight:900;color:var(--text);margin-bottom:8px;}
+.hero p{color:var(--text-light);font-size:16px;margin-bottom:20px;}
+.hero-chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:28px;}
+.hero-chip{padding:5px 14px;border-radius:20px;font-size:13px;font-weight:600;background:var(--blue-light);color:var(--blue);}
+
+/* CHAPTER */
+.chapter{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:28px;overflow:hidden;}
+.chapter-header{padding:16px 24px;display:flex;align-items:center;gap:12px;}
+.chapter-num{font-family:'Fraunces',serif;font-size:26px;font-weight:900;opacity:.25;line-height:1;color:#fff;}
+.chapter-title{font-family:'Fraunces',serif;font-size:20px;font-weight:700;color:#fff;}
+.chapter-body{padding:24px;}
+.ch1 .chapter-header{background:linear-gradient(135deg,#1e3a8a,#2a6ef5);}
+.ch2 .chapter-header{background:linear-gradient(135deg,#065f46,#059669);}
+.ch3 .chapter-header{background:linear-gradient(135deg,#7c2d12,#ea580c);}
+
+h3{font-family:'Fraunces',serif;font-size:16px;color:var(--blue);margin:20px 0 8px;font-weight:700;}
+h3:first-child{margin-top:0;}
+p{margin-bottom:10px;}
+ul,ol{padding-left:20px;margin-bottom:10px;}
+li{margin-bottom:4px;}
+
+.box-warn{background:#fff8e1;border-left:4px solid #f59e0b;padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0;font-size:14px;}
+.box-info{background:var(--blue-light);border-left:4px solid var(--blue);padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0;font-size:14px;}
+.box-success{background:var(--green-light);border-left:4px solid #16a34a;padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0;font-size:14px;}
+.box-danger{background:var(--red-light);border-left:4px solid var(--red);padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0;font-size:14px;}
+
+.tbl-wrap{overflow-x:auto;margin:12px 0;}
+table{width:100%;border-collapse:collapse;font-size:13.5px;}
+th{background:var(--blue);color:#fff;padding:8px 12px;text-align:left;font-weight:600;}
+td{padding:8px 12px;border-bottom:1px solid #e2e8f0;vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+tr:nth-child(even) td{background:#f8fafc;}
+
+/* INLINE QUIZ (in Lernzettel) */
+.quiz-section-lern{margin-top:20px;border-top:2px dashed #e2e8f0;padding-top:16px;}
+.quiz-title-lern{font-family:'Fraunces',serif;font-size:14px;color:var(--text);font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--grey);border-radius:8px;border:1px solid #e2e8f0;user-select:none;transition:background .2s;}
+.quiz-title-lern:hover{background:#e0e7ff;}
+.quiz-section-lern.open .quiz-title-lern{border-radius:8px 8px 0 0;}
+.quiz-cards-wrapper-lern{display:none;padding-top:10px;}
+.quiz-section-lern.open .quiz-cards-wrapper-lern{display:block;}
+.quiz-card-lern{background:var(--grey);border-radius:10px;margin-bottom:10px;overflow:hidden;border:1px solid #e2e8f0;}
+.quiz-question-lern{padding:12px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:14px;user-select:none;transition:background .2s;}
+.quiz-question-lern:hover{background:#e8f0fe;}
+.quiz-question-lern .arrow{font-size:18px;transition:transform .3s;color:var(--blue);flex-shrink:0;margin-left:12px;}
+.quiz-answer-lern{display:none;padding:14px 16px;background:var(--white);border-top:1px solid #e2e8f0;font-size:14px;color:var(--text);line-height:1.7;}
+.quiz-card-lern.open .quiz-answer-lern{display:block;}
+.quiz-card-lern.open .arrow{transform:rotate(180deg);}
+
+/* ===== KARTEIKARTEN PAGE ===== */
+#cards-page{max-width:900px;margin:0 auto;padding:30px 20px 80px;}
+.cards-hero{text-align:center;padding:28px 20px;background:linear-gradient(135deg,#4c1d95,#7c3aed);border-radius:var(--radius);color:#fff;margin-bottom:24px;}
+.cards-hero h1{font-family:'Fraunces',serif;font-size:24px;margin-bottom:6px;}
+.cards-hero p{opacity:.9;font-size:14px;}
+
+.fc-filter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+.fc-filter-btn{background:var(--grey);border:1px solid #e2e8f0;border-radius:20px;padding:5px 14px;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;}
+.fc-filter-btn.active{background:var(--blue);color:#fff;border-color:var(--blue);}
+
+.flashcards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
+.flashcard{perspective:1000px;height:210px;cursor:pointer;}
+.flashcard-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .5s;border-radius:var(--radius);}
+.flashcard.flipped .flashcard-inner{transform:rotateY(180deg);}
+.flashcard-front,.flashcard-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:var(--radius);padding:18px;display:flex;flex-direction:column;justify-content:center;}
+.flashcard-front{background:var(--white);box-shadow:var(--shadow);border:1px solid #e2e8f0;}
+.flashcard-back{transform:rotateY(180deg);box-shadow:var(--shadow);}
+.flashcard-back.r-back{background:linear-gradient(135deg,#065f46,#059669);}
+.flashcard-back.f-back{background:linear-gradient(135deg,#7f1d1d,#dc2626);}
+.fc-category{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--blue);font-weight:700;margin-bottom:6px;}
+.fc-num{font-size:10px;color:var(--grey-dark);margin-bottom:4px;}
+.fc-question{font-weight:600;font-size:13px;line-height:1.5;color:var(--text);}
+.fc-hint{margin-top:8px;font-size:11px;color:var(--grey-dark);font-style:italic;}
+.fc-answer-label{font-family:'Fraunces',serif;font-size:28px;font-weight:900;color:#fff;margin-bottom:8px;}
+.fc-answer-exp{font-size:12px;line-height:1.5;color:rgba(255,255,255,.9);}
+
+/* ===== TEST PAGE ===== */
+#test-page{max-width:800px;margin:0 auto;padding:30px 20px 80px;}
+.test-hero{text-align:center;padding:40px 20px;background:linear-gradient(135deg,#1e3a8a,#2a6ef5);border-radius:var(--radius);color:#fff;margin-bottom:30px;}
+.test-hero h1{font-family:'Fraunces',serif;font-size:28px;margin-bottom:8px;}
+.test-hero p{opacity:.9;font-size:15px;}
+#start-btn{margin-top:20px;background:#fff;color:var(--blue);border:none;padding:12px 32px;border-radius:24px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:16px;cursor:pointer;transition:transform .2s;}
+#start-btn:hover{transform:scale(1.04);}
+
+/* filter buttons in test hero */
+.test-filter{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:16px 0 0;}
+.test-filter-btn{background:rgba(255,255,255,.2);color:#fff;border:2px solid rgba(255,255,255,.5);padding:6px 16px;border-radius:20px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:13px;cursor:pointer;transition:all .2s;}
+.test-filter-btn.active,.test-filter-btn:hover{background:#fff;color:var(--blue);border-color:#fff;}
+
+#question-container{display:none;}
+#result-container{display:none;}
+.q-progress-bar-wrap{background:#e2e8f0;border-radius:10px;height:8px;margin-bottom:20px;overflow:hidden;}
+.q-progress-bar-fill{background:linear-gradient(90deg,var(--blue),#7c3aed);height:100%;border-radius:10px;transition:width .3s;}
+.q-counter{text-align:right;font-size:13px;color:var(--text-light);margin-bottom:10px;font-weight:600;}
+.question-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px;margin-bottom:20px;}
+.q-topic-badge{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--blue);font-weight:700;margin-bottom:10px;display:inline-block;background:var(--blue-light);padding:3px 10px;border-radius:12px;}
+.q-text{font-size:17px;font-weight:600;line-height:1.55;margin-bottom:20px;}
+.answer-options{display:flex;flex-direction:column;gap:10px;}
+.answer-btn{background:var(--grey);border:2px solid #e2e8f0;border-radius:8px;padding:13px 16px;text-align:left;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;line-height:1.4;}
+.answer-btn:hover:not(:disabled){background:var(--blue-light);border-color:var(--blue);}
+.answer-btn.correct{background:var(--green-light);border-color:#16a34a;color:var(--green);font-weight:700;}
+.answer-btn.wrong{background:var(--red-light);border-color:var(--red);color:var(--red);}
+.answer-btn.show-correct{background:var(--green-light);border-color:#16a34a;}
+.feedback-box{margin-top:14px;padding:13px 16px;border-radius:8px;font-size:14px;display:none;line-height:1.6;}
+.feedback-box.show{display:block;}
+.feedback-box.ok{background:var(--green-light);border-left:4px solid #16a34a;}
+.feedback-box.nok{background:var(--red-light);border-left:4px solid var(--red);}
+#next-btn{display:none;margin-top:14px;background:var(--blue);color:#fff;border:none;padding:10px 28px;border-radius:20px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:15px;cursor:pointer;transition:background .2s;}
+#next-btn:hover{background:var(--blue-dark);}
+.result-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:40px;text-align:center;}
+.result-score{font-family:'Fraunces',serif;font-size:72px;font-weight:900;color:var(--blue);line-height:1;}
+.result-label{font-size:22px;font-weight:700;margin:10px 0 6px;}
+.result-sub{color:var(--text-light);margin-bottom:20px;}
+.result-grade{display:inline-block;padding:8px 24px;border-radius:24px;font-weight:700;font-size:16px;margin-bottom:24px;}
+.grade-a{background:var(--green-light);color:var(--green);}
+.grade-b{background:var(--blue-light);color:var(--blue);}
+.grade-c{background:#fff3e0;color:var(--orange);}
+.grade-d{background:var(--red-light);color:var(--red);}
+.result-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.btn-secondary{background:var(--grey);color:var(--text);border:none;padding:10px 24px;border-radius:20px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:14px;cursor:pointer;}
+.btn-primary{background:var(--blue);color:#fff;border:none;padding:10px 24px;border-radius:20px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:14px;cursor:pointer;}
+
+@media(max-width:820px){
+  #header-inner{flex-wrap:wrap;padding:6px 12px;gap:5px;}
+  #header-title{flex:1;font-size:14px;}
+  #nav-links{display:none;}
+  #header-btns{width:100%;display:flex;gap:6px;}
+  #header-btns button{flex:1;padding:7px 4px!important;font-size:11px!important;}
+  .flashcards-grid{grid-template-columns:1fr;}
+  .test-hero h1{font-size:22px;}
+}
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+
+<!-- SUBJECT TABS -->
+<div id="subject-bar" style="position:sticky;top:0;z-index:200;background:var(--white);border-bottom:1px solid #e2e8f0;padding:6px 16px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap;">
+  <span style="font-family:'Fraunces',serif;font-size:13px;font-weight:700;color:var(--text-light);padding:7px 4px;white-space:nowrap;">5. Semester:</span>
+  <a class="subject-tab active" href="CFM_Lernzettel.html">💰 Corp. Financial Mgmt.</a>
+  <a class="subject-tab" href="../Turnaround Management/Turnaround_Lernzettel.html">⚡ Turnaround Mgmt.</a>
+</div>
+
+<div id="header">
+  <div id="header-inner">
+    <span id="header-title">💰 CFM</span>
+    <nav id="nav-links">
+      <button class="nav-link" onclick="showPage('learn')">📚 Lernzettel</button>
+      <button class="nav-link" onclick="scrollToSec('sec-pe')">Private Equity & VC</button>
+      <button class="nav-link" onclick="scrollToSec('sec-boerse')">Börsengang</button>
+      <button class="nav-link" onclick="scrollToSec('sec-optionen')">Optionen & Futures</button>
+    </nav>
+    <div id="header-btns">
+      <button id="btn-darkmode" onclick="toggleDark()">🌙</button>
+      <button class="hbtn" id="btn-learn" onclick="showPage('learn')">📚 Lernen</button>
+      <button class="hbtn" id="btn-cards" onclick="showPage('cards')">🃏 Karten</button>
+      <button class="hbtn" id="btn-test" onclick="showPage('test')">✏️ Quiz</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== LERNZETTEL ===================== -->
+<div id="learn-page" class="page active">
+<div id="main">
+
+<div class="hero">
+  <h1>Corporate Financial Management</h1>
+  <p>Lernzettel · 5. Semester · FOM Hamburg</p>
+  <div class="hero-chips">
+    <span class="hero-chip">92 Übungsfragen</span>
+    <span class="hero-chip">3 Themenblöcke</span>
+    <span class="hero-chip">Richtig / Falsch</span>
+  </div>
+</div>
+
+<!-- ---- KAPITEL 1: Private Equity & VC ---- -->
+<div class="chapter ch1" id="sec-pe">
+  <div class="chapter-header"><div class="chapter-num">01</div><div class="chapter-title">Private Equity &amp; Venture Capital</div></div>
+  <div class="chapter-body">
+
+    <h3>Was ist Private Equity?</h3>
+    <p>PE = Beteiligungskapital <strong>außerhalb der Börse</strong>. PE-Fonds beteiligen sich an <strong>nicht börsennotierten</strong> Unternehmen und streben eine <strong>zeitlich begrenzte</strong> Beteiligung an (3–7 Jahre), um anschließend gewinnbringend auszusteigen.</p>
+    <div class="box-info">Faustregel für fast alle PE-Aussagen: <strong>nicht börsennotiert + zeitlich begrenzt</strong> = richtig.</div>
+
+    <h3>Einsatzgebiete</h3>
+    <ul>
+      <li><strong>Wachstumsfinanzierung</strong> – PE ist dafür geeignet ✓</li>
+      <li><strong>Unternehmensnachfolge</strong> – PE kommt häufig in Frage ✓</li>
+      <li><strong>Gründungsfinanzierung</strong> – hier ist VC zuständig (Sonderform)</li>
+    </ul>
+
+    <h3>Venture Capital – Abgrenzung</h3>
+    <p>VC = Sonderform von PE für <strong>sehr junge, wachstumsstarke</strong> Unternehmen (Start-ups). Fremdkapital ist für Gründungen kaum zugänglich → VC spielt dabei die wichtigere Rolle.</p>
+    <div class="box-danger"><strong>Falle:</strong> VC finanziert <em>junge</em> Unternehmen – nicht reife. Reife Unternehmen → klassisches PE.</div>
+
+    <h3>MBO vs. MBI – die häufigste Verwechslung</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Begriff</th><th>Wer übernimmt?</th><th>Eselsbrücke</th></tr></thead>
+      <tbody>
+        <tr><td><strong>MBO</strong> – Buy Out</td><td>Das <strong>aktuelle</strong> (interne) Management</td><td>"Out" = Manager holen das Unternehmen <u>heraus</u> aus Fremdbesitz</td></tr>
+        <tr><td><strong>MBI</strong> – Buy In</td><td><strong>Externe</strong> Manager kommen von außen</td><td>"In" = Manager kommen <u>herein</u></td></tr>
+        <tr><td><strong>LMBO</strong> – Leveraged MBO</td><td>Aktuelles Management + hoher FK-Anteil</td><td>Leverage = Hebel durch Fremdkapital</td></tr>
+      </tbody>
+    </table></div>
+    <div class="box-warn"><strong>Regel:</strong> MBO = aktuelle Manager · MBI = externe Manager · LMBO = MBO mit viel Fremdkapital (nicht nur EK!)</div>
+
+    <h3>Exit-Strategien – Secondary Sale vs. Trade Sale</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Exit-Weg</th><th>Käufer</th><th>Eselsbrücke</th></tr></thead>
+      <tbody>
+        <tr><td><strong>IPO / Börsengang</strong></td><td>Öffentliche Anleger</td><td>Aktien werden an der Börse gelistet</td></tr>
+        <tr><td><strong>Secondary Sale</strong></td><td>Anderer <strong>Finanz</strong>investor (PE-Fonds)</td><td>„Secondary" = zweiter Finanzinvestor übernimmt</td></tr>
+        <tr><td><strong>Trade Sale</strong></td><td><strong>Strategischer</strong> Investor (Industrieunternehmen)</td><td>„Trade" = Handel/Industrie = strategisch</td></tr>
+      </tbody>
+    </table></div>
+    <div class="box-danger">
+      <strong>Die häufigsten Fehler:</strong><br>
+      – Secondary Sale an strategischen Investor → FALSCH (das ist Trade Sale)<br>
+      – Trade Sale an Finanzinvestor → FALSCH (das ist Secondary Sale)<br>
+      – Beim Exit stocken PE-Investoren auf → immer FALSCH (sie verkaufen)
+    </div>
+
+    <!-- Inline-Quiz Kapitel 1 -->
+    <div class="quiz-section-lern">
+      <div class="quiz-title-lern" onclick="toggleSection(this)">
+        ▶ Übungsfragen: Private Equity &amp; VC (Fragen 1–26) <span class="arrow">▶</span>
+      </div>
+      <div class="quiz-cards-wrapper-lern" id="qw-pe"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ---- KAPITEL 2: Börsengang ---- -->
+<div class="chapter ch2" id="sec-boerse">
+  <div class="chapter-header"><div class="chapter-num">02</div><div class="chapter-title">Gang an die Börse (IPO / Going Public)</div></div>
+  <div class="chapter-body">
+
+    <h3>Definition</h3>
+    <p>Beim Going Public werden <strong>erstmalig</strong> Aktien als verbriefte Anteile an externe Kapitalgeber an organisierten Finanzmärkten (Börse) veräußert. Danach können Aktien am <strong>Sekundärmarkt</strong> gehandelt werden – jederzeit, nicht nur beim erneuten Börsengang.</p>
+
+    <h3>Kapitalfrage – Eigenkapital, kein Fremdkapital</h3>
+    <div class="box-success">
+      Beim Börsengang fließt dem Unternehmen <strong>neues Eigenkapital zu</strong> → stärkt die Eigenkapitalbasis.<br>
+      Das Kapital ist <strong>kein Fremdkapital</strong>. Wer „Fremdkapital" sagt, liegt falsch.
+    </div>
+
+    <h3>Vorteile des Börsengangs</h3>
+    <ul>
+      <li>Kapitalzufluss → stärkt EK-Basis</li>
+      <li>Erhöhter Bekanntheitsgrad &amp; Reputation</li>
+      <li>Mitarbeiterattraktivität steigt (Aktienoptionen möglich)</li>
+      <li>Mitarbeiterbeteiligung wird <strong>erleichtert</strong> (nicht erschwert)</li>
+      <li>Besonders für <strong>wachstumsstarke</strong> Unternehmen geeignet</li>
+      <li>Privatisierung staatlicher Unternehmen durch Börsengang möglich</li>
+    </ul>
+
+    <h3>Nachteile des Börsengangs</h3>
+    <ul>
+      <li>Hohe <strong>Einmalkosten</strong> (Emission) <em>und</em> <strong>laufende Kosten</strong> (IR, Reporting, Compliance)</li>
+      <li>Erhöhte <strong>Publizitätspflichten</strong> → ausgefeiltes Rechnungswesen nötig</li>
+      <li>Einfluss der Altgesellschafter sinkt (nicht steigt!)</li>
+      <li>Feindliche Übernahme wird <strong>wahrscheinlicher</strong> (nicht durch Gesetz verhindert)</li>
+    </ul>
+
+    <div class="box-danger">
+      <strong>Klassische Fallen:</strong><br>
+      – „kein Kapital fließt zu" → FALSCH · – „Fremdkapital" → FALSCH<br>
+      – „nur Einmalkosten" → FALSCH · – „erleichtert Übernahme-Schutz" → FALSCH<br>
+      – „Einfluss Altgesellschafter steigt" → FALSCH · – „Börsengang = schlechterer Ruf" → FALSCH<br>
+      – „staatliche Unternehmen müssen erst privatisiert werden, dann erst IPO" → FALSCH (der IPO ist die Privatisierung)<br>
+      – „Mitarbeiterbeteiligung wird erschwert" → FALSCH (wird erleichtert)
+    </div>
+
+    <h3>Underpricing</h3>
+    <p><strong>Underpricing</strong> = Phänomen, dass der <strong>erste Kurs am Sekundärmarkt ÜBER dem Emissionskurs</strong> liegt. Das Unternehmen hat die Aktien zu günstig ausgegeben; Anleger erzielen eine Ersttagsrendite.</p>
+    <div class="box-info">Erster Sekundärmarktkurs <strong>&gt;</strong> Emissionskurs → Underpricing ✓ (nicht darunter!)</div>
+
+    <!-- Inline-Quiz Kapitel 2 -->
+    <div class="quiz-section-lern">
+      <div class="quiz-title-lern" onclick="toggleSection(this)">
+        ▶ Übungsfragen: Börsengang (Fragen 27–58) <span class="arrow">▶</span>
+      </div>
+      <div class="quiz-cards-wrapper-lern" id="qw-boerse"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ---- KAPITEL 3: Optionen & Futures ---- -->
+<div class="chapter ch3" id="sec-optionen">
+  <div class="chapter-header"><div class="chapter-num">03</div><div class="chapter-title">Optionen &amp; Futures</div></div>
+  <div class="chapter-body">
+
+    <h3>Bedingt vs. Unbedingt – die Grundunterscheidung</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Art</th><th>Instrumente</th><th>Was passiert?</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Unbedingt</strong></td><td>Forwards, Futures</td><td><strong>Beide</strong> Parteien müssen erfüllen – egal wie der Kurs steht</td></tr>
+        <tr><td><strong>Bedingt</strong></td><td>Optionen (Call, Put)</td><td>Käufer hat ein <strong>Recht</strong> (kann ausüben oder nicht); Verkäufer hat Pflicht</td></tr>
+      </tbody>
+    </table></div>
+    <div class="box-warn"><strong>Merke:</strong> Forwards &amp; Futures = BEIDE Parteien verpflichtet. „Nur eine Partei verpflichtet" → immer FALSCH für Forwards/Futures.</div>
+
+    <h3>Futures &amp; Forwards – Gewinn/Verlust</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Kursentwicklung</th><th>Käufer</th><th>Verkäufer</th></tr></thead>
+      <tbody>
+        <tr><td>Kurs <strong>&gt;</strong> Terminkurs</td><td>✅ Gewinn (kauft günstig)</td><td>❌ Verlust (muss günstig liefern)</td></tr>
+        <tr><td>Kurs <strong>&lt;</strong> Terminkurs</td><td>❌ Verlust (kauft zu teuer)</td><td>✅ Gewinn (verkauft zu teuer)</td></tr>
+      </tbody>
+    </table></div>
+    <p>Das Verlustpotenzial ist für <strong>beide Parteien sehr hoch</strong> (unbegrenzt). Der Satz „nur für eine Partei hoch, für die andere auf Prämie begrenzt" beschreibt Optionen, nicht Forwards.</p>
+
+    <h3>Optionen: Call vs. Put – wer darf/muss was?</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th></th><th>Call (Kaufoption)</th><th>Put (Verkaufsoption)</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Käufer hat …</strong></td><td>Recht zu <strong>kaufen</strong></td><td>Recht zu <strong>verkaufen</strong></td></tr>
+        <tr><td><strong>Käufer hat KEINE …</strong></td><td>Pflicht</td><td>Pflicht</td></tr>
+        <tr><td><strong>Verkäufer muss …</strong></td><td>Basiswert <strong>liefern</strong> (verkaufen)</td><td>Basiswert <strong>kaufen</strong></td></tr>
+        <tr><td><strong>Verkäufer hat …</strong></td><td>kein Rücktrittsrecht</td><td>kein Rücktrittsrecht</td></tr>
+        <tr><td><strong>Vorteilhaft wenn …</strong></td><td>Kurs steigt</td><td>Kurs fällt</td></tr>
+      </tbody>
+    </table></div>
+    <div class="box-danger">
+      <strong>Fallen bei Optionen:</strong><br>
+      – Call-Käufer erwirbt Recht zu <em>verkaufen</em> → FALSCH (er kauft)<br>
+      – Käufer hat Pflicht (egal ob Call oder Put) → FALSCH (immer Recht)<br>
+      – Call-Verkäufer muss kaufen → FALSCH (er muss liefern/verkaufen)<br>
+      – Put-Verkäufer muss liefern → FALSCH (er muss kaufen)<br>
+      – Verkäufer hat Rücktrittsrecht → immer FALSCH
+    </div>
+
+    <h3>Innerer Wert &amp; Zeitwert</h3>
+    <div class="box-success"><strong>Innerer Wert:</strong> Kann <strong>nie negativ</strong> werden – Minimum ist 0. „Selten negativ" oder „immer positiv" → FALSCH. Richtig ist: „kann nicht negativ werden".</div>
+    <ul>
+      <li><strong>Zeitwert:</strong> Steigt mit längerer Restlaufzeit – nicht sinkt!</li>
+      <li>Bei Fälligkeit ist Zeitwert = 0.</li>
+    </ul>
+
+    <h3>Einflussfaktoren auf den Optionspreis</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Faktor ↑</th><th>Call-Preis</th><th>Put-Preis</th><th>Merke</th></tr></thead>
+      <tbody>
+        <tr><td>Kassakurs ↑</td><td>↑ steigt</td><td>↓ sinkt</td><td>Asymmetrisch</td></tr>
+        <tr><td>Volatilität ↑</td><td>↑ steigt</td><td>↑ steigt</td><td><strong>Beide</strong> steigen!</td></tr>
+        <tr><td>Restlaufzeit ↑</td><td>↑ steigt</td><td>↑ steigt</td><td><strong>Beide</strong> steigen!</td></tr>
+      </tbody>
+    </table></div>
+    <div class="box-warn">
+      <strong>Falle Volatilität:</strong> Höhere Volatilität erhöht Call <em>und</em> Put. Die Aussage „höhere Volatilität → höherer Call, niedrigerer Put" ist FALSCH.<br>
+      <strong>Falle Kassakurs:</strong> Höherer Kassakurs → „immer höherer Optionspreis" ist FALSCH. Er erhöht nur den Call, senkt den Put.
+    </div>
+
+    <!-- Inline-Quiz Kapitel 3 -->
+    <div class="quiz-section-lern">
+      <div class="quiz-title-lern" onclick="toggleSection(this)">
+        ▶ Übungsfragen: Optionen &amp; Futures (Fragen 59–92) <span class="arrow">▶</span>
+      </div>
+      <div class="quiz-cards-wrapper-lern" id="qw-optionen"></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+</div><!-- /learn-page -->
+
+<!-- ===================== KARTEIKARTEN ===================== -->
+<div id="cards-page" class="page">
+  <div id="cards-page-inner">
+    <div class="cards-hero">
+      <h1>🃏 Karteikarten</h1>
+      <p>Klick auf eine Karte zum Aufdecken</p>
+    </div>
+    <div class="fc-filter" id="fc-filter">
+      <button class="fc-filter-btn active" onclick="fcFilter('all',this)">Alle (92)</button>
+      <button class="fc-filter-btn" onclick="fcFilter('pe',this)">Private Equity &amp; VC (26)</button>
+      <button class="fc-filter-btn" onclick="fcFilter('boerse',this)">Börsengang (32)</button>
+      <button class="fc-filter-btn" onclick="fcFilter('optionen',this)">Optionen &amp; Futures (34)</button>
+    </div>
+    <div class="flashcards-grid" id="flashcards-grid"></div>
+  </div>
+</div>
+
+<!-- ===================== TEST ===================== -->
+<div id="test-page" class="page">
+  <div id="test-hero-wrap">
+    <div class="test-hero">
+      <h1>✏️ Quiz – Richtig oder Falsch</h1>
+      <p>Frage für Frage – mit sofortigem Feedback</p>
+      <div class="test-filter" id="test-filter">
+        <button class="test-filter-btn active" onclick="setTestFilter('all',this)">Alle (92)</button>
+        <button class="test-filter-btn" onclick="setTestFilter('pe',this)">Private Equity &amp; VC</button>
+        <button class="test-filter-btn" onclick="setTestFilter('boerse',this)">Börsengang</button>
+        <button class="test-filter-btn" onclick="setTestFilter('optionen',this)">Optionen &amp; Futures</button>
+      </div>
+      <button id="start-btn" onclick="startTest()">Quiz starten →</button>
+    </div>
+  </div>
+  <div id="question-container">
+    <div class="q-progress-bar-wrap"><div class="q-progress-bar-fill" id="q-prog"></div></div>
+    <div class="q-counter" id="q-counter"></div>
+    <div class="question-card">
+      <div class="q-topic-badge" id="q-badge"></div>
+      <div class="q-text" id="q-text"></div>
+      <div class="answer-options">
+        <button class="answer-btn" id="btn-r" onclick="checkAnswer(true)">✓ Richtig</button>
+        <button class="answer-btn" id="btn-f" onclick="checkAnswer(false)">✗ Falsch</button>
+      </div>
+      <div class="feedback-box" id="feedback-box"></div>
+      <button id="next-btn" onclick="nextQuestion()">Nächste Frage →</button>
+    </div>
+  </div>
+  <div id="result-container">
+    <div class="result-card">
+      <div class="result-score" id="res-score"></div>
+      <div class="result-label" id="res-label"></div>
+      <div class="result-sub" id="res-sub"></div>
+      <div class="result-grade" id="res-grade"></div>
+      <div class="result-btns">
+        <button class="btn-secondary" onclick="showPage('test')">Nochmal</button>
+        <button class="btn-primary" onclick="showPage('learn')">Zum Lernzettel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===================== DATA =====================
+const Q = [
+  {id:1,t:'pe',tl:'Private Equity & VC',q:'Private-Equity-Beteiligungen erfolgen typischerweise an börsennotierten Unternehmen.',a:false,e:'PE-Beteiligungen erfolgen typischerweise an NICHT börsennotierten Unternehmen.'},
+  {id:2,t:'pe',tl:'Private Equity & VC',q:'Private-Equity-Beteiligungen erfolgen typischerweise an nicht börsennotierten Unternehmen.',a:true,e:'Richtig – das ist das Kernmerkmal von Private Equity.'},
+  {id:3,t:'pe',tl:'Private Equity & VC',q:'Private-Equity-Fonds streben typischerweise eine zeitlich begrenzte Beteiligung an.',a:true,e:'Richtig – typische Haltedauer 3–7 Jahre, dann Exit.'},
+  {id:4,t:'pe',tl:'Private Equity & VC',q:'Private-Equity-Fonds streben typischerweise eine zeitlich unbegrenzte Beteiligung an.',a:false,e:'Falsch – PE-Fonds streben eine zeitlich BEGRENZTE Beteiligung an.'},
+  {id:5,t:'pe',tl:'Private Equity & VC',q:'Venture Capital ist eine Sonderform von Private Equity zur Finanzierung überwiegend sehr junger und wachstumsträchtiger Unternehmen.',a:true,e:'Richtig – VC ist der Start-up-Zweig von PE.'},
+  {id:6,t:'pe',tl:'Private Equity & VC',q:'Venture Capital ist eine Sonderform von Private Equity zur Finanzierung überwiegend reifer Unternehmen.',a:false,e:'Falsch – VC finanziert junge, wachstumsstarke Unternehmen, nicht reife.'},
+  {id:7,t:'pe',tl:'Private Equity & VC',q:'Bei der Regelung der Unternehmensnachfolge kommt häufig der Einsatz von Private Equity in Frage.',a:true,e:'Richtig – PE ist ein wichtiges Instrument bei Nachfolgeregelungen (z.B. via MBO).'},
+  {id:8,t:'pe',tl:'Private Equity & VC',q:'Bei der Regelung der Unternehmensnachfolge kommt der Einsatz von Private Equity grundsätzlich nicht in Frage.',a:false,e:'Falsch – PE ist gerade bei Nachfolgeregelungen sehr relevant.'},
+  {id:9,t:'pe',tl:'Private Equity & VC',q:'Private Equity ist zur Wachstumsfinanzierung geeignet.',a:true,e:'Richtig – PE eignet sich sehr gut zur Wachstumsfinanzierung.'},
+  {id:10,t:'pe',tl:'Private Equity & VC',q:'Zur Wachstumsfinanzierung ist Private Equity aufgrund seiner Ausgestaltung eher ungeeignet.',a:false,e:'Falsch – PE ist eine wichtige Wachstumsfinanzierungsquelle.'},
+  {id:11,t:'pe',tl:'Private Equity & VC',q:'Im Rahmen von Unternehmensgründungen spielt Venture Capital eine wichtige Rolle.',a:true,e:'Richtig – VC ist die typische Finanzierungsform für Start-ups.'},
+  {id:12,t:'pe',tl:'Private Equity & VC',q:'Im Rahmen von Unternehmensgründungen spielt Fremdkapital eine wichtigere Rolle als Venture Capital.',a:false,e:'Falsch – junge Unternehmen erhalten kaum Bankkredite; VC ist die wichtigere Quelle.'},
+  {id:13,t:'pe',tl:'Private Equity & VC',q:'Bei einem Management Buy Out handelt es sich um eine Unternehmensübernahme, bei der die Geschäftsführer des Unternehmens Anteile erwerben.',a:true,e:'Richtig – MBO: das AKTUELLE Management kauft Unternehmensanteile.'},
+  {id:14,t:'pe',tl:'Private Equity & VC',q:'Bei einem Management Buy Out handelt es sich um eine Unternehmensübernahme, bei der externe Geschäftsführer das Unternehmen übernehmen.',a:false,e:'Falsch – das wäre ein Management Buy IN (MBI). Beim MBO kauft das aktuelle Management.'},
+  {id:15,t:'pe',tl:'Private Equity & VC',q:'Bei einem Management Buy In wird das Unternehmen von einer Gruppe externer Manager übernommen.',a:true,e:'Richtig – MBI: EXTERNE Manager übernehmen das Unternehmen.'},
+  {id:16,t:'pe',tl:'Private Equity & VC',q:'Bei einem Management Buy In wird das Unternehmen von den aktuellen Managern übernommen.',a:false,e:'Falsch – das wäre ein MBO. Beim MBI kommen die Manager von außen.'},
+  {id:17,t:'pe',tl:'Private Equity & VC',q:'Private-Equity-Investoren streben oft einen Exit über einen Börsengang des Unternehmens an.',a:true,e:'Richtig – der Börsengang (IPO) ist eine der gängigen Exit-Strategien.'},
+  {id:18,t:'pe',tl:'Private Equity & VC',q:'Werden Management Buy Outs zum großen Teil durch Fremdkapital finanziert, spricht man von Leveraged Management Buy Outs.',a:true,e:'Richtig – Leveraged MBO = MBO mit hohem Fremdkapitalanteil (Hebel).'},
+  {id:19,t:'pe',tl:'Private Equity & VC',q:'Beim Leveraged Management Buy Out wird die Übernahme grundsätzlich nur durch Eigenkapital finanziert.',a:false,e:'Falsch – beim Leveraged MBO wird gerade FREMDKAPITAL als Hebel eingesetzt.'},
+  {id:20,t:'pe',tl:'Private Equity & VC',q:'Der Börsengang kommt für Private-Equity-Investoren als Exit nicht in Frage, da sie ihre Anteile dann erst recht behalten wollen.',a:false,e:'Falsch – der Börsengang (IPO) ist explizit eine Exit-Option für PE-Investoren.'},
+  {id:21,t:'pe',tl:'Private Equity & VC',q:'Im Rahmen eines Secondary Sale verkaufen die Private-Equity-Investoren ihre Anteile an einen anderen Finanzinvestor.',a:true,e:'Richtig – Secondary Sale: Verkauf an anderen Finanzinvestor (z.B. anderer PE-Fonds).'},
+  {id:22,t:'pe',tl:'Private Equity & VC',q:'Im Rahmen eines Secondary Sale stocken die Private-Equity-Investoren ihre Anteile auf.',a:false,e:'Falsch – beim Secondary Sale VERKAUFEN die Investoren ihre Anteile.'},
+  {id:23,t:'pe',tl:'Private Equity & VC',q:'Im Rahmen eines Secondary Sale verkaufen die Private-Equity-Investoren ihre Anteile an einen strategischen Investor.',a:false,e:'Falsch – Secondary Sale = Finanzinvestor. Strategischer Investor = Trade Sale.'},
+  {id:24,t:'pe',tl:'Private Equity & VC',q:'Im Rahmen eines Trade Sale verkaufen die Private-Equity-Investoren ihre Anteile an einen anderen Finanzinvestor.',a:false,e:'Falsch – Trade Sale = strategischer Investor. Finanzinvestor = Secondary Sale.'},
+  {id:25,t:'pe',tl:'Private Equity & VC',q:'Im Rahmen eines Trade Sale stocken die Private-Equity-Investoren ihre Anteile auf.',a:false,e:'Falsch – beim Trade Sale VERKAUFEN die PE-Investoren ihre Anteile.'},
+  {id:26,t:'pe',tl:'Private Equity & VC',q:'Im Rahmen eines Trade Sale verkaufen die Private-Equity-Investoren ihre Anteile an einen strategischen Investor.',a:true,e:'Richtig – Trade Sale: Verkauf an strategischen Investor (Industrie, Wettbewerber etc.).'},
+  {id:27,t:'boerse',tl:'Börsengang (IPO)',q:'Bei Going Public werden erstmalig die Aktien des Unternehmens als verbriefte Anteile an externe Kapitalgeber an organisierten Finanzmärkten veräußert.',a:true,e:'Richtig – das ist die Definition des Going Public / IPO.'},
+  {id:28,t:'boerse',tl:'Börsengang (IPO)',q:'Nach dem Gang an die Börse können die Aktien am Sekundärmarkt gehandelt werden.',a:true,e:'Richtig – der Sekundärmarkt ermöglicht den Handel von bereits emittierten Aktien.'},
+  {id:29,t:'boerse',tl:'Börsengang (IPO)',q:'Nach dem Gang an die Börse werden die Aktien in der Regel nicht gehandelt.',a:false,e:'Falsch – gerade nach dem Börsengang werden Aktien am Sekundärmarkt gehandelt.'},
+  {id:30,t:'boerse',tl:'Börsengang (IPO)',q:'Nach dem Gang an die Börse können erworbene Aktien nur im Rahmen eines erneuten Börsengangs veräußert werden.',a:false,e:'Falsch – Aktien können jederzeit am Sekundärmarkt gehandelt werden.'},
+  {id:31,t:'boerse',tl:'Börsengang (IPO)',q:'Im Rahmen eines Börsengangs fließt dem Unternehmen neues Kapital zu.',a:true,e:'Richtig – beim IPO (Primärmarkt) fließt dem Unternehmen neues Eigenkapital zu.'},
+  {id:32,t:'boerse',tl:'Börsengang (IPO)',q:'Im Rahmen eines Börsengangs fließt dem Unternehmen kein neues Kapital zu.',a:false,e:'Falsch – beim Börsengang fließt dem Unternehmen neues Eigenkapital zu.'},
+  {id:33,t:'boerse',tl:'Börsengang (IPO)',q:'Ein Börsengang ist für Unternehmen mit hohen Wachstumsaussichten geeignet.',a:true,e:'Richtig – wachstumsstarke Unternehmen profitieren besonders von der Kapitalbeschaffung an der Börse.'},
+  {id:34,t:'boerse',tl:'Börsengang (IPO)',q:'Ein Börsengang ist nur für Unternehmen mit geringen Wachstumsaussichten geeignet.',a:false,e:'Falsch – Börsengang ist gerade für wachstumsstarke Unternehmen vorteilhaft.'},
+  {id:35,t:'boerse',tl:'Börsengang (IPO)',q:'Ein Börsengang erhöht die Attraktivität des Unternehmens für die Mitarbeiter.',a:true,e:'Richtig – Aktienoptionen und Mitarbeiterbeteiligungen erhöhen die Arbeitgeberattraktivität.'},
+  {id:36,t:'boerse',tl:'Börsengang (IPO)',q:'Ein Börsengang verringert die Attraktivität des Unternehmens für die Mitarbeiter.',a:false,e:'Falsch – ein Börsengang erhöht die Attraktivität.'},
+  {id:37,t:'boerse',tl:'Börsengang (IPO)',q:'Der Börsengang erleichtert die Mitarbeiterbeteiligung am Unternehmen.',a:true,e:'Richtig – börsennotierte Aktien können als Mitarbeiterbeteiligung ausgegeben werden.'},
+  {id:38,t:'boerse',tl:'Börsengang (IPO)',q:'Aufgrund der gesetzlichen Regelungen erschwert der Börsengang die Mitarbeiterbeteiligung am Unternehmen.',a:false,e:'Falsch – der Börsengang erleichtert die Mitarbeiterbeteiligung.'},
+  {id:39,t:'boerse',tl:'Börsengang (IPO)',q:'Der Börsengang erhöht den Bekanntheitsgrad des Unternehmens.',a:true,e:'Richtig – durch die Börsennotierung steigt Presseberichterstattung und Wahrnehmung.'},
+  {id:40,t:'boerse',tl:'Börsengang (IPO)',q:'Durch den Börsengang verschlechtert sich grundsätzlich der Ruf des Unternehmens.',a:false,e:'Falsch – in der Regel steigt der Bekanntheitsgrad und Ruf.'},
+  {id:41,t:'boerse',tl:'Börsengang (IPO)',q:'Das Kapital aus dem Börsengang stärkt die Eigenkapitalbasis des Unternehmens.',a:true,e:'Richtig – der Emissionserlös ist Eigenkapital und stärkt die Eigenkapitalbasis.'},
+  {id:42,t:'boerse',tl:'Börsengang (IPO)',q:'Das Kapital aus dem Börsengang stärkt die Eigenkapitalbasis des Unternehmens nicht, da es sich um Fremdkapital handelt.',a:false,e:'Falsch – Aktienkapital ist EIGENKAPITAL, kein Fremdkapital.'},
+  {id:43,t:'boerse',tl:'Börsengang (IPO)',q:'Der Börsengang stärkt die Eigenkapitalbasis des Unternehmens nicht, da kein Kapital dem Unternehmen zufließt.',a:false,e:'Falsch – beim Börsengang fließt dem Unternehmen neues Eigenkapital zu.'},
+  {id:44,t:'boerse',tl:'Börsengang (IPO)',q:'Staatliche Unternehmen müssen erst privatisiert werden, erst dann können sie an die Börse gebracht werden.',a:false,e:'Falsch – der Börsengang IST die Privatisierung; beides geschieht gleichzeitig.'},
+  {id:45,t:'boerse',tl:'Börsengang (IPO)',q:'Durch einen Börsengang können staatliche Unternehmen privatisiert werden.',a:true,e:'Richtig – der Börsengang ist ein Instrument zur Privatisierung staatlicher Unternehmen.'},
+  {id:46,t:'boerse',tl:'Börsengang (IPO)',q:'Bei börsennotierten Unternehmen ist eine feindliche Übernahme aufgrund gesetzlicher Bestimmungen nicht möglich.',a:false,e:'Falsch – feindliche Übernahmen sind bei börsennotierten Unternehmen möglich (und wahrscheinlicher).'},
+  {id:47,t:'boerse',tl:'Börsengang (IPO)',q:'Nach dem Börsengang muss das Unternehmen in der Regel höhere Publizitätspflichten erfüllen.',a:true,e:'Richtig – Quartalsberichte, Ad-hoc-Meldungen etc. sind Pflicht.'},
+  {id:48,t:'boerse',tl:'Börsengang (IPO)',q:'Ein Börsengang hat keinen Einfluss auf die Publizitätspflichten des Unternehmens.',a:false,e:'Falsch – der Börsengang erhöht die Publizitätspflichten erheblich.'},
+  {id:49,t:'boerse',tl:'Börsengang (IPO)',q:'Bei börsennotierten Unternehmen ist eine feindliche Übernahme wahrscheinlicher als bei nicht börsennotierten Unternehmen.',a:true,e:'Richtig – frei handelbare Aktien ermöglichen Aufkauf von Anteilen am Markt.'},
+  {id:50,t:'boerse',tl:'Börsengang (IPO)',q:'Bei börsennotierten Unternehmen ist eine feindliche Übernahme wahrscheinlicher als bei nicht börsennotierten Unternehmen. (2)',a:true,e:'Richtig – wie Frage 49: Börsennotierung erleichtert feindliche Übernahmen.'},
+  {id:51,t:'boerse',tl:'Börsengang (IPO)',q:'Nach einem Börsengang wird der Einfluss der Altgesellschafter in der Regel höher.',a:false,e:'Falsch – durch Ausgabe neuer Aktien an externe Investoren sinkt der Einfluss der Altgesellschafter.'},
+  {id:52,t:'boerse',tl:'Börsengang (IPO)',q:'Nach einem Börsengang wird der Einfluss der Altgesellschafter in der Regel geringer.',a:true,e:'Richtig – Verwässerung der Anteile → geringerer Einfluss der Altgesellschafter.'},
+  {id:53,t:'boerse',tl:'Börsengang (IPO)',q:'Ein Börsengang ist mit hohen Einmalkosten verbunden, zusätzliche fortlaufende Kosten entstehen durch die Börsennotierung nicht.',a:false,e:'Falsch – neben Einmalkosten entstehen auch laufende Kosten (IR, Reporting, Compliance).'},
+  {id:54,t:'boerse',tl:'Börsengang (IPO)',q:'Ein Börsengang ist mit hohen Einmalkosten und zusätzlichen fortlaufenden Kosten verbunden.',a:true,e:'Richtig – beide Kostenarten fallen an: Emissionskosten + laufende Börsenkosten.'},
+  {id:55,t:'boerse',tl:'Börsengang (IPO)',q:'Um den Publizitätspflichten gerecht zu werden, bedarf es eines ausgefeilten Rechnungswesens.',a:true,e:'Richtig – IFRS-Rechnungslegung und Quartalsberichte erfordern ein professionelles Rechnungswesen.'},
+  {id:56,t:'boerse',tl:'Börsengang (IPO)',q:'Das Rechnungswesen spielt für die Erfüllung der Publizitätspflichten eine eher untergeordnete Rolle.',a:false,e:'Falsch – ein ausgefeiltes Rechnungswesen ist Voraussetzung für die Publizitätspflichten.'},
+  {id:57,t:'boerse',tl:'Börsengang (IPO)',q:'Unter Underpricing versteht man das Phänomen, dass der erste Kurs am Sekundärmarkt über dem Emissionskurs liegt.',a:true,e:'Richtig – Underpricing: 1. Sekundärmarktkurs > Emissionskurs (Ersttagsrendite für Anleger).'},
+  {id:58,t:'boerse',tl:'Börsengang (IPO)',q:'Unter Underpricing versteht man das Phänomen, dass der erste Kurs am Sekundärmarkt unter dem Emissionskurs liegt.',a:false,e:'Falsch – beim Underpricing liegt der erste Kurs ÜBER dem Emissionskurs, nicht darunter.'},
+  {id:59,t:'optionen',tl:'Optionen & Futures',q:'Forwards und Futures sind unbedingte Termingeschäfte.',a:true,e:'Richtig – beide Parteien sind zur Erfüllung verpflichtet (unbedingt).'},
+  {id:60,t:'optionen',tl:'Optionen & Futures',q:'Forwards und Futures sind bedingte Termingeschäfte.',a:false,e:'Falsch – Forwards & Futures sind UNBEDINGTE Termingeschäfte. Optionen sind bedingt.'},
+  {id:61,t:'optionen',tl:'Optionen & Futures',q:'Bei einem Future verpflichten sich beide Parteien, Aktien oder andere Anlagen im Fälligkeitszeitpunkt zum heute vereinbarten Terminkurs zu kaufen bzw. zu verkaufen.',a:true,e:'Richtig – bei unbedingten Termingeschäften sind beide Parteien verpflichtet.'},
+  {id:62,t:'optionen',tl:'Optionen & Futures',q:'Bei einem Forward verpflichtet sich nur eine der beiden Parteien, Aktien oder andere Anlagen im Fälligkeitszeitpunkt zum heute vereinbarten Terminkurs zu kaufen bzw. zu verkaufen.',a:false,e:'Falsch – auch beim Forward verpflichten sich BEIDE Parteien (unbedingt).'},
+  {id:63,t:'optionen',tl:'Optionen & Futures',q:'Wenn der Aktienkurs über dem vereinbarten Terminkurs liegt, erzielt der Käufer einen Gewinn.',a:true,e:'Richtig – der Käufer kauft zum vereinbarten (niedrigeren) Terminkurs und kann teurer verkaufen.'},
+  {id:64,t:'optionen',tl:'Optionen & Futures',q:'Wenn der Aktienkurs über dem vereinbarten Terminkurs liegt, erzielt der Verkäufer einen Gewinn.',a:false,e:'Falsch – wenn der Kurs über dem Terminkurs liegt, verliert der Verkäufer.'},
+  {id:65,t:'optionen',tl:'Optionen & Futures',q:'Wenn der Aktienkurs unter dem vereinbarten Terminkurs liegt, erzielt der Käufer einen Verlust.',a:true,e:'Richtig – der Käufer muss zu einem höheren Terminkurs kaufen als der Marktkurs.'},
+  {id:66,t:'optionen',tl:'Optionen & Futures',q:'Wenn der Aktienkurs unter dem vereinbarten Terminkurs liegt, erzielt der Verkäufer einen Verlust.',a:false,e:'Falsch – wenn der Kurs unter dem Terminkurs liegt, erzielt der Verkäufer einen Gewinn.'},
+  {id:67,t:'optionen',tl:'Optionen & Futures',q:'Bei einem Forward ist das Verlustpotenzial für beide Parteien sehr hoch.',a:true,e:'Richtig – da Forward unbedingt ist, tragen beide Seiten hohes Verlustrisiko (theoretisch unbegrenzt).'},
+  {id:68,t:'optionen',tl:'Optionen & Futures',q:'Bei einem Forward ist das Verlustpotenzial nur für eine der beiden Parteien sehr hoch, für die andere ist es auf die Kontraktprämie begrenzt.',a:false,e:'Falsch – das beschreibt Optionen, nicht Forwards. Bei Forwards tragen beide hohes Verlustrisiko.'},
+  {id:69,t:'optionen',tl:'Optionen & Futures',q:'Der Käufer eines europäischen Calls erwirbt das Recht, eine bestimmte Menge eines Basiswerts zu einem bestimmten Zeitpunkt zum Basispreis zu verkaufen.',a:false,e:'Falsch – ein Call ist eine KAUFOPTION. Der Käufer erwirbt das Recht zu KAUFEN, nicht zu verkaufen.'},
+  {id:70,t:'optionen',tl:'Optionen & Futures',q:'Der Käufer eines europäischen Calls erwirbt das Recht, eine bestimmte Menge eines Basiswerts zu einem bestimmten Zeitpunkt zum Basispreis zu kaufen.',a:true,e:'Richtig – Call = Kaufoption. Der Käufer hat das Recht (nicht die Pflicht) zu kaufen.'},
+  {id:71,t:'optionen',tl:'Optionen & Futures',q:'Der Käufer eines europäischen Calls erwirbt die Pflicht, eine bestimmte Menge eines Basiswerts zu einem bestimmten Zeitpunkt zum Basispreis zu verkaufen.',a:false,e:'Falsch – der Käufer einer Option hat immer ein RECHT, niemals eine Pflicht.'},
+  {id:72,t:'optionen',tl:'Optionen & Futures',q:'Der Käufer eines europäischen Calls erwirbt die Pflicht, eine bestimmte Menge eines Basiswerts zu einem bestimmten Zeitpunkt zum Basispreis zu kaufen.',a:false,e:'Falsch – der Käufer einer Option hat ein RECHT, keine Pflicht.'},
+  {id:73,t:'optionen',tl:'Optionen & Futures',q:'Der Verkäufer eines europäischen Calls verpflichtet sich, bei Ausübung der Option eine bestimmte Menge eines Basiswerts zu einem bestimmten Zeitpunkt zum Basispreis zu kaufen.',a:false,e:'Falsch – der Call-Verkäufer muss bei Ausübung LIEFERN (verkaufen), nicht kaufen.'},
+  {id:74,t:'optionen',tl:'Optionen & Futures',q:'Der Verkäufer eines europäischen Calls verpflichtet sich, bei Ausübung der Option eine bestimmte Menge eines Basiswerts zu einem bestimmten Zeitpunkt zum Basispreis zu liefern.',a:true,e:'Richtig – der Call-Verkäufer (Stillhalter) muss bei Ausübung den Basiswert zum Basispreis liefern.'},
+  {id:75,t:'optionen',tl:'Optionen & Futures',q:'Der Verkäufer eines europäischen Calls hat das Recht, bei Ausübung der Option von seiner Verpflichtung unter Berufung auf die Marktsituation zurückzutreten.',a:false,e:'Falsch – der Verkäufer (Stillhalter) hat kein Rücktrittsrecht.'},
+  {id:76,t:'optionen',tl:'Optionen & Futures',q:'Der Käufer eines europäischen Puts erwirbt das Recht, eine bestimmte Menge eines Basiswerts zu einem bestimmten Zeitpunkt zum Basispreis zu verkaufen.',a:true,e:'Richtig – Put = Verkaufsoption. Der Käufer hat das Recht zu verkaufen.'},
+  {id:77,t:'optionen',tl:'Optionen & Futures',q:'Der Käufer eines europäischen Puts erwirbt das Recht, eine bestimmte Menge eines Basiswerts zu einem bestimmten Zeitpunkt zum Basispreis zu kaufen.',a:false,e:'Falsch – ein Put ist eine VERKAUFSOPTION. Das Kaufrecht hätte der Call-Käufer.'},
+  {id:78,t:'optionen',tl:'Optionen & Futures',q:'Der Käufer eines europäischen Puts erwirbt die Pflicht, eine bestimmte Menge eines Basiswerts zu einem bestimmten Zeitpunkt zum Basispreis zu verkaufen.',a:false,e:'Falsch – der Käufer einer Option hat immer ein Recht, keine Pflicht.'},
+  {id:79,t:'optionen',tl:'Optionen & Futures',q:'Der Käufer eines europäischen Puts erwirbt die Pflicht, eine bestimmte Menge eines Basiswerts zu einem bestimmten Zeitpunkt zum Basispreis zu kaufen.',a:false,e:'Falsch – der Käufer einer Option hat ein Recht, keine Pflicht. Und ein Put ist ein Verkaufsrecht.'},
+  {id:80,t:'optionen',tl:'Optionen & Futures',q:'Der Verkäufer eines europäischen Puts verpflichtet sich, bei Ausübung der Option eine bestimmte Menge eines Basiswerts zu einem bestimmten Zeitpunkt zum Basispreis zu kaufen.',a:true,e:'Richtig – der Put-Verkäufer (Stillhalter) muss bei Ausübung den Basiswert zum Basispreis KAUFEN.'},
+  {id:81,t:'optionen',tl:'Optionen & Futures',q:'Der Verkäufer eines europäischen Puts hat das Recht, bei Ausübung der Option von seiner Verpflichtung unter Berufung auf die Marktsituation zurückzutreten.',a:false,e:'Falsch – der Verkäufer hat kein Rücktrittsrecht; er ist zur Erfüllung verpflichtet.'},
+  {id:82,t:'optionen',tl:'Optionen & Futures',q:'Der Verkäufer eines europäischen Puts verpflichtet sich, bei Ausübung der Option eine bestimmte Menge eines Basiswerts zu einem bestimmten Zeitpunkt zum Basispreis zu liefern.',a:false,e:'Falsch – der Put-Verkäufer muss KAUFEN (nicht liefern). Liefern muss der Call-Verkäufer.'},
+  {id:83,t:'optionen',tl:'Optionen & Futures',q:'Der innere Wert einer Option wird sehr selten negativ.',a:false,e:'Falsch – der innere Wert kann NIEMALS negativ werden (Minimum ist 0).'},
+  {id:84,t:'optionen',tl:'Optionen & Futures',q:'Der innere Wert einer Option kann nicht negativ werden.',a:true,e:'Richtig – der innere Wert beträgt mindestens 0. Wäre er negativ, würde die Option nicht ausgeübt.'},
+  {id:85,t:'optionen',tl:'Optionen & Futures',q:'Der innere Wert einer Option ist immer positiv.',a:false,e:'Falsch – der innere Wert kann 0 sein (at the money oder out of the money), aber nicht negativ.'},
+  {id:86,t:'optionen',tl:'Optionen & Futures',q:'Der Zeitwert einer Option ist umso höher, je länger die Restlaufzeit der Option ist.',a:true,e:'Richtig – längere Restlaufzeit = mehr Zeit für günstige Kursbewegungen = höherer Zeitwert.'},
+  {id:87,t:'optionen',tl:'Optionen & Futures',q:'Der Zeitwert einer Option ist umso geringer, je länger die Restlaufzeit der Option ist.',a:false,e:'Falsch – mehr Restlaufzeit bedeutet mehr Zeitwert, nicht weniger.'},
+  {id:88,t:'optionen',tl:'Optionen & Futures',q:'Je höher die Volatilität des zugrundeliegenden Basiswertes ist, desto höher ist der Optionspreis.',a:true,e:'Richtig – höhere Volatilität erhöht die Chance auf günstigen Kurs → Optionspreis steigt (für Call UND Put).'},
+  {id:89,t:'optionen',tl:'Optionen & Futures',q:'Je höher die Volatilität des zugrundeliegenden Basiswertes ist, desto höher ist der Preis eines Calls und desto niedriger ist der Preis eines Puts.',a:false,e:'Falsch – höhere Volatilität erhöht BEIDE Optionspreise (Call UND Put).'},
+  {id:90,t:'optionen',tl:'Optionen & Futures',q:'Ein höherer Kassakurs führt immer zu einem höheren Optionspreis.',a:false,e:'Falsch – höherer Kassakurs erhöht den CALL-Preis, senkt aber den PUT-Preis.'},
+  {id:91,t:'optionen',tl:'Optionen & Futures',q:'Ein höherer Kassakurs führt zu einem höheren Preis der Kaufoption.',a:true,e:'Richtig – höherer Kassakurs → Call ist wertvoller (Kaufrecht wird profitabler).'},
+  {id:92,t:'optionen',tl:'Optionen & Futures',q:'Ein höherer Kassakurs führt zu einem höheren Preis der Verkaufsoption.',a:false,e:'Falsch – höherer Kassakurs senkt den PUT-Preis (Verkaufsrecht wird weniger attraktiv).'},
+];
+
+// ===================== UTILITY =====================
+function showPage(p){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  document.getElementById(p+'-page').classList.add('active');
+  window.scrollTo(0,0);
+  if(p==='cards') renderCards('all');
+  if(p==='test'){
+    document.getElementById('question-container').style.display='none';
+    document.getElementById('result-container').style.display='none';
+    document.getElementById('test-hero-wrap').style.display='block';
+  }
+}
+function scrollToSec(id){
+  showPage('learn');
+  setTimeout(()=>{const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},80);
+}
+function toggleDark(){
+  const d=document.body.getAttribute('data-theme')==='dark';
+  document.body.setAttribute('data-theme',d?'':'dark');
+  document.getElementById('btn-darkmode').textContent=d?'🌙':'☀️';
+}
+
+// progress bar
+window.addEventListener('scroll',()=>{
+  if(!document.getElementById('learn-page').classList.contains('active'))return;
+  const max=document.body.scrollHeight-window.innerHeight;
+  document.getElementById('progress-bar').style.width=(max>0?window.scrollY/max*100:0)+'%';
+});
+
+// ===================== INLINE QUIZ (Lernzettel) =====================
+function toggleSection(el){
+  const sec=el.closest('.quiz-section-lern');
+  sec.classList.toggle('open');
+}
+
+function buildInlineQuiz(containerId, topic){
+  const wrap=document.getElementById(containerId);
+  if(wrap.children.length>0)return;
+  const qs=Q.filter(q=>q.t===topic);
+  qs.forEach(q=>{
+    const card=document.createElement('div');
+    card.className='quiz-card-lern';
+    const answer=q.a?'✓ Richtig':'✗ Falsch';
+    const cls=q.a?'color:#16a34a':'color:#e53935';
+    card.innerHTML=`
+      <div class="quiz-question-lern" onclick="this.closest('.quiz-card-lern').classList.toggle('open')">
+        <span>Frage ${q.id}: ${q.q}</span><span class="arrow">▼</span>
+      </div>
+      <div class="quiz-answer-lern">
+        <strong style="${cls}">${answer}</strong><br><br>${q.e}
+      </div>`;
+    wrap.appendChild(card);
+  });
+}
+
+// Build inline quizzes when section opens
+document.querySelectorAll('.quiz-title-lern').forEach(el=>{
+  el.addEventListener('click',()=>{
+    const sec=el.closest('.quiz-section-lern');
+    const wrap=sec.querySelector('.quiz-cards-wrapper-lern');
+    const id=wrap.id;
+    if(id==='qw-pe') buildInlineQuiz('qw-pe','pe');
+    if(id==='qw-boerse') buildInlineQuiz('qw-boerse','boerse');
+    if(id==='qw-optionen') buildInlineQuiz('qw-optionen','optionen');
+  });
+});
+
+// ===================== KARTEIKARTEN =====================
+function renderCards(filter){
+  const grid=document.getElementById('flashcards-grid');
+  grid.innerHTML='';
+  const list=filter==='all'?Q:Q.filter(q=>q.t===filter);
+  list.forEach(q=>{
+    const fc=document.createElement('div');
+    fc.className='flashcard';
+    const backCls=q.a?'r-back':'f-back';
+    const label=q.a?'✓ Richtig':'✗ Falsch';
+    fc.innerHTML=`
+      <div class="flashcard-inner">
+        <div class="flashcard-front">
+          <div class="fc-num">Frage ${q.id}</div>
+          <div class="fc-category">${q.tl}</div>
+          <div class="fc-question">${q.q}</div>
+          <div class="fc-hint">→ tippen zum Aufdecken</div>
+        </div>
+        <div class="flashcard-back ${backCls}">
+          <div class="fc-answer-label">${label}</div>
+          <div class="fc-answer-exp">${q.e}</div>
+        </div>
+      </div>`;
+    fc.addEventListener('click',()=>fc.classList.toggle('flipped'));
+    grid.appendChild(fc);
+  });
+}
+function fcFilter(f,btn){
+  document.querySelectorAll('.fc-filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderCards(f);
+}
+
+// ===================== TEST / QUIZ =====================
+let testQ=[], testIdx=0, testCorrect=0, testFilter='all';
+
+function setTestFilter(f,btn){
+  testFilter=f;
+  document.querySelectorAll('.test-filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function startTest(){
+  const pool=testFilter==='all'?[...Q]:Q.filter(q=>q.t===testFilter);
+  testQ=pool.sort(()=>Math.random()-.5);
+  testIdx=0; testCorrect=0;
+  document.getElementById('test-hero-wrap').style.display='none';
+  document.getElementById('result-container').style.display='none';
+  document.getElementById('question-container').style.display='block';
+  showQuestion();
+}
+
+function showQuestion(){
+  const q=testQ[testIdx];
+  const total=testQ.length;
+  document.getElementById('q-prog').style.width=(testIdx/total*100)+'%';
+  document.getElementById('q-counter').textContent=`Frage ${testIdx+1} von ${total}`;
+  document.getElementById('q-badge').textContent=q.tl;
+  document.getElementById('q-text').textContent=q.q;
+  const btnR=document.getElementById('btn-r');
+  const btnF=document.getElementById('btn-f');
+  btnR.className='answer-btn'; btnF.className='answer-btn';
+  btnR.disabled=false; btnF.disabled=false;
+  const fb=document.getElementById('feedback-box');
+  fb.className='feedback-box'; fb.textContent='';
+  document.getElementById('next-btn').style.display='none';
+}
+
+function checkAnswer(userTrue){
+  const q=testQ[testIdx];
+  const correct=userTrue===q.a;
+  if(correct) testCorrect++;
+  const btnR=document.getElementById('btn-r');
+  const btnF=document.getElementById('btn-f');
+  btnR.disabled=true; btnF.disabled=true;
+  if(userTrue){
+    btnR.classList.add(correct?'correct':'wrong');
+    if(!correct) btnF.classList.add('show-correct');
+  } else {
+    btnF.classList.add(correct?'correct':'wrong');
+    if(!correct) btnR.classList.add('show-correct');
+  }
+  const fb=document.getElementById('feedback-box');
+  fb.className='feedback-box show '+(correct?'ok':'nok');
+  fb.innerHTML=(correct?'<strong>✓ Richtig!</strong> ':'<strong>✗ Falsch.</strong> ')+q.e;
+  document.getElementById('next-btn').style.display='inline-block';
+  document.getElementById('next-btn').textContent=testIdx<testQ.length-1?'Nächste Frage →':'Ergebnis anzeigen →';
+}
+
+function nextQuestion(){
+  testIdx++;
+  if(testIdx>=testQ.length){ showResult(); return; }
+  showQuestion();
+}
+
+function showResult(){
+  document.getElementById('question-container').style.display='none';
+  document.getElementById('result-container').style.display='block';
+  const total=testQ.length;
+  const pct=Math.round(testCorrect/total*100);
+  document.getElementById('res-score').textContent=pct+'%';
+  document.getElementById('res-label').textContent=testCorrect+' von '+total+' richtig';
+  let msg='',grade='',gcls='';
+  if(pct>=90){msg='Ausgezeichnet! Klausur-ready.';grade='Note: Sehr gut';gcls='grade-a';}
+  else if(pct>=75){msg='Gut! Noch ein paar Runden.';grade='Note: Gut';gcls='grade-b';}
+  else if(pct>=60){msg='Solide Basis – weitermachen.';grade='Note: Befriedigend';gcls='grade-c';}
+  else{msg='Nochmal die Lernzettel lesen!';grade='Note: Ausbaufähig';gcls='grade-d';}
+  document.getElementById('res-sub').textContent=msg;
+  const g=document.getElementById('res-grade');
+  g.textContent=grade; g.className='result-grade '+gcls;
+  document.getElementById('q-prog').style.width='100%';
+}
+</script>
+</body>
+</html>
