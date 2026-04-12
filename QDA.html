@@ -2012,11 +2012,151 @@ F-statistic: 14.9 on 3 and 153 DF, p-value: 1.475e-08</div>
 
         </div>
 
+        <!-- TRANSFERAUFGABE -->
+        <div class="chapter" style="margin-top: 50px;">
+            <div class="chapter-header">🎓 TRANSFERAUFGABE (WS 25/26)</div>
+
+            <div class="aufgabe-box">
+                <div class="aufgabe-number">Originaltext aus der Klausur:</div>
+                <div class="aufgabe-text">
+                    Benennen Sie ein Forschungsproblem aus Ihrem beruflichen Kontext. Beschreiben und begründen Sie kurz, wie Sie dieses unter Heranziehung des PPDACs und Verwendung eines in der Veranstaltung behandelten Verfahrens angehen würden.
+                </div>
+                <div class="aufgabe-points">(9 Punkte)</div>
+            </div>
+
+            <h4>🔍 Schritt-für-Schritt Erklärung:</h4>
+
+            <div class="erklarung-step">
+                <span class="step-nr">1</span>
+                <span class="step-title">PPDAC Zyklus verstehen</span>
+                <div class="step-content">
+                    <strong>PPDAC = Problem, Plan, Data, Analysis, Conclusion</strong><br>
+                    <br>
+                    <strong>P - Problem:</strong> Forschungsfrage definieren<br>
+                    <strong>P - Plan:</strong> Wie sammelst du Daten? Variablen? Messung?<br>
+                    <strong>D - Data:</strong> Daten sammeln & deskriptive Statistik<br>
+                    <strong>A - Analysis:</strong> Hypothesen testen, statistische Tests<br>
+                    <strong>C - Conclusion:</strong> Ergebnisse interpretieren, Antwort geben
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">2</span>
+                <span class="step-title">Forschungsproblem aus beruflichem Kontext</span>
+                <div class="step-content">
+                    <strong>Beispiel IT:</strong> "Welche Faktoren beeinflussen die Akzeptanz von agilen Methoden?"<br>
+                    <br>
+                    <strong>Andere Beispiele:</strong><br>
+                    • Consulting: "Zufriedenheit zwischen Projekttypen?"<br>
+                    • HR: "Korrelation Fortbildung & Zufriedenheit?"<br>
+                    • Marketing: "Wie beeinflussen mehrere Kanäle Konversion?"<br>
+                    <br>
+                    <strong>Kriterien:</strong> Konkret, messbar, relevant, lösbar
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">3</span>
+                <span class="step-title">Plan Phase: Methode wählen & begründen</span>
+                <div class="step-content">
+                    <strong>Optionen (in Veranstaltung behandelt):</strong><br>
+                    • t-Test (2 Gruppen)<br>
+                    • ANOVA (>2 Gruppen)<br>
+                    • Chi-Squared (kategorische Daten)<br>
+                    • Regression (mehrere Prädiktoren)<br>
+                    • Korrelation (Zusammenhang)<br>
+                    <br>
+                    <strong>Beispiel:</strong> Agile-Befürworter vs. Skeptiker in Erfahrung<br>
+                    → Welch's t-Test (2 Gruppen, metrische AV, ungleiche Varianzen)
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">4</span>
+                <span class="step-title">Data Phase: Variablen definieren & sammeln</span>
+                <div class="step-content">
+                    <strong>Variablen:</strong><br>
+                    • UV: Agile-Akzeptanz (nominal: ja/nein)<br>
+                    • AV: Berufserfahrung (metrisch: Jahre)<br>
+                    <br>
+                    <strong>Datensammlung:</strong><br>
+                    • Online-Umfrage, N = 100-150 Entwickler<br>
+                    • Frage 1: "Befürworten Sie agile Methoden?"<br>
+                    • Frage 2: "Jahre Erfahrung?"<br>
+                    <br>
+                    <strong>Deskriptive Statistik:</strong> Mittelwerte, SD, Häufigkeiten
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">5</span>
+                <span class="step-title">Analysis Phase: Test durchführen</span>
+                <div class="step-content">
+                    <strong>Hypothesen:</strong><br>
+                    H0: Gleiche Erfahrung in beiden Gruppen<br>
+                    Ha: Unterschiedliche Erfahrung<br>
+                    <br>
+                    <strong>Test (R-Code):</strong><br>
+                    t.test(Erfahrung ~ Akzeptanz, data = df)<br>
+                    <br>
+                    <strong>Output prüfen:</strong><br>
+                    • t-Statistik & p-Wert<br>
+                    • Mittelwerte vergleichen<br>
+                    • Konfidenzintervall
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">6</span>
+                <span class="step-title">Conclusion Phase: Interpretieren & begründen</span>
+                <div class="step-content">
+                    <strong>Beispiel-Ergebnis:</strong><br>
+                    Befürworter: MW = 8.2 J, Skeptiker: MW = 5.1 J<br>
+                    t(98) = 2.15, p = 0.034* → SIGNIFIKANT<br>
+                    <br>
+                    <strong>Interpretation:</strong><br>
+                    ✓ Erfahrenere Entwickler befürworten agile Methoden mehr<br>
+                    ✓ Unterschied ist statistisch signifikant<br>
+                    ✓ Praktische Bedeutung: ~3 Jahre Differenz<br>
+                    <br>
+                    <strong>Handlung:</strong> "Agile-Training für unerfahrenere Entwickler"
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">7</span>
+                <span class="step-title">Komplettes Beispiel zusammenfasst</span>
+                <div class="step-content">
+                    <strong>Problem:</strong> Agile-Transformation mit Widerständen<br>
+                    <strong>Plan:</strong> Online-Umfrage, Welch's t-Test<br>
+                    <strong>Data:</strong> N=100, Befürworter MW=8.2J, Skeptiker MW=5.1J<br>
+                    <strong>Analysis:</strong> t(98)=2.15, p=0.034*, CI=[0.25, 5.95]<br>
+                    <strong>Conclusion:</strong> Erfahrung unterscheidet signifikant. Training nötig.
+                </div>
+            </div>
+
+            <div class="antwort-box">
+                <div class="antwort-title">💪 Deine komplette Antwort:</div>
+                <ul>
+                    <li><strong>Forschungsproblem:</strong> Konkrete Frage (2-3 Sätze, dein Kontext)</li>
+                    <li><strong>PPDAC Problem:</strong> Was untersuchen? (Variablen)</li>
+                    <li><strong>PPDAC Plan:</strong> Welche Methode? (t-Test/ANOVA/Chi²/Regression) + Begründung</li>
+                    <li><strong>PPDAC Data:</strong> Datensammlung? Stichprobe? Variablen-Messung?</li>
+                    <li><strong>PPDAC Analysis:</strong> Hypothesen? Welcher Test? Output-Erwartung?</li>
+                    <li><strong>PPDAC Conclusion:</strong> Ergebnisse? Praktische Bedeutung?</li>
+                    <li><strong>Begründung:</strong> Warum diese Methode? Warum relevant?</li>
+                </ul>
+            </div>
+
+        </div>
+
         <!-- FOOTER -->
         <div class="chapter">
             <p style="text-align: center; font-style: italic; color: var(--text-light); margin-top: 40px;">
                 <strong>Viel Erfolg beim Lernen! 💪</strong><br>
-                Arbeite jede Aufgabe durch und versuche sie ERST alleine zu lösen, DANN schau dir die Erklärung an.
+                Arbeite jede Aufgabe durch und versuche sie ERST alleine zu lösen, DANN schau dir die Erklärung an.<br>
+                <br>
+                <strong>📊 Insgesamt:</strong> 8 Klausur 1 + 7 Klausur 2 + 1 Transfer = <span style="color: var(--green);">16 vollständige Erklärungen auf EINER Seite</span>
             </p>
         </div>
     </div>
