@@ -1,0 +1,2047 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QDA – Quantitative Datenanalyse – Detaillierter Lernzettel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blue: #2a6ef5;
+            --blue-dark: #1a4fc4;
+            --blue-light: #e8f0fe;
+            --red: #e53935;
+            --red-light: #ffebee;
+            --green: #2e7d32;
+            --green-light: #e8f5e9;
+            --orange: #e65100;
+            --orange-light: #fff3e0;
+            --grey: #f4f6f8;
+            --grey-dark: #9aa3b0;
+            --text: #1a2233;
+            --text-light: #5c6475;
+            --white: #ffffff;
+            --shadow: 0 2px 12px rgba(42, 110, 245, 0.10);
+            --radius: 12px;
+        }
+
+        [data-theme="dark"] {
+            --blue: #60a5fa;
+            --blue-dark: #3b82f6;
+            --blue-light: #1e3a5f;
+            --red: #f87171;
+            --red-light: #3b1111;
+            --green: #4ade80;
+            --green-light: #14532d;
+            --orange: #fb923c;
+            --orange-light: #431407;
+            --grey: #1e293b;
+            --grey-dark: #64748b;
+            --text: #e2e8f0;
+            --text-light: #94a3b8;
+            --white: #0f172a;
+            --shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.25s, border-color 0.25s, color 0.2s;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #f7f9fd;
+            color: var(--text);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        body[data-theme="dark"] {
+            background: #0a0f1e !important;
+            color: #e2e8f0;
+        }
+
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--blue), #7c3aed);
+            width: 0%;
+            z-index: 9999;
+        }
+
+        #header {
+            position: sticky;
+            top: 0;
+            background: var(--white);
+            border-bottom: 1px solid #e2e8f0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        body[data-theme="dark"] #header {
+            background: #0f172a !important;
+            border-color: #1e293b !important;
+        }
+
+        #header-inner {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            font-family: 'Fraunces', serif;
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--blue);
+        }
+
+        #btn-darkmode {
+            background: var(--grey);
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .chapter {
+            margin-bottom: 40px;
+            padding: 25px;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        body[data-theme="dark"] .chapter {
+            background: #1a2332;
+            border: 1px solid #1e293b;
+        }
+
+        .chapter-header {
+            font-family: 'Fraunces', serif;
+            font-size: 26px;
+            font-weight: 900;
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--blue);
+            color: var(--blue);
+        }
+
+        h3 {
+            font-size: 17px;
+            font-weight: 700;
+            margin: 25px 0 15px 0;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h4 {
+            font-size: 14px;
+            font-weight: 700;
+            margin: 15px 0 10px 0;
+            color: var(--blue);
+        }
+
+        body[data-theme="dark"] h4 {
+            color: #60a5fa;
+        }
+
+        p, li {
+            margin-bottom: 11px;
+            color: var(--text);
+        }
+
+        strong {
+            color: var(--blue);
+            font-weight: 700;
+        }
+
+        .aufgabe-box {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            border-radius: 8px;
+            padding: 18px;
+            margin: 20px 0;
+        }
+
+        body[data-theme="dark"] .aufgabe-box {
+            background: #78350f;
+            border-color: #d97706;
+        }
+
+        .aufgabe-number {
+            font-weight: 700;
+            color: #d97706;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        body[data-theme="dark"] .aufgabe-number {
+            color: #fbbf24;
+        }
+
+        .aufgabe-text {
+            color: #1a1a1a;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        body[data-theme="dark"] .aufgabe-text {
+            color: #e8e8e8;
+        }
+
+        .aufgabe-points {
+            font-size: 12px;
+            color: #d97706;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        body[data-theme="dark"] .aufgabe-points {
+            color: #fbbf24;
+        }
+
+        .code-output {
+            background: #1a1a1a;
+            color: #e8e8e8;
+            padding: 14px;
+            border-radius: 6px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+            line-height: 1.5;
+            border-left: 4px solid var(--blue);
+            white-space: pre;
+            letter-spacing: 0.3px;
+        }
+
+        body[data-theme="dark"] .code-output {
+            background: #0f0f0f;
+            border-color: #60a5fa;
+        }
+
+        .erklarung-step {
+            background: var(--blue-light);
+            border-left: 4px solid var(--blue);
+            padding: 14px;
+            margin: 12px 0;
+            border-radius: 6px;
+        }
+
+        body[data-theme="dark"] .erklarung-step {
+            background: #1e3a5f;
+            border-color: #60a5fa;
+        }
+
+        .step-nr {
+            display: inline-block;
+            background: var(--blue);
+            color: var(--white);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: 700;
+            margin-right: 10px;
+            font-size: 13px;
+        }
+
+        body[data-theme="dark"] .step-nr {
+            background: #3b82f6;
+        }
+
+        .step-title {
+            font-weight: 700;
+            color: var(--text);
+            display: inline;
+        }
+
+        .step-content {
+            margin-top: 8px;
+            margin-left: 38px;
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        body[data-theme="dark"] .step-content {
+            color: #e2e8f0;
+        }
+
+        .wichtig {
+            background: var(--orange-light);
+            border-left: 4px solid var(--orange);
+            padding: 14px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+
+        body[data-theme="dark"] .wichtig {
+            background: #431407;
+            border-color: #fb923c;
+        }
+
+        .antwort-box {
+            background: var(--green-light);
+            border: 2px solid var(--green);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 15px 0;
+        }
+
+        body[data-theme="dark"] .antwort-box {
+            background: #14532d;
+            border-color: #4ade80;
+        }
+
+        .antwort-title {
+            color: var(--green);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        body[data-theme="dark"] .antwort-title {
+            color: #4ade80;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: var(--white);
+            border-radius: 6px;
+            overflow: hidden;
+            font-size: 13px;
+        }
+
+        body[data-theme="dark"] table {
+            background: #0f172a;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        body[data-theme="dark"] th, body[data-theme="dark"] td {
+            border-color: #1e293b;
+        }
+
+        th {
+            background: var(--blue);
+            color: var(--white);
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        tr:nth-child(even) {
+            background: var(--grey);
+        }
+
+        body[data-theme="dark"] tr:nth-child(even) {
+            background: #1a2332;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 12px;
+        }
+
+        .mnemonic {
+            background: rgba(42, 110, 245, 0.15);
+            padding: 12px;
+            border-radius: 6px;
+            margin: 12px 0;
+            font-weight: 500;
+            font-style: italic;
+            font-size: 14px;
+        }
+
+        body[data-theme="dark"] .mnemonic {
+            background: #1e3a5f;
+            color: #60a5fa;
+        }
+
+        .highlight {
+            background: #fff9e6;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        body[data-theme="dark"] .highlight {
+            background: #4a3f00;
+            color: #fde047;
+        }
+    </style>
+</head>
+<body>
+    <div id="progress-bar"></div>
+
+    <div id="header">
+        <div id="header-inner">
+            <h1>📊 QDA – Quantitative Datenanalyse</h1>
+            <button id="btn-darkmode">🌙</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- INTRO -->
+        <div class="chapter">
+            <h2 style="font-size: 20px; font-weight: 700; margin-bottom: 15px;">📚 Wie du diesen Lernzettel nutzt</h2>
+            <p><strong>Dieser Lernzettel hat:</strong></p>
+            <ul>
+                <li>✅ Alle 15 Original-Aufgaben aus Klausur 1 + 2</li>
+                <li>✅ Outputs exakt formatiert wie in den Klausuren</li>
+                <li>✅ Detaillierte Schritt-für-Schritt Erklärungen</li>
+                <li>✅ Was deine Antwort enthalten muss</li>
+                <li>✅ Häufige Fehler und wie du sie vermeidest</li>
+            </ul>
+            <p style="margin-top: 15px;"><strong>Beste Lernstrategie:</strong> Lies die Aufgabe (ohne Lösung), versuche sie selbst zu lösen, DANN schau dir die Erklärung an. Das ist effektiver als nur zu lesen!</p>
+        </div>
+
+        <!-- KLAUSUR 1 -->
+        <div class="chapter">
+            <div class="chapter-header">📋 ÜBUNGSKLAUSUR 1</div>
+
+            <!-- ============ AUFGABE 1.1 ============ -->
+            <h3>🎯 Aufgabe 1: Falsifikationsprinzip (5 Punkte)</h3>
+
+            <div class="aufgabe-box">
+                <div class="aufgabe-number">Originaltext aus der Klausur:</div>
+                <div class="aufgabe-text">
+                    In einer Publikation über einen empirischen Sachverhalt lesen Sie unter anderem den Satz: „Es ist wissenschaftlich bewiesen, dass…". Nehmen Sie zu dieser Aussage Stellung. Begründen Sie Ihre Ausführungen.
+                </div>
+                <div class="aufgabe-points">(5 Punkte)</div>
+            </div>
+
+            <h4>🔍 Schritt-für-Schritt Erklärung:</h4>
+
+            <div class="erklarung-step">
+                <span class="step-nr">1</span>
+                <span class="step-title">Das Problem erkennen</span>
+                <div class="step-content">
+                    Der Satz "Es ist wissenschaftlich <span class="highlight">bewiesen</span>" ist fundamentalfalsch.<br>
+                    → Das Wort "bewiesen" ist in der Wissenschaft nicht möglich!<br>
+                    → Das ist der Kern deiner Kritik
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">2</span>
+                <span class="step-title">Karl Popper und das Falsifikationsprinzip</span>
+                <div class="step-content">
+                    <strong>Kernidee:</strong> Wissenschaftliche Aussagen können nicht <strong>verifiziert</strong> (bewiesen) werden, sondern nur <strong>falsifiziert</strong> (widerlegt).<br>
+                    <br>
+                    <strong>Warum?</strong> Weil du nicht alle möglichen Fälle überprüfen kannst:<br>
+                    • Um "Alle Schwäne sind weiß" zu beweisen, müsstest du ALLE Schwäne überprüfen<br>
+                    • Das ist praktisch unmöglich<br>
+                    • ABER: Ein einziger schwarzer Schwan widerlegt diese Aussage sofort
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">3</span>
+                <span class="step-title">Praktisches Beispiel geben</span>
+                <div class="step-content">
+                    "In der Medizin: 'Ein Medikament wirkt gegen Kopfschmerzen' kann nicht bewiesen werden (es könnte einen Fall geben, wo es nicht wirkt). Aber wenn es bei 10.000 Patienten wirkt und bei einer Person nicht, dann falsifiziert diese eine Person nicht die ganze Aussage—sie zeigt nur, dass die Aussage zu präzise war."
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">4</span>
+                <span class="step-title">Konklusio schreiben</span>
+                <div class="step-content">
+                    "Die Aussage 'wissenschaftlich bewiesen' ist irreführend. Nach Karl Popper können wissenschaftliche Theorien niemals endgültig bewiesen werden—sie bleiben provisorisch, bis sie durch neue Erkenntnisse widerlegt werden."
+                </div>
+            </div>
+
+            <div class="antwort-box">
+                <div class="antwort-title">💪 Was deine Antwort enthalten muss:</div>
+                <ul>
+                    <li><strong>Kritik der Aussage:</strong> "Beweis" ist in der Wissenschaft nicht möglich</li>
+                    <li><strong>Falsifikationsprinzip:</strong> Theorien werden nicht bewiesen, sondern falsi fiziert</li>
+                    <li><strong>Begründung:</strong> Man kann nicht alle Fälle überprüfen (Verifikation unmöglich)</li>
+                    <li><strong>Beispiel:</strong> Konkrete Situation (z.B. Schwäne, Medikamente)</li>
+                    <li><strong>Schluss:</strong> Bewährte Theorien, nicht bewiesene</li>
+                </ul>
+            </div>
+
+            <!-- ============ AUFGABE 1.2 ============ -->
+            <h3>🎯 Aufgabe 2: Skalenniveaus und Lagemaße (10 Punkte)</h3>
+
+            <div class="aufgabe-box">
+                <div class="aufgabe-number">Originaltext aus der Klausur:</div>
+                <div class="aufgabe-text">
+                    Sie haben den folgenden Output vorliegen:
+                </div>
+                <div class="code-output">str(CASchools.1)
+## 'data.frame': 420 obs. of 9 variables:
+## $ county : Factor w/ 45 levels "Alameda","Butte",..: 1 2 2 2 2 ...
+## $ grades : Factor w/ 2 levels "KK-06","KK-08": 2 2 2 2 2 ...
+## $ expenditure: num 6385 5099 5502 7102 5236 ...
+## $ income : num 22.69 9.82 8.98 8.98 9.08 ...
+## $ read : num 692 660 636 652 642 ...
+## $ math : num 690 662 651 644 640 ...
+## $ lunch : num 2.04 47.92 76.32 77.05 78.43 ...
+## $ stratio : num 17.9 21.5 18.7 17.4 18.7 ...
+## $ score : num 691 661 644 648 641 ...</div>
+                <div class="aufgabe-text">
+                    Wie viele Beobachtungen liegen vor (Größe des Datensatzes)? Welche der o.a. Variablen haben nominales Skalenniveau? Welches Lagemaß kann für diese Variable bestimmt werden? Welches Skalenniveau hat die Variable lunch? Welche Lagemaße können hier bestimmt werden?
+                </div>
+                <div class="aufgabe-points">(10 Punkte)</div>
+            </div>
+
+            <h4>🔍 Schritt-für-Schritt Erklärung:</h4>
+
+            <div class="erklarung-step">
+                <span class="step-nr">1</span>
+                <span class="step-title">Beobachtungen zählen</span>
+                <div class="step-content">
+                    Schau auf die erste Zeile des Outputs:<br>
+                    <span class="highlight">## 'data.frame': 420 obs. of 9 variables:</span><br>
+                    <br>
+                    <strong>Antwort:</strong> Es liegen <strong>420 Beobachtungen</strong> vor
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">2</span>
+                <span class="step-title">Nominale Variablen identifizieren</span>
+                <div class="step-content">
+                    Schau nach dem Wort <span class="highlight">Factor</span> (Faktor = Kategorie):<br>
+                    <br>
+                    ✓ <span class="highlight">county : Factor w/ 45 levels</span> → Nominales Skalenniveau<br>
+                    ✓ <span class="highlight">grades : Factor w/ 2 levels</span> → Nominales Skalenniveau<br>
+                    <br>
+                    ✗ expenditure, income, read, math, lunch, stratio, score = alle "num" (numerisch) → NICHT nominal
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">3</span>
+                <span class="step-title">Lagemaß für nominale Daten</span>
+                <div class="step-content">
+                    Nominale Variablen (Kategorien ohne Ordnung):<br>
+                    → Nur <strong>Modus</strong> erlaubt (die häufigste Kategorie)<br>
+                    <br>
+                    <strong>Warum nicht Median oder Mittel?</strong> Weil Kategorien wie "Alameda" und "Butte" nicht geordnet sind und keine Zahlen bedeuten.
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">4</span>
+                <span class="step-title">Skalenniveau von "lunch" bestimmen</span>
+                <div class="step-content">
+                    Schau auf die lunch-Werte:<br>
+                    <span class="highlight">## $ lunch : num 2.04 47.92 76.32 77.05 78.43 ...</span><br>
+                    <br>
+                    • "num" bedeutet numerisch<br>
+                    • Hat Dezimalstellen (2.04, 47.92, etc.)<br>
+                    • Kann mit Rechenoperationen verwendet werden<br>
+                    <br>
+                    <strong>Skalenniveau:</strong> <strong>Metrisch</strong> (eigentlich: Verhältnis)
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">5</span>
+                <span class="step-title">Lagemaße für metrische Daten</span>
+                <div class="step-content">
+                    Metrische Variablen erlauben ALLE Lagemaße:<br>
+                    ✓ Modus (häufigster Wert)<br>
+                    ✓ Median (Mittenwert)<br>
+                    ✓ Arithmetisches Mittel (Durchschnitt)<br>
+                    ✓ Varianz (Streuung)<br>
+                    ✓ Standardabweichung
+                </div>
+            </div>
+
+            <div class="antwort-box">
+                <div class="antwort-title">💪 Deine komplette Antwort:</div>
+                <ul>
+                    <li><strong>Beobachtungen:</strong> 420</li>
+                    <li><strong>Nominale Variablen:</strong> county, grades</li>
+                    <li><strong>Lagemaß für nominale Daten:</strong> Modus</li>
+                    <li><strong>Skalenniveau lunch:</strong> Metrisch</li>
+                    <li><strong>Lagemaße für lunch:</strong> Modus, Median, Arithmetisches Mittel, Varianz, Standardabweichung</li>
+                </ul>
+            </div>
+
+            <!-- ============ AUFGABE 1.3 ============ -->
+            <h3>🎯 Aufgabe 3: Chi²-Test & Forschungsfrage (10 Punkte)</h3>
+
+            <div class="aufgabe-box">
+                <div class="aufgabe-number">Originaltext aus der Klausur:</div>
+                <div class="aufgabe-text">
+                    Kreieren Sie eine Forschungsfrage in Bezug auf Ihren Studiengang, bei deren Analyse Sie einen Chi²-Test durchführen würden. Begründen Sie Ihre Antwort.
+                </div>
+                <div class="aufgabe-points">(10 Punkte)</div>
+            </div>
+
+            <h4>🔍 Schritt-für-Schritt Erklärung:</h4>
+
+            <div class="erklarung-step">
+                <span class="step-nr">1</span>
+                <span class="step-title">Dein Kontext: Sales bei IT Consulting</span>
+                <div class="step-content">
+                    Denk an reale Fragen aus deinem Job in der IT-Beratung:
+                    • Welche Unterschiede zwischen Gruppen interessieren dich?
+                    • Welche Kategorien sind relevant?
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">2</span>
+                <span class="step-title">Forschungsfrage mit 2 kategorialen Variablen</span>
+                <div class="step-content">
+                    <strong>Beispiel-Forschungsfrage:</strong><br>
+                    "Unterscheidet sich die Akzeptanz von Cloud-Solutions zwischen Unternehmen verschiedener Branchen (Tech, Finance, Healthcare)?"<br>
+                    <br>
+                    <strong>Warum funktioniert das?</strong><br>
+                    • Unabhängige Variable (UV): <strong>Branche</strong> = kategorial (Tech, Finance, Healthcare)<br>
+                    • Abhängige Variable (AV): <strong>Akzeptanz</strong> = kategorial (Ja/Nein oder Hoch/Mittel/Niedrig)
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">3</span>
+                <span class="step-title">Begründung: Warum Chi²?</span>
+                <div class="step-content">
+                    "Ich wähle den Chi²-Test, weil beide Variablen (Branche und Akzeptanz) nominal/kategorial skaliert sind. Der Chi²-Test prüft, ob ein statistisch signifikanter Zusammenhang zwischen zwei kategorialen Variablen besteht."<br>
+                    <br>
+                    <strong>Nicht verwechseln:</strong><br>
+                    ✗ t-Test: für 2 metrische Gruppen<br>
+                    ✗ ANOVA: für 3+ metrische Gruppen<br>
+                    ✓ Chi²: für kategoriale × kategoriale
+                </div>
+            </div>
+
+            <div class="antwort-box">
+                <div class="antwort-title">💪 Was deine Antwort enthalten muss:</div>
+                <ul>
+                    <li><strong>Konkrete Forschungsfrage</strong> (aus deinem Sales-Kontext)</li>
+                    <li><strong>Zwei kategoriale Variablen</strong> (nicht metrisch!)</li>
+                    <li><strong>Begründung:</strong> "Weil beide Variablen kategorial sind"</li>
+                    <li><strong>Testverfahren:</strong> Chi²-Test</li>
+                </ul>
+            </div>
+
+            <!-- ============ AUFGABE 1.4 ============ -->
+            <h3>🎯 Aufgabe 4: Bootstrap & Inferenztest (10 Punkte)</h3>
+
+            <div class="aufgabe-box">
+                <div class="aufgabe-number">Originaltext aus der Klausur:</div>
+                <div class="aufgabe-text">
+                    Angenommen, im Rahmen einer Untersuchung wird der Frage nachgegangen, inwiefern sich Männer und Frauen hinsichtlich Ihres Einkaufsverhaltens in Bezug auf Dekorationsartikel unterscheiden. Dabei werden FOM-Studierende in HH gefragt, wie lange der letzte Kauf her ist. Unten sehen Sie einen Auszug aus den Ergebnissen. Interpretieren Sie diese. Welchen klassischen Inferenztest könnten Sie ebenfalls zur Beantwortung der Forschungsfrage durchführen?
+                </div>
+                <div class="code-output">diff.stipro <- diffmean(Tage ~ Geschlecht, data = deko)
+diff.stipro
+## diffmean
+## -42.47323
+
+quantile( ~ diffmean, probs = c(0.025, 0.975),
+          data = Bootvtlg)
+## 2.5%      97.5%
+## -67.58301 -18.02143
+
+gf_histogram( ~ diffmean, data = Nullvtlg)
+
+p.value <- prop(~ (diffmean <= diff.stipro),
+                data = Nullvtlg)
+p.value
+## prop_TRUE
+## 3e-04</div>
+                <div class="aufgabe-points">(10 Punkte)</div>
+            </div>
+
+            <h4>🔍 Schritt-für-Schritt Erklärung:</h4>
+
+            <div class="erklarung-step">
+                <span class="step-nr">1</span>
+                <span class="step-title">Die Differenz (diffmean) verstehen</span>
+                <div class="step-content">
+                    <strong>Code:</strong> <span class="highlight">diffmean = -42.47323</span><br>
+                    <br>
+                    <strong>Was bedeutet das?</strong><br>
+                    • Die Differenz ist NEGATIV (-42.47)<br>
+                    • Das Minuszeichen bedeutet: Frauen kaufen 42,47 Tage FRÜHER als Männer<br>
+                    • → Frauen kaufen Dekorationsartikel häufiger/schneller
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">2</span>
+                <span class="step-title">Das Konfidenzintervall deuten</span>
+                <div class="step-content">
+                    <strong>Code:</strong><br>
+                    <span class="highlight">95% CI: [-67.58301, -18.02143]</span><br>
+                    <br>
+                    <strong>Interpretation:</strong><br>
+                    • Mit 95% Sicherheit liegt die wahre Differenz zwischen -67.58 und -18.02 Tagen<br>
+                    • Der Wert 0 ist NICHT im Intervall enthalten<br>
+                    • → Das ist ein Zeichen für Signifikanz!
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">3</span>
+                <span class="step-title">Der p-Wert</span>
+                <div class="step-content">
+                    <strong>Code:</strong> <span class="highlight">p.value = 3e-04 = 0.0003</span><br>
+                    <br>
+                    <strong>Was bedeutet 0.0003?</strong><br>
+                    • Das ist DEUTLICH unter 0.05<br>
+                    • → Der Unterschied ist hochsignifikant<br>
+                    • → Es gibt wirklich einen Unterschied zwischen Männern und Frauen
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">4</span>
+                <span class="step-title">Alternativer klassischer Test</span>
+                <div class="step-content">
+                    <strong>Alternativer Test:</strong> t-Test (Welch Two Sample t-test)<br>
+                    <br>
+                    <strong>Warum?</strong> Weil der t-Test die gleiche Frage beantwortet:<br>
+                    • 2 unabhängige Gruppen (Frauen/Männer)<br>
+                    • Metrische abhängige Variable (Tage)<br>
+                    • Testet: Unterscheiden sich die Mittelwerte?<br>
+                    <br>
+                    Das Bootstrap-Verfahren ist moderner, der t-Test ist die klassische Methode.
+                </div>
+            </div>
+
+            <div class="antwort-box">
+                <div class="antwort-title">💪 Deine komplette Antwort:</div>
+                <ul>
+                    <li><strong>Differenz:</strong> Frauen kaufen 42,47 Tage früher (häufiger)</li>
+                    <li><strong>Konfidenzintervall:</strong> 0 ist nicht enthalten → signifikant</li>
+                    <li><strong>p-Wert = 0.0003:</strong> Hochsignifikant (weit unter 0.05)</li>
+                    <li><strong>Praktische Bedeutung:</strong> Es gibt einen echten Unterschied</li>
+                    <li><strong>Alternativer Test:</strong> t-Test (oder Welch Two Sample t-test)</li>
+                </ul>
+            </div>
+
+            <!-- ============ AUFGABE 1.5 ============ -->
+            <h3>🎯 Aufgabe 5: Richtige Verfahren auswählen (15 Punkte)</h3>
+
+            <div class="aufgabe-box">
+                <div class="aufgabe-number">Originaltext aus der Klausur:</div>
+                <div class="aufgabe-text">
+                    Benennen Sie für die folgenden Fragestellungen bzw. Hypothesen statistische Verfahren, die zur Überprüfung sinnvoll herangezogen werden können. Nennen Sie jeweils ein Verfahren und begründen Sie kurz Ihre Wahl.
+                    <br><br>
+                    <strong>a)</strong> Die Bereitschaft, kassenlose Supermarktsysteme zu nutzen (gemessen auf einer 7-stufigen Skala mit gleichen Distanzen zwischen den Stufen), unterscheidet sich zwischen den Ländern Europas. (5 Punkte)
+                    <br><br>
+                    <strong>b)</strong> Die tatsächliche Nutzung (ja / nein) mobiler Zahlungsmöglichkeiten unterscheidet sich nach dem Geschlecht (männlich / weiblich / divers). (5 Punkte)
+                    <br><br>
+                    <strong>c)</strong> Die Bereitschaft, mobile Zahlungsmöglichkeiten zu verwenden, hängt ab von dem Alter, der jeweiligen Innovationsfreudigkeit sowie dem Sicherheitsbedürfnis der Nutzerinnen und Nutzer. (Bis auf das Alter werden alle Variablen auf einer 7-stufigen Skala mit gleichen Distanzen zwischen den Stufen gemessen). (5 Punkte)
+                </div>
+                <div class="aufgabe-points">(15 Punkte)</div>
+            </div>
+
+            <h4>🔍 Schritt-für-Schritt Erklärung:</h4>
+
+            <div class="erklarung-step">
+                <span class="step-nr">a)</span>
+                <span class="step-title">ANOVA (Varianzanalyse)</span>
+                <div class="step-content">
+                    <strong>Analyse der Variablen:</strong><br>
+                    • AV (abhängig): Bereitschaft = 7-stufige Skala = metrisch (gleiche Distanzen!)<br>
+                    • UV (unabhängig): Länder = Europa hat 20+ Länder = 3+ Kategorien<br>
+                    <br>
+                    <strong>Begründung:</strong> "Ich wähle ANOVA, weil ich eine metrische abhängige Variable über 3+ Gruppen hinweg vergleiche. ANOVA testet, ob sich die Mittelwerte zwischen den Gruppen unterscheiden."<br>
+                    <br>
+                    <strong>Falsch wäre:</strong><br>
+                    ✗ t-Test: nur für 2 Gruppen<br>
+                    ✗ Chi²: AV ist nicht kategorial
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">b)</span>
+                <span class="step-title">Chi²-Test</span>
+                <div class="step-content">
+                    <strong>Analyse der Variablen:</strong><br>
+                    • AV (abhängig): Nutzung = ja/nein = nominal/kategorial<br>
+                    • UV (unabhängig): Geschlecht = männlich/weiblich/divers = 3 Kategorien = nominal<br>
+                    <br>
+                    <strong>Begründung:</strong> "Ich wähle Chi², weil beide Variablen nominal/kategorial sind. Chi² testet die Unabhängigkeit zwischen zwei kategorialen Variablen."<br>
+                    <br>
+                    <strong>Falsch wäre:</strong><br>
+                    ✗ t-Test: AV ist nicht metrisch<br>
+                    ✗ ANOVA: AV ist nicht metrisch
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">c)</span>
+                <span class="step-title">Multiple lineare Regression</span>
+                <div class="step-content">
+                    <strong>Analyse der Variablen:</strong><br>
+                    • AV (abhängig): Bereitschaft = 7-stufig = metrisch<br>
+                    • UV1: Alter = metrisch (Jahre)<br>
+                    • UV2: Innovationsfreudigkeit = 7-stufig = metrisch<br>
+                    • UV3: Sicherheitsbedürfnis = 7-stufig = metrisch<br>
+                    • Es gibt 3 UVs!<br>
+                    <br>
+                    <strong>Begründung:</strong> "Ich wähle Regression, weil ich eine metrische AV durch mehrere metrische UVs erklären möchte. Regression zeigt, wie stark jede UV die AV beeinflusst."<br>
+                    <br>
+                    <strong>Falsch wäre:</strong><br>
+                    ✗ t-Test oder ANOVA: mehrere UVs möglich, aber nicht optimal<br>
+                    ✗ Chi²: UVs sind nicht kategorial
+                </div>
+            </div>
+
+            <div class="antwort-box">
+                <div class="antwort-title">💪 Entscheidungsbaum:</div>
+                <table>
+                    <tr>
+                        <th>Frage</th>
+                        <th>Test</th>
+                    </tr>
+                    <tr>
+                        <td>Metrische AV, 2 Gruppen?</td>
+                        <td>t-Test</td>
+                    </tr>
+                    <tr>
+                        <td>Metrische AV, 3+ Gruppen?</td>
+                        <td>ANOVA</td>
+                    </tr>
+                    <tr>
+                        <td>Kategoriale × Kategoriale?</td>
+                        <td>Chi²</td>
+                    </tr>
+                    <tr>
+                        <td>Mehrere metrische UVs?</td>
+                        <td>Regression</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- ============ AUFGABE 1.6 ============ -->
+            <h3>🎯 Aufgabe 6: t-Test Output interpretieren (15 Punkte)</h3>
+
+            <div class="aufgabe-box">
+                <div class="aufgabe-number">Originaltext aus der Klausur:</div>
+                <div class="aufgabe-text">
+                    Sie möchten herausfinden, ob es einen geschlechtsspezifischen Unterschied zwischen Frauen und Männern hinsichtlich der Nutzungsintensität von Social Media (gemessen auf einer 5-stufigen Skala mit gleichen Distanzen zwischen den Stufen) gibt. Geben Sie an und begründen Sie, mit welchem Testverfahren diese Forschungsfrage (bei normalverteilten Werten) geprüft werden kann. Was sagt Ihnen dann der folgende Output?
+                </div>
+                <div class="code-output">Welch Two Sample t-test
+data: S_I by Geschlecht_Faktor
+t = 4.4088, df = 2263, p-value = 1.088e-05
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+0.08772984 0.22829474
+sample estimates:
+mean in group weiblich mean in group maennlich
+3.796653            3.638640</div>
+                <div class="aufgabe-points">(15 Punkte)</div>
+            </div>
+
+            <h4>🔍 Schritt-für-Schritt Erklärung:</h4>
+
+            <div class="erklarung-step">
+                <span class="step-nr">1</span>
+                <span class="step-title">Testauswahl begründen</span>
+                <div class="step-content">
+                    <strong>Deine Begründung schreiben:</strong><br>
+                    "Ich wähle den Welch Two Sample t-Test, weil:<br>
+                    1. Es 2 unabhängige Gruppen gibt (Frauen/Männer)<br>
+                    2. Die AV ist metrisch (5-stufige Skala mit gleichen Distanzen)<br>
+                    3. Die Werte sind normalverteilt (wie angegeben)<br>
+                    Der t-Test ist das Standardverfahren für Mittelwertvergleiche zwischen 2 Gruppen."
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">2</span>
+                <span class="step-title">Die t-Statistik verstehen</span>
+                <div class="step-content">
+                    <strong>Output:</strong> <span class="highlight">t = 4.4088, df = 2263</span><br>
+                    <br>
+                    <strong>Was bedeutet das?</strong><br>
+                    • t = 4.41: Ein moderater bis großer Unterschied<br>
+                    • (je größer |t|, desto größer der Unterschied)<br>
+                    • df = 2263: Es waren 2263 + 2 = 2265 Personen in der Stichprobe
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">3</span>
+                <span class="step-title">Der p-Wert</span>
+                <div class="step-content">
+                    <strong>Output:</strong> <span class="highlight">p-value = 1.088e-05</span><br>
+                    Das bedeutet: p = 0.00001088<br>
+                    <br>
+                    <strong>Interpretation:</strong><br>
+                    • Das ist DEUTLICH unter 0.05<br>
+                    • → Der Unterschied ist HOCHSIGNIFIKANT<br>
+                    • → Es gibt einen echten Unterschied zwischen Frauen und Männern
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">4</span>
+                <span class="step-title">Die Mittelwerte vergleichen</span>
+                <div class="step-content">
+                    <strong>Output:</strong><br>
+                    <span class="highlight">mean in group weiblich: 3.796653</span><br>
+                    <span class="highlight">mean in group maennlich: 3.638640</span><br>
+                    <br>
+                    <strong>Differenz:</strong> 3.797 - 3.639 = 0.158<br>
+                    <br>
+                    <strong>Bedeutung:</strong><br>
+                    • Frauen nutzen Social Media mit 3.80er Intensität<br>
+                    • Männer mit 3.64er Intensität<br>
+                    • → Frauen nutzen Social Media intensiver (0.158 Punkte mehr)
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">5</span>
+                <span class="step-title">Das Konfidenzintervall</span>
+                <div class="step-content">
+                    <strong>Output:</strong><br>
+                    <span class="highlight">95% CI: [0.08772984, 0.22829474]</span><br>
+                    <br>
+                    <strong>Interpretation:</strong><br>
+                    • Mit 95% Sicherheit liegt der wahre Unterschied zwischen 0.088 und 0.228 Punkten<br>
+                    • Der Wert 0 ist NICHT im Intervall enthalten<br>
+                    • → Das ist ein weiteres Zeichen für Signifikanz<br>
+                    • → Der Unterschied ist statistisch gesichert
+                </div>
+            </div>
+
+            <div class="antwort-box">
+                <div class="antwort-title">💪 Deine komplette Antwort:</div>
+                <ul>
+                    <li><strong>Testverfahren:</strong> Welch Two Sample t-Test</li>
+                    <li><strong>Begründung:</strong> 2 Gruppen, metrische AV, normalverteilt</li>
+                    <li><strong>t-Statistik:</strong> t = 4.41 zeigt moderaten bis großen Unterschied</li>
+                    <li><strong>p-Wert:</strong> p < 0.001 → hochsignifikant</li>
+                    <li><strong>Praktische Bedeutung:</strong> Frauen nutzen SM intensiver (Diff. 0.158)</li>
+                    <li><strong>Konfidenzintervall:</strong> [0.088, 0.228] bestätigt Signifikanz</li>
+                    <li><strong>Fazit:</strong> Es gibt einen echten, signifikanten Unterschied</li>
+                </ul>
+            </div>
+
+            <!-- ============ AUFGABE 1.7 ============ -->
+            <h3>🎯 Aufgabe 7: ANOVA Output (10 Punkte)</h3>
+
+            <div class="aufgabe-box">
+                <div class="aufgabe-number">Originaltext aus der Klausur:</div>
+                <div class="aufgabe-text">
+                    Bei der Durchführung einer Analyse mit R erhalten Sie vom Programm folgenden Output:
+                </div>
+                <div class="code-output">> AnovaModel.1 <- aov(V1 ~ V2, data = WM)
+> summary(AnovaModel.1)
+
+            DF Sum Sq  F value  Pr(>F)
+V2          6  16.87  2.812    0.017*
+Residuals  71  71.52  1.007
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</div>
+                <div class="aufgabe-text">
+                    Kreieren Sie eine Forschungsfrage aus Ihrer Praxis, die hier Basis der Untersuchung sein könnte. Was sagt Ihnen dann der Output? Was sagt er Ihnen bezüglich der Ergebnisse nicht?
+                </div>
+                <div class="aufgabe-points">(10 Punkte)</div>
+            </div>
+
+            <h4>🔍 Schritt-für-Schritt Erklärung:</h4>
+
+            <div class="erklarung-step">
+                <span class="step-nr">1</span>
+                <span class="step-title">Forschungsfrage kreieren</span>
+                <div class="step-content">
+                    <strong>Beispiel:</strong><br>
+                    "Unterscheidet sich die Kaufintention für Cloud-Services zwischen Konsumenten verschiedener Altersgruppen (18-25, 26-35, 36-45, 46-55, 56-65, 66-75, 75+)?"<br>
+                    <br>
+                    <strong>Oder aus IT-Kontext:</strong><br>
+                    "Unterscheidet sich die Akzeptanz von KI-Tools zwischen verschiedenen Abteilungen eines Unternehmens?"
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">2</span>
+                <span class="step-title">Die DF (Degrees of Freedom) interpretieren</span>
+                <div class="step-content">
+                    <strong>Output:</strong> <span class="highlight">V2 DF = 6</span><br>
+                    <br>
+                    <strong>Was bedeutet DF = 6?</strong><br>
+                    • DF = Anzahl Gruppen - 1<br>
+                    • 6 = 7 Gruppen - 1<br>
+                    • → Es gibt 7 verschiedene Gruppen/Kategorien in V2
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">3</span>
+                <span class="step-title">Die F-Statistik verstehen</span>
+                <div class="step-content">
+                    <strong>Output:</strong> <span class="highlight">F value = 2.812</span><br>
+                    <br>
+                    <strong>Was bedeutet das?</strong><br>
+                    • F = Varianz zwischen Gruppen / Varianz innerhalb Gruppen<br>
+                    • F = 2.812: Ein moderater Unterschied zwischen den Gruppen<br>
+                    • (je größer F, desto größer der Unterschied)
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">4</span>
+                <span class="step-title">Der p-Wert</span>
+                <div class="step-content">
+                    <strong>Output:</strong> <span class="highlight">Pr(>F) = 0.017*</span><br>
+                    Das Sternchen (*) bedeutet: p < 0.05<br>
+                    <br>
+                    <strong>Interpretation:</strong><br>
+                    • p = 0.017 ist kleiner als 0.05<br>
+                    • → Der Unterschied ist SIGNIFIKANT<br>
+                    • → Es gibt statistisch nachweisbare Unterschiede zwischen den 7 Gruppen
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">5</span>
+                <span class="step-title">Was der Output NICHT sagt</span>
+                <div class="step-content">
+                    <strong>Der ANOVA-Output sagt NICHT:</strong><br>
+                    ✗ Welche Gruppen unterscheiden sich (dafür braucht man Post-hoc Tests wie Tukey)<br>
+                    ✗ Wie groß der Effekt ist (Effect Size)<br>
+                    ✗ Was praktisch am bedeutsamsten ist (Signifikanz ≠ Relevanz)<br>
+                    ✗ Details über die Daten (z.B. Outlier, Normalverteilung)
+                </div>
+            </div>
+
+            <div class="antwort-box">
+                <div class="antwort-title">💪 Deine komplette Antwort:</div>
+                <ul>
+                    <li><strong>Forschungsfrage:</strong> [Konkrete Frage mit 7 Gruppen]</li>
+                    <li><strong>DF = 6:</strong> Es gibt 7 Gruppen</li>
+                    <li><strong>F = 2.812:</strong> Moderater Unterschied zwischen Gruppen</li>
+                    <li><strong>p = 0.017:</strong> Signifikant (es gibt Unterschiede)</li>
+                    <li><strong>NICHT bekannt:</strong> Welche Gruppen unterscheiden sich, Effektgröße</li>
+                </ul>
+            </div>
+
+            <!-- ============ AUFGABE 1.8 ============ -->
+            <h3>🎯 Aufgabe 8: Regression interpretieren (15 Punkte)</h3>
+
+            <div class="aufgabe-box">
+                <div class="aufgabe-number">Originaltext aus der Klausur:</div>
+                <div class="aufgabe-text">
+                    Im Folgenden sehen Sie die R-Ausgaben zur Berechnung der Variablen ASQ001.
+                </div>
+                <div class="code-output">Call: lm(formula = ASQ001 ~ UQ002 + UQ003 + UQ004 + UQ006, data = WS)
+
+Residuals:
+     Min      1Q  Median      3Q     Max
+-2.6598 -0.7117  0.0103  0.6703  2.2513
+
+Coefficients:
+          Estimate Std.Error t value Pr(>|t|)
+Intercept  9.6184   0.4689   2.051  0.0421 *
+UQ002     -0.0002   0.0671  -0.004  0.9970
+UQ003      0.1987   0.0613   3.242  0.0015 **
+UQ004      0.1147   0.0598   1.919  0.0570
+UQ006      0.4152   0.0616   6.747  3.91e-10 ***
+--- Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.008 on 137 degrees of freedom
+Multiple R-squared:  0.3371,  Adjusted R-squared:  0.3178
+F-statistic: 17.42 on 4 and 137 DF,  p-value: 1.41e-11</div>
+                <div class="aufgabe-text">
+                    Interpretieren Sie das Ergebnis: Was können Sie zu den Regressionskoeffizienten sagen? Was zur Güte des Modells? Beschreiben Sie mit eigenen Worten die allgemeine Aussage des p-Wertes. Begründen Sie Ihre Aussagen.
+                </div>
+                <div class="aufgabe-points">(15 Punkte)</div>
+            </div>
+
+            <h4>🔍 Schritt-für-Schritt Erklärung:</h4>
+
+            <div class="erklarung-step">
+                <span class="step-nr">1</span>
+                <span class="step-title">Die Regressionsgleichung aufstellen</span>
+                <div class="step-content">
+                    <strong>Schritt 1: Alle Koeffizienten sammeln</strong><br>
+                    • Intercept = 9.6184<br>
+                    • UQ002 = -0.0002<br>
+                    • UQ003 = 0.1987<br>
+                    • UQ004 = 0.1147<br>
+                    • UQ006 = 0.4152<br>
+                    <br>
+                    <strong>Schritt 2: Gleichung schreiben</strong><br>
+                    <span class="highlight">ASQ001 = 9.6184 - 0.0002×UQ002 + 0.1987×UQ003 + 0.1147×UQ004 + 0.4152×UQ006</span>
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">2</span>
+                <span class="step-title">Signifikanz der Koeffizienten (α = 5%)</span>
+                <div class="step-content">
+                    <strong>Regel:</strong> Ein Koeffizient ist signifikant, wenn Pr(>|t|) < 0.05<br>
+                    <br>
+                    <strong>Analyse:</strong><br>
+                    ✗ <strong>UQ002:</strong> p = 0.9970 >> 0.05 → NICHT signifikant (rauswerfen!)<br>
+                    ✓ <strong>UQ003:</strong> p = 0.0015 < 0.05 → Signifikant (**)<br>
+                    ? <strong>UQ004:</strong> p = 0.0570 ≈ 0.05 → Grenzfall (knapp nicht signifikant)<br>
+                    ✓ <strong>UQ006:</strong> p = 3.91e-10 < 0.001 → Hochsignifikant (***)<br>
+                    <br>
+                    <strong>Bereinigt:</strong> Für α=5% sind UQ003 und UQ006 signifikant
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">3</span>
+                <span class="step-title">Stärkste Variable identifizieren</span>
+                <div class="step-content">
+                    <strong>Methode:</strong> Standardisierte Effekte berechnen = Estimate / Std.Error<br>
+                    <br>
+                    • UQ002: -0.0002 / 0.0671 = -0.003 (quasi null)<br>
+                    • UQ003: 0.1987 / 0.0613 = 3.24<br>
+                    • UQ004: 0.1147 / 0.0598 = 1.92<br>
+                    • UQ006: 0.4152 / 0.0616 = 6.74<br>
+                    <br>
+                    <strong>Ergebnis:</strong> UQ006 mit 6.74 hat den STÄRKSTEN Effekt!
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">4</span>
+                <span class="step-title">Modellgüte: R² interpretieren</span>
+                <div class="step-content">
+                    <strong>Output:</strong> <span class="highlight">Multiple R-squared: 0.3371</span><br>
+                    <br>
+                    <strong>Was bedeutet R² = 0.3371?</strong><br>
+                    • Das Modell erklärt 33.71% der Varianz in ASQ001<br>
+                    • Die anderen 66.29% werden durch andere Faktoren erklärt<br>
+                    <br>
+                    <strong>Adjusted R-squared: 0.3178</strong><br>
+                    • Das ist R² nach Anpassung für die Anzahl Variablen<br>
+                    • (berücksichtigt "Overfitting")<br>
+                    <br>
+                    <strong>Bewertung:</strong><br>
+                    • R² = 0.337 ist moderat<br>
+                    • Nicht besonders gut (würde sich R² > 0.50 wünschen)<br>
+                    • Aber akzeptabel für sozialwissenschaftliche Daten
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">5</span>
+                <span class="step-title">F-Statistik: Modell-Gesamt-Signifikanz</span>
+                <div class="step-content">
+                    <strong>Output:</strong> <span class="highlight">F-statistic: 17.42 on 4 and 137 DF, p-value: 1.41e-11</span><br>
+                    <br>
+                    <strong>Was testet F?</strong><br>
+                    Die Nullhypothese: "Alle Koeffizienten sind = 0" (Modell ist nutzlos)<br>
+                    <br>
+                    <strong>Ergebnis:</strong><br>
+                    • p = 1.41e-11 ist VIEL kleiner als 0.001<br>
+                    • → H0 wird massiv abgelehnt<br>
+                    • → Das Modell ist HOCHSIGNIFIKANT<br>
+                    • → Die Variablen zusammen erklären signifikant mehr als "zufällig"
+                </div>
+            </div>
+
+            <div class="antwort-box">
+                <div class="antwort-title">💪 Deine komplette Antwort:</div>
+                <ul>
+                    <li><strong>Regressionsgleichung:</strong> ASQ001 = 9.62 + 0.199×UQ003 + 0.415×UQ006</li>
+                    <li><strong>Signifikant:</strong> UQ003 (p=0.0015), UQ006 (p<0.001)</li>
+                    <li><strong>Nicht signifikant:</strong> UQ002 (p=0.997), UQ004 (p=0.057)</li>
+                    <li><strong>Stärkster Effekt:</strong> UQ006 (Effekt = 6.74)</li>
+                    <li><strong>Modellgüte R²:</strong> 33.71% Varianz erklärt (moderat)</li>
+                    <li><strong>F-Statistik:</strong> p < 0.001 → Modell hochsignifikant</li>
+                    <li><strong>Interpretation:</strong> UQ006 ist die wichtigste Variable</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- KLAUSUR 2 -->
+        <div class="chapter" style="margin-top: 50px;">
+            <div class="chapter-header">📋 ÜBUNGSKLAUSUR 2</div>
+
+            <!-- ============ AUFGABE 2.1 ============ -->
+            <h3>🎯 Aufgabe 1: Falsifikationsansatz von Popper (5 Punkte)</h3>
+
+            <div class="aufgabe-box">
+                <div class="aufgabe-number">Originaltext aus der Klausur:</div>
+                <div class="aufgabe-text">
+                    Skizzieren Sie die Kernaussagen des Falsifikationsansatzes von Karl Popper.
+                </div>
+                <div class="aufgabe-points">(5 Punkte)</div>
+            </div>
+
+            <h4>🔍 Schritt-für-Schritt Erklärung:</h4>
+
+            <div class="erklarung-step">
+                <span class="step-nr">1</span>
+                <span class="step-title">Verifikation vs. Falsifikation verstehen</span>
+                <div class="step-content">
+                    <strong>Das Kernproblem:</strong><br>
+                    • Verifikation (Beweis durch Bestätigung) ist LOGISCH unmöglich<br>
+                    • Z.B. "Alle Schwäne sind weiß" - du kannst nicht alle Schwäne der Welt untersuchen<br>
+                    <br>
+                    <strong>Popper's Lösung:</strong><br>
+                    • Falsifikation (Beweis durch Widerlegung) ist MÖGLICH<br>
+                    • Nur EIN schwarzer Schwan widerlegt die Aussage komplett
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">2</span>
+                <span class="step-title">Asymmetrie von Verifikation und Falsifikation</span>
+                <div class="step-content">
+                    <strong>Verifikation:</strong><br>
+                    ✗ Du kannst eine Theorie niemals endgültig beweisen<br>
+                    ✗ Es könnten immer noch Fälle existieren, die sie widersprechen<br>
+                    <br>
+                    <strong>Falsifikation:</strong><br>
+                    ✓ Eine EINZIGE Beobachtung kann eine Theorie widerlegen<br>
+                    ✓ Das ist logisch und eindeutig möglich<br>
+                    <br>
+                    <strong>→ Deshalb sollte Wissenschaft auf Falsifikation basieren!</strong>
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">3</span>
+                <span class="step-title">Falsifizierbarkeit als Kriterium</span>
+                <div class="step-content">
+                    <strong>Wissenschaftliche Theorie = muss falsifizierbar sein</strong><br>
+                    <br>
+                    <strong>Beispiele falsifizierbarer Theorien:</strong><br>
+                    • "Social Media nutzer > 2h/Tag haben höhere Depressionsrate"<br>
+                    → Widerlegbar durch Gegenevidenz<br>
+                    <br>
+                    <strong>Beispiele NICHT falsifizierbarer Aussagen:</strong><br>
+                    • "Gott existiert" (nicht messbar)<br>
+                    • "Das Unbewusste kontrolliert alles" (nicht überprüfbar)<br>
+                    <br>
+                    <strong>→ Unfalsifizierbare Theorien sind NICHT wissenschaftlich!</strong>
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">4</span>
+                <span class="step-title">Der Forschungsprozess nach Popper</span>
+                <div class="step-content">
+                    <strong>Ablauf:</strong><br>
+                    1. Aufstellen einer Hypothese (klar, falsifizierbar)<br>
+                    2. Ableiten von Vorhersagen<br>
+                    3. Durchführen von Tests/Experimenten<br>
+                    4a. Falls Daten PASSEN: Hypothese bleibt (vorerst) bestätigt<br>
+                    4b. Falls Daten NICHT passen: Hypothese wird falsifiziert → neuer Versuch<br>
+                    <br>
+                    <strong>→ Wissenschaft = ständiger Prozess der Falsifizierung!</strong>
+                </div>
+            </div>
+
+            <div class="antwort-box">
+                <div class="antwort-title">💪 Deine komplette Antwort:</div>
+                <ul>
+                    <li><strong>Kernidee:</strong> Verifikation unmöglich, Falsifikation möglich</li>
+                    <li><strong>Asymmetrie:</strong> Eine Beobachtung widerlegt, viele Beobachtungen beweisen nicht</li>
+                    <li><strong>Falsifizierbarkeit:</strong> Notwendiges Kriterium für wissenschaftliche Theorien</li>
+                    <li><strong>Forschungsprozess:</strong> Hypothesen aufstellen, testen, ggf. falsifizieren</li>
+                    <li><strong>Bedeutung:</strong> Wissenschaft ist kritischer Prozess, nicht endgültige Wahrheit</li>
+                </ul>
+            </div>
+
+            <!-- ============ AUFGABE 2.2 ============ -->
+            <h3>🎯 Aufgabe 2: Qualitative vs. Quantitative Forschung (10 Punkte)</h3>
+
+            <div class="aufgabe-box">
+                <div class="aufgabe-number">Originaltext aus der Klausur:</div>
+                <div class="aufgabe-text">
+                    Nennen Sie je drei Stärken der qualitativen und quantitativen Forschung. Nennen Sie jeweils eine Forschungsfrage passend zu Ihrem Studiengang, bei der Sie ein qualitatives bzw. ein quantitatives Forschungsdesign wählen würden.
+                </div>
+                <div class="aufgabe-points">(10 Punkte)</div>
+            </div>
+
+            <h4>🔍 Schritt-für-Schritt Erklärung:</h4>
+
+            <div class="erklarung-step">
+                <span class="step-nr">1</span>
+                <span class="step-title">Drei Stärken der QUALITATIVEN Forschung</span>
+                <div class="step-content">
+                    <strong>Stärke 1: Tiefgang & Verständnis</strong><br>
+                    • Erfasst Bedeutungen, Motivationen, Kontexte<br>
+                    • Warum verhalten sich Menschen so?<br>
+                    • Nicht nur "Was", sondern "Warum"<br>
+                    <br>
+                    <strong>Stärke 2: Flexibilität & Offenheit</strong><br>
+                    • Kann neuen Themen folgen (nicht vorher festgelegt)<br>
+                    • Unerwartete Muster entdecken<br>
+                    • Anpassung an neue Erkenntnisse<br>
+                    <br>
+                    <strong>Stärke 3: Realistische Daten</strong><br>
+                    • Naturalistic Inquiry (echte Umgebung)<br>
+                    • Nicht künstlich in Laboren erzeugt<br>
+                    • Hohe ökologische Validität
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">2</span>
+                <span class="step-title">Drei Stärken der QUANTITATIVEN Forschung</span>
+                <div class="step-content">
+                    <strong>Stärke 1: Objektivität & Messbarkeit</strong><br>
+                    • Präzise Messung und Quantifizierung<br>
+                    • Weniger subjektive Interpretation<br>
+                    • Reproduzierbar und verifizierbar<br>
+                    <br>
+                    <strong>Stärke 2: Verallgemeinerbarkeit (Generalisierbarkeit)</strong><br>
+                    • Auf größere Populationen übertragbar<br>
+                    • Statistische Inferenz möglich<br>
+                    • Repräsentativität durch Sampling<br>
+                    <br>
+                    <strong>Stärke 3: Effizienz & Skalierbarkeit</strong><br>
+                    • Große Stichproben möglich (N > 1000)<br>
+                    • Schnelle Datenerhebung<br>
+                    • Computer-gestützte Analyse
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">3</span>
+                <span class="step-title">Forschungsfrage für QUALITATIVE Methode (IT-Kontext)</span>
+                <div class="step-content">
+                    <strong>Beispiel aus IT-Studium:</strong><br>
+                    <span class="highlight">"Wie erleben IT-Fachleute den Übergang von Wasserfall- zu agilen Entwicklungsmethoden? Welche Herausforderungen sehen sie?"</span><br>
+                    <br>
+                    <strong>Warum qualitativ?</strong><br>
+                    ✓ Geht um subjektive Erfahrungen<br>
+                    ✓ Braucht tiefe Verständnis von Perspektiven<br>
+                    ✓ Neue Aspekte könnten sich zeigen<br>
+                    ✓ Interviews/Fallstudien ideal<br>
+                    <br>
+                    <strong>Alternative Beispiele:</strong><br>
+                    • Wie sehen Softwareentwickler ihre Work-Life-Balance?<br>
+                    • Warum scheitern IT-Projekte?
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">4</span>
+                <span class="step-title">Forschungsfrage für QUANTITATIVE Methode (IT-Kontext)</span>
+                <div class="step-content">
+                    <strong>Beispiel aus IT-Studium:</strong><br>
+                    <span class="highlight">"Gibt es einen signifikanten Unterschied in der Produktivität zwischen Teams, die agile vs. Wasserfall-Methoden nutzen? (gemessen in Story Points/Sprint)"</span><br>
+                    <br>
+                    <strong>Warum quantitativ?</strong><br>
+                    ✓ Vergleich von Gruppen<br>
+                    ✓ Messbare Kriterien (Story Points, Bugs, Zeit)<br>
+                    ✓ Soll auf andere Teams generalisierbar sein<br>
+                    ✓ Statistische Tests möglich<br>
+                    <br>
+                    <strong>Alternative Beispiele:</strong><br>
+                    • Korreliert Erfahrung mit Anzahl von Bugs?<br>
+                    • Unterscheiden sich Code-Quality-Metriken zwischen Sprachen?
+                </div>
+            </div>
+
+            <div class="antwort-box">
+                <div class="antwort-title">💪 Deine komplette Antwort:</div>
+                <ul>
+                    <li><strong>Qualitativ (3 Stärken):</strong> Tiefgang, Flexibilität, realistische Daten</li>
+                    <li><strong>Quantitativ (3 Stärken):</strong> Objektivität, Generalisierbarkeit, Effizienz</li>
+                    <li><strong>Qualitative Frage:</strong> "Wie erleben Entwickler agile Transformationen?"</li>
+                    <li><strong>Quantitative Frage:</strong> "Unterscheidet sich Produktivität zwischen agile und Wasserfall?"</li>
+                </ul>
+            </div>
+
+            <!-- ============ AUFGABE 2.3 ============ -->
+            <h3>🎯 Aufgabe 3: Lage- und Streuungsmaße (5 Punkte)</h3>
+
+            <div class="aufgabe-box">
+                <div class="aufgabe-number">Originaltext aus der Klausur:</div>
+                <div class="aufgabe-text">
+                    Geben Sie an, welche der folgenden Lage- und Streuungsmaße für welches Skalenniveau berechnet werden können: Median, Modus, arithmetisches Mittel, Varianz, IQR.
+                </div>
+                <div class="aufgabe-points">(5 Punkte)</div>
+            </div>
+
+            <h4>🔍 Schritt-für-Schritt Erklärung:</h4>
+
+            <div class="erklarung-step">
+                <span class="step-nr">1</span>
+                <span class="step-title">Die drei Skalenniveaus wiederholen</span>
+                <div class="step-content">
+                    <strong>Nominal:</strong> Nur Kategorien (keine Ordnung)<br>
+                    • Beispiel: Geschlecht (m/w), Farbe, Religion<br>
+                    <br>
+                    <strong>Ordinal:</strong> Kategorien mit Ordnung<br>
+                    • Beispiel: Schulnoten (1-6), Zufriedenheit (sehr zufrieden - gar nicht)<br>
+                    <br>
+                    <strong>Metrisch (Intervall/Verhältnis):</strong> Zahlen mit Abständen<br>
+                    • Beispiel: Alter, Temperatur, Einkommen
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">2</span>
+                <span class="step-title">MODUS - Für welche Niveaus?</span>
+                <div class="step-content">
+                    <strong>Modus = häufigste Kategorie/Wert</strong><br>
+                    <br>
+                    ✓ Nominal: JA! (einziger Lagemaß)<br>
+                    ✓ Ordinal: JA<br>
+                    ✓ Metrisch: JA<br>
+                    <br>
+                    <strong>→ Modus funktioniert auf ALLEN Skalenniveaus!</strong>
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">3</span>
+                <span class="step-title">MEDIAN - Für welche Niveaus?</span>
+                <div class="step-content">
+                    <strong>Median = Mittelwert nach Sortierung</strong><br>
+                    <br>
+                    ✗ Nominal: NEIN (kann nicht sortieren)<br>
+                    ✓ Ordinal: JA! (Kategorien haben Ordnung)<br>
+                    ✓ Metrisch: JA<br>
+                    <br>
+                    <strong>→ Median ab ORDINAL Skalenniveau!</strong>
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">4</span>
+                <span class="step-title">ARITHMETISCHES MITTEL - Für welche Niveaus?</span>
+                <div class="step-content">
+                    <strong>Mittel = Summe geteilt durch N (braucht echte Zahlen!)</strong><br>
+                    <br>
+                    ✗ Nominal: NEIN (nicht mal kategorisierbar)<br>
+                    ✗ Ordinal: NEIN! (Abstände sind nicht gleich)<br>
+                    ✓ Metrisch: JA! (nur hier haben Abstände Bedeutung)<br>
+                    <br>
+                    <strong>→ Mittel NUR auf METRISCH Skalenniveau!</strong>
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">5</span>
+                <span class="step-title">VARIANZ & IQR - Für welche Niveaus?</span>
+                <div class="step-content">
+                    <strong>Varianz = durchschnittliche quadrierte Abweichung</strong><br>
+                    ✗ Nominal: NEIN<br>
+                    ✗ Ordinal: NEIN (hängt vom Mittel ab)<br>
+                    ✓ Metrisch: JA! (nur hier sinnvoll)<br>
+                    <br>
+                    <strong>IQR (Interquartil-Range) = Q3 - Q1</strong><br>
+                    ✗ Nominal: NEIN<br>
+                    ✓ Ordinal: JA! (Quartile basieren auf Sortierung)<br>
+                    ✓ Metrisch: JA<br>
+                    <br>
+                    <strong>→ Varianz NUR metrisch; IQR ab ordinal!</strong>
+                </div>
+            </div>
+
+            <div class="antwort-box">
+                <div class="antwort-title">💪 Übersichtstabelle:</div>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr>
+                        <th style="border: 1px solid #ccc; padding: 10px;">Maß</th>
+                        <th style="border: 1px solid #ccc; padding: 10px;">Nominal</th>
+                        <th style="border: 1px solid #ccc; padding: 10px;">Ordinal</th>
+                        <th style="border: 1px solid #ccc; padding: 10px;">Metrisch</th>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #ccc; padding: 10px;"><strong>Modus</strong></td>
+                        <td style="border: 1px solid #ccc; padding: 10px;">✓</td>
+                        <td style="border: 1px solid #ccc; padding: 10px;">✓</td>
+                        <td style="border: 1px solid #ccc; padding: 10px;">✓</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #ccc; padding: 10px;"><strong>Median</strong></td>
+                        <td style="border: 1px solid #ccc; padding: 10px;">✗</td>
+                        <td style="border: 1px solid #ccc; padding: 10px;">✓</td>
+                        <td style="border: 1px solid #ccc; padding: 10px;">✓</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #ccc; padding: 10px;"><strong>Mittel</strong></td>
+                        <td style="border: 1px solid #ccc; padding: 10px;">✗</td>
+                        <td style="border: 1px solid #ccc; padding: 10px;">✗</td>
+                        <td style="border: 1px solid #ccc; padding: 10px;">✓</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #ccc; padding: 10px;"><strong>Varianz</strong></td>
+                        <td style="border: 1px solid #ccc; padding: 10px;">✗</td>
+                        <td style="border: 1px solid #ccc; padding: 10px;">✗</td>
+                        <td style="border: 1px solid #ccc; padding: 10px;">✓</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #ccc; padding: 10px;"><strong>IQR</strong></td>
+                        <td style="border: 1px solid #ccc; padding: 10px;">✗</td>
+                        <td style="border: 1px solid #ccc; padding: 10px;">✓</td>
+                        <td style="border: 1px solid #ccc; padding: 10px;">✓</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- ============ AUFGABE 2.4 ============ -->
+            <h3>🎯 Aufgabe 4: Chi-Squared Test (8 Punkte)</h3>
+
+            <div class="aufgabe-box">
+                <div class="aufgabe-number">Originaltext aus der Klausur:</div>
+                <div class="aufgabe-text">
+                    Bei der Durchführung eines Hypothesentests erhalten Sie folgenden Output:
+                </div>
+                <div class="code-output">Pearson's Chi-squared test
+data: .Table
+X-squared = 3.7, df = 1, p-value = 0.0515</div>
+                <div class="aufgabe-text">
+                    Kreieren Sie eine Fragestellung, die hier Basis der Untersuchung sein könnte, und begründen Sie Ihre Wahl. Was sagt Ihnen dann der Output?
+                </div>
+                <div class="aufgabe-points">(8 Punkte)</div>
+            </div>
+
+            <h4>🔍 Schritt-für-Schritt Erklärung:</h4>
+
+            <div class="erklarung-step">
+                <span class="step-nr">1</span>
+                <span class="step-title">Wann braucht man Chi-Squared?</span>
+                <div class="step-content">
+                    <strong>Chi-Squared Test ist für:</strong><br>
+                    • Zwei KATEGORISCHE (nominal/ordinal) Variablen<br>
+                    • Test auf Unabhängigkeit<br>
+                    • "Sind zwei Kategorien zusammenhängend?"<br>
+                    <br>
+                    <strong>df = 1 bedeutet:</strong><br>
+                    • 2×2 Kontingenztabelle<br>
+                    • 2 Kategorien in Variable 1, 2 Kategorien in Variable 2
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">2</span>
+                <span class="step-title">Forschungsfrage kreieren</span>
+                <div class="step-content">
+                    <strong>Passendes Beispiel:</strong><br>
+                    <span class="highlight">"Gibt es einen Zusammenhang zwischen Geschlecht (m/w) und Nutzung von mobilem Online-Banking (ja/nein)?"</span><br>
+                    <br>
+                    <strong>Warum dieser Test?</strong><br>
+                    ✓ Geschlecht = nominal (2 Kategorien)<br>
+                    ✓ Nutzung = nominal (2 Kategorien)<br>
+                    ✓ χ² Tests auf Unabhängigkeit<br>
+                    ✓ df = (2-1)×(2-1) = 1 ✓<br>
+                    <br>
+                    <strong>Alternative Beispiele:</strong><br>
+                    • Korreliert Abteilung mit IT-Sicherheitsbewusstsein?<br>
+                    • Gibt es Zusammenhang Alter (U30/Ü30) und Cloud-Nutzung?
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">3</span>
+                <span class="step-title">Chi-Squared Statistik verstehen</span>
+                <div class="step-content">
+                    <strong>Output:</strong> <span class="highlight">X-squared = 3.7</span><br>
+                    <br>
+                    <strong>Was bedeutet X² = 3.7?</strong><br>
+                    • Maß für Abweichung von Unabhängigkeit<br>
+                    • Je größer X², desto größer der Unterschied<br>
+                    • X² = 3.7 ist MODERAT (nicht sehr groß)<br>
+                    <br>
+                    <strong>Interpretation ohne p-Wert:</strong><br>
+                    • Kleiner als kritischer Wert (ca. 3.84 bei df=1, α=0.05)<br>
+                    • → Knapp unter der Signifikanzschwelle
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">4</span>
+                <span class="step-title">p-Wert interpretieren</span>
+                <div class="step-content">
+                    <strong>Output:</strong> <span class="highlight">p-value = 0.0515</span><br>
+                    <br>
+                    <strong>Was bedeutet p = 0.0515?</strong><br>
+                    • p > 0.05 (knapp überschritten!)<br>
+                    • → Nicht signifikant auf α = 5% Niveau<br>
+                    <br>
+                    <strong>ABER: GRENZFALL!</strong><br>
+                    • p = 0.0515 ist praktisch "0.05"<br>
+                    • Mit α = 0.10 wäre es signifikant<br>
+                    • Vorsicht: Keine Signifikanz ≠ "kein Effekt"<br>
+                    <br>
+                    <strong>Schreibweise:</strong><br>
+                    "Der Zusammenhang ist nicht signifikant (χ²(1) = 3.7, p = .0515)"
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">5</span>
+                <span class="step-title">Conclusion & nächste Schritte</span>
+                <div class="step-content">
+                    <strong>Statistisches Ergebnis:</strong><br>
+                    ✓ Es besteht KEIN signifikanter Zusammenhang<br>
+                    ✓ Geschlecht und Mobile Banking sind unabhängig<br>
+                    <br>
+                    <strong>Was könntest du tun?</strong><br>
+                    • Größere Stichprobe (mehr Power)<br>
+                    • Andere Prädiktoren prüfen<br>
+                    • Praktische Signifikanz prüfen (Effektgröße)
+                </div>
+            </div>
+
+            <div class="antwort-box">
+                <div class="antwort-title">💪 Deine komplette Antwort:</div>
+                <ul>
+                    <li><strong>Forschungsfrage:</strong> Gibt es Zusammenhang zwischen Geschlecht und Mobile Banking-Nutzung?</li>
+                    <li><strong>Begründung:</strong> Zwei kategorische Variablen, χ² testet Unabhängigkeit</li>
+                    <li><strong>X² = 3.7:</strong> Moderate Abweichung von Unabhängigkeit</li>
+                    <li><strong>p = 0.0515:</strong> NICHT signifikant (p > 0.05), aber Grenzfall</li>
+                    <li><strong>Conclusion:</strong> Kein signifikanter Zusammenhang auf α = 5%</li>
+                </ul>
+            </div>
+
+            <!-- ============ AUFGABE 2.5 ============ -->
+            <h3>🎯 Aufgabe 5: ANOVA - Kassenlose Supermarktsysteme (10 Punkte)</h3>
+
+            <div class="aufgabe-box">
+                <div class="aufgabe-number">Originaltext aus der Klausur:</div>
+                <div class="aufgabe-text">
+                    Unten sehen Sie (in Ausschnitten) das Ergebnis einer ANOVA. Es soll untersucht werden, ob sich die Akzeptanz von Kassenlosen Supermarktsystemen zwischen den Konsumierenden unterschiedlicher europäischer Länder unterscheidet. Warum führen Sie eine Varianzanalyse durch? Was sagt Ihnen der Output? Was sagt er Ihnen nicht?
+                </div>
+                <div class="code-output">> summary(AnovaModel.3)
+Df Sum Sq Mean Sq F value Pr(>F)
+Land_Faktor 5 20.7 4.141 3.185 0.0072 **
+Residuals 2212 2875.9 1.300
+---
+Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+370 observations deleted due to missingness</div>
+                <div class="aufgabe-points">(10 Punkte)</div>
+            </div>
+
+            <h4>🔍 Schritt-für-Schritt Erklärung:</h4>
+
+            <div class="erklarung-step">
+                <span class="step-nr">1</span>
+                <span class="step-title">Warum ANOVA (und nicht t-Test)?</span>
+                <div class="step-content">
+                    <strong>Szenario:</strong><br>
+                    • 1 abhängige Variable: Akzeptanz (metrisch, Skala)<br>
+                    • 1 unabhängige Variable: Land (6 Länder) = 6 Gruppen<br>
+                    <br>
+                    <strong>Grund für ANOVA:</strong><br>
+                    ✓ t-Test vergleicht NUR 2 Gruppen<br>
+                    ✓ Mit 6 Ländern: C(6,2) = 15 t-Tests!<br>
+                    ✓ → Mehrfachvergleichsproblem (α-Inflation)<br>
+                    ✓ → ANOVA kontrolliert Fehler automatisch<br>
+                    <br>
+                    <strong>→ ANOVA ist die richtige Wahl für >2 Gruppen!</strong>
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">2</span>
+                <span class="step-title">Degrees of Freedom (DF) verstehen</span>
+                <div class="step-content">
+                    <strong>Output:</strong> <span class="highlight">Df = 5</span> (Land_Faktor)<br>
+                    <br>
+                    <strong>Berechnung:</strong><br>
+                    • DF = Anzahl Gruppen - 1<br>
+                    • DF = 6 - 1 = 5 ✓<br>
+                    <br>
+                    <strong>Residuals DF = 2212:</strong><br>
+                    • Das sind die Freiheitsgrade innerhalb der Gruppen<br>
+                    • DF_total = 2212 + 5 = 2217 Beobachtungen
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">3</span>
+                <span class="step-title">Sum Squares und Mean Squares</span>
+                <div class="step-content">
+                    <strong>Sum Sq (Sum of Squares):</strong><br>
+                    • Land_Faktor: 20.7 (Varianz zwischen Ländern)<br>
+                    • Residuals: 2875.9 (Varianz innerhalb Länder)<br>
+                    <br>
+                    <strong>Mean Sq = Sum Sq / Df:</strong><br>
+                    • Land_Faktor: 20.7 / 5 = 4.141<br>
+                    • Residuals: 2875.9 / 2212 = 1.300<br>
+                    <br>
+                    <strong>Interpretation:</strong><br>
+                    • MSbetween = 4.141 (durchschnittliche Unterschiede zwischen Ländern)<br>
+                    • MSwithin = 1.300 (durchschnittliche Unterschiede innerhalb Länder)<br>
+                    • → Zwischen-Varianz ist 4.141/1.300 = 3.18x größer!
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">4</span>
+                <span class="step-title">F-Statistik und p-Wert</span>
+                <div class="step-content">
+                    <strong>Output:</strong> <span class="highlight">F = 3.185, p = 0.0072</span><br>
+                    <br>
+                    <strong>Was testet F?</strong><br>
+                    • H0: Alle Länder haben GLEICHE mittlere Akzeptanz<br>
+                    • Ha: MINDESTENS 1 Land unterscheidet sich<br>
+                    <br>
+                    <strong>Ergebnis:</strong><br>
+                    • F = 3.185 > kritischer Wert<br>
+                    • p = 0.0072 < 0.05 (**) → SIGNIFIKANT<br>
+                    <br>
+                    <strong>Conclusion:</strong><br>
+                    ✓ Es gibt SIGNIFIKANTE Unterschiede zwischen den Ländern<br>
+                    ✓ Die Länder akzeptieren kassenlose Systeme unterschiedlich!
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">5</span>
+                <span class="step-title">Was der Output NICHT sagt</span>
+                <div class="step-content">
+                    <strong>Der Output sagt NICHT:</strong><br>
+                    ✗ Welche Länder unterscheiden sich voneinander<br>
+                    ✗ Dafür brauchst du Post-hoc Tests (Tukey, Scheffé)<br>
+                    <br>
+                    ✗ Wie groß der Effekt ist (Effektgröße η²)<br>
+                    ✗ η² = 20.7 / (20.7 + 2875.9) = 0.0072 = 0.72%<br>
+                    ✗ → Sehr KLEINER praktischer Effekt trotz Signifikanz!<br>
+                    <br>
+                    ✗ Normalverteilung und Varianzhomogenität<br>
+                    ✗ Outlier und fehlende Werte<br>
+                    ✗ (370 obs. deleted = wichtige Info!)
+                </div>
+            </div>
+
+            <div class="antwort-box">
+                <div class="antwort-title">💪 Deine komplette Antwort:</div>
+                <ul>
+                    <li><strong>Warum ANOVA:</strong> 6 Länder = >2 Gruppen, vermeidet Mehrfachvergleichsproblem</li>
+                    <li><strong>DF:</strong> 5 (= 6 Länder - 1)</li>
+                    <li><strong>F = 3.185, p = 0.0072:</strong> Signifikant (p < 0.05)</li>
+                    <li><strong>Interpretation:</strong> Länder unterscheiden sich signifikant in Kassenlos-Akzeptanz</li>
+                    <li><strong>NICHT bekannt:</strong> Welche Länder unterscheiden sich, Effektgröße (nur 0.72%), 370 fehlende Fälle</li>
+                </ul>
+            </div>
+
+            <!-- ============ AUFGABE 2.6 ============ -->
+            <h3>🎯 Aufgabe 6: t-Test für Work-Life-Balance (7 Punkte)</h3>
+
+            <div class="aufgabe-box">
+                <div class="aufgabe-number">Originaltext aus der Klausur:</div>
+                <div class="aufgabe-text">
+                    Im Rahmen einer Untersuchung zum Thema Work-Life-Balance wird untersucht, ob sich Frauen und Männer diesbezüglich (gemessen auf einer 6-stufigen Skala mit gleichen Distanzen zwischen den Stufen) unterscheiden. Geben Sie an, mit welchem Testverfahren dies üblicherweise geprüft wird (bei Vorliegen einer Normalverteilung). Begründen Sie Ihre Wahl.
+                </div>
+                <div class="aufgabe-points">(7 Punkte)</div>
+            </div>
+
+            <h4>🔍 Schritt-für-Schritt Erklärung:</h4>
+
+            <div class="erklarung-step">
+                <span class="step-nr">1</span>
+                <span class="step-title">Die Variablen analysieren</span>
+                <div class="step-content">
+                    <strong>Unabhängige Variable (UV):</strong><br>
+                    • Geschlecht: Frauen vs. Männer<br>
+                    • Kategorisch, 2 Gruppen<br>
+                    <br>
+                    <strong>Abhängige Variable (AV):</strong><br>
+                    • Work-Life-Balance auf 6-stufiger Skala<br>
+                    • Metrisch (gleiche Abstände!)<br>
+                    <br>
+                    <strong>Szenario:</strong><br>
+                    ✓ 1 metrische AV<br>
+                    ✓ 2 unabhängige Gruppen<br>
+                    ✓ → t-Test perfekt geeignet!
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">2</span>
+                <span class="step-title">Independent Samples t-Test (nicht gepaart)</span>
+                <div class="step-content">
+                    <strong>Die richtige Wahl:</strong><br>
+                    <span class="highlight">Independent Samples t-Test (ungepaarter t-Test)</span><br>
+                    <br>
+                    <strong>Begründung:</strong><br>
+                    ✓ Zwei VERSCHIEDENE Gruppen (Frauen ≠ Männer)<br>
+                    ✓ Jede Person nur einmal gemessen<br>
+                    ✓ Keine "Paare" (nicht z.B. Vorher-Nachher)<br>
+                    <br>
+                    <strong>Nicht der One-Sample oder Paired t-Test!</strong><br>
+                    ✗ One-Sample: Vergleicht 1 Gruppe gegen Mittelwert<br>
+                    ✗ Paired: Vergleicht Messwiederholungen
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">3</span>
+                <span class="step-title">Warum Normalverteilung wichtig ist</span>
+                <div class="step-content">
+                    <strong>Die Annahme:</strong> "bei Vorliegen einer Normalverteilung"<br>
+                    <br>
+                    <strong>Das bedeutet:</strong><br>
+                    ✓ Daten sind normalverteilt (Shapiro-Wilk Test)<br>
+                    ✓ → Parametrischer t-Test ist gerechtfertigt<br>
+                    <br>
+                    <strong>Wenn NICHT normalverteilt:</strong><br>
+                    ✗ Mann-Whitney-U Test (nichtparametrisch)<br>
+                    ✗ Das wäre die Alternative<br>
+                    <br>
+                    <strong>Mit Normalverteilung + N>30:</strong><br>
+                    ✓ t-Test robust, auch wenn leicht abweichend
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">4</span>
+                <span class="step-title">Welch vs. Student t-Test?</span>
+                <div class="step-content">
+                    <strong>Student's t-Test:</strong><br>
+                    • Setzt gleiche Varianzen voraus<br>
+                    • Homogenität der Varianzen (Levene's Test)<br>
+                    <br>
+                    <strong>Welch's t-Test:</strong><br>
+                    • Setzt NICHT gleiche Varianzen voraus<br>
+                    • Robuster (empfohlen)<br>
+                    <br>
+                    <strong>In der Praxis:</strong><br>
+                    ✓ Welch's t-Test ist immer eine sichere Wahl<br>
+                    ✓ Vergleicht trotzdem die Mittelwerte
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">5</span>
+                <span class="step-title">Hypothesen aufstellen</span>
+                <div class="step-content">
+                    <strong>H0 (Nullhypothese):</strong><br>
+                    "Es gibt keinen Unterschied in der Work-Life-Balance zwischen Frauen und Männern"<br>
+                    μ_Frauen = μ_Männer<br>
+                    <br>
+                    <strong>Ha (Alternativhypothese, zweiseitig):</strong><br>
+                    "Frauen und Männer unterscheiden sich in ihrer Work-Life-Balance"<br>
+                    μ_Frauen ≠ μ_Männer<br>
+                    <br>
+                    <strong>Signifikanzniveau:</strong><br>
+                    α = 0.05 (Standard)
+                </div>
+            </div>
+
+            <div class="antwort-box">
+                <div class="antwort-title">💪 Deine komplette Antwort:</div>
+                <ul>
+                    <li><strong>Testverfahren:</strong> Independent Samples t-Test (ungepaarter t-Test, ggf. Welch)</li>
+                    <li><strong>Begründung 1:</strong> 1 metrische AV (6-stufige Skala mit gleichen Abständen)</li>
+                    <li><strong>Begründung 2:</strong> 2 unabhängige Gruppen (Frauen vs. Männer)</li>
+                    <li><strong>Begründung 3:</strong> Normalverteilung gegeben → parametrischer Test berechtigt</li>
+                    <li><strong>Alternativ ohne Normalverteilung:</strong> Mann-Whitney-U Test</li>
+                </ul>
+            </div>
+
+            <!-- ============ AUFGABE 2.7 ============ -->
+            <h3>🎯 Aufgabe 7: Regression - Work-Life-Balance Modell (15 Punkte)</h3>
+
+            <div class="aufgabe-box">
+                <div class="aufgabe-number">Originaltext aus der Klausur:</div>
+                <div class="aufgabe-text">
+                    Im Folgenden sehen Sie die R-Ausgabe eines Regressionsmodells zur Berechnung der Variablen WS1.
+                </div>
+                <div class="code-output">Call: lm(formula = WS1 ~ IG1 + IG2 + DU1, data = WM14)
+
+Residuals:
+Min 1Q Median 3Q Max
+-6.4869 -1.6844 -0.2926 1.7884 8.3294
+
+Coefficients:
+Estimate Std.Error t value Pr(>|t|)
+Intercept 5.47431 0.56265 9.730 <2e-16***
+IG1 0.58388 0.10250 5.696 6.1e-08***
+IG2 -0.19006 0.07366 -2.580 0.0108*
+DU1 -0.08599 0.09834 -0.874 0.3833
+--- Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.642 on 153 degrees of freedom
+Multiple R-squared: 0.2261, Adjusted R-squared: 0.2109
+F-statistic: 14.9 on 3 and 153 DF, p-value: 1.475e-08</div>
+                <div class="aufgabe-text">
+                    Stellen Sie die geschätzte Gleichung des Regressionsmodells auf. Gehen Sie dabei von α = 5% aus. Identifizieren Sie die unabhängige Variable, die im Modell am stärksten auf WS1 wirkt. Gehen Sie auf die Güte des Modells ein. Erläutern Sie, was die F-Statistik testet und diese in dem obigen Fall aussagt. Begründen Sie Ihre Aussagen.
+                </div>
+                <div class="aufgabe-points">(15 Punkte)</div>
+            </div>
+
+            <h4>🔍 Schritt-für-Schritt Erklärung:</h4>
+
+            <div class="erklarung-step">
+                <span class="step-nr">1</span>
+                <span class="step-title">Regressionsgleichung aufstellen</span>
+                <div class="step-content">
+                    <strong>Schritt 1: Alle Koeffizienten sammeln</strong><br>
+                    • Intercept = 5.47431<br>
+                    • IG1 = 0.58388<br>
+                    • IG2 = -0.19006<br>
+                    • DU1 = -0.08599<br>
+                    <br>
+                    <strong>Schritt 2: Gleichung schreiben</strong><br>
+                    <span class="highlight">WS1 = 5.474 + 0.584×IG1 - 0.190×IG2 - 0.086×DU1</span><br>
+                    <br>
+                    <strong>Interpretation des Intercepts:</strong><br>
+                    • Wenn alle IV = 0: WS1 = 5.474 (Baseline)
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">2</span>
+                <span class="step-title">Signifikanz der Koeffizienten (α = 5%)</span>
+                <div class="step-content">
+                    <strong>Regel:</strong> Signifikant wenn Pr(>|t|) < 0.05<br>
+                    <br>
+                    <strong>Analyse:</strong><br>
+                    ✓ <strong>Intercept:</strong> p < 2e-16 (***) → Hochsignifikant<br>
+                    ✓ <strong>IG1:</strong> p = 6.1e-08 (***) → Hochsignifikant, POSITIV<br>
+                    ✓ <strong>IG2:</strong> p = 0.0108 (*) → Signifikant, NEGATIV<br>
+                    ✗ <strong>DU1:</strong> p = 0.3833 >> 0.05 → NICHT signifikant<br>
+                    <br>
+                    <strong>→ IG1 und IG2 behalten, DU1 rauswerfen!</strong>
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">3</span>
+                <span class="step-title">Stärkste Variable identifizieren</span>
+                <div class="step-content">
+                    <strong>Methode: Standardisierte Effekte = |Estimate| / Std.Error</strong><br>
+                    <br>
+                    • IG1: 0.58388 / 0.10250 = 5.70<br>
+                    • IG2: 0.19006 / 0.07366 = 2.58<br>
+                    • DU1: 0.08599 / 0.09834 = 0.87<br>
+                    <br>
+                    <strong>→ IG1 mit t = 5.70 hat den STÄRKSTEN Effekt!</strong><br>
+                    <br>
+                    <strong>Interpretation IG1:</strong><br>
+                    • Für jeden Punkt IG1 steigt WS1 um 0.584 Punkte<br>
+                    • Hochsignifikant positiver Effekt<br>
+                    • IG1 ist die Schlüsselvariable!
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">4</span>
+                <span class="step-title">Modellgüte: R² interpretieren</span>
+                <div class="step-content">
+                    <strong>Output:</strong> <span class="highlight">Multiple R-squared: 0.2261</span><br>
+                    <br>
+                    <strong>Was bedeutet R² = 0.2261?</strong><br>
+                    • Das Modell erklärt 22.61% der Varianz in WS1<br>
+                    • Die anderen 77.39% werden durch andere Faktoren erklärt<br>
+                    <br>
+                    <strong>Adjusted R² = 0.2109:</strong><br>
+                    • R² bereinigt um Anzahl der Variablen<br>
+                    • (verhindert "Overfitting")<br>
+                    <br>
+                    <strong>Bewertung:</strong><br>
+                    • R² = 0.226 ist MODERAT bis SCHWACH<br>
+                    • Für sozialwissenschaftliche Daten: akzeptabel<br>
+                    • Aber: Modell erklärt nicht die meiste Varianz<br>
+                    • → Es fehlen wahrscheinlich weitere Prädiktoren
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">5</span>
+                <span class="step-title">F-Statistik: Modell-Gesamt-Signifikanz</span>
+                <div class="step-content">
+                    <strong>Output:</strong> <span class="highlight">F-statistic: 14.9 on 3 and 153 DF, p-value: 1.475e-08</span><br>
+                    <br>
+                    <strong>Was testet die F-Statistik?</strong><br>
+                    H0: "Alle Regressionskoeffizienten sind = 0" (Modell ist nutzlos)<br>
+                    Ha: "Mindestens ein Koeffizient ist ≠ 0" (Modell hat Vorhersagekraft)<br>
+                    <br>
+                    <strong>Was bedeutet F = 14.9, p = 1.475e-08?</strong><br>
+                    • p ist VIEL kleiner als 0.001<br>
+                    • → H0 wird massiv abgelehnt<br>
+                    • → Das Modell ist HOCHSIGNIFIKANT<br>
+                    • → IG1, IG2, DU1 zusammen erklären signifikant mehr als zufällig
+                </div>
+            </div>
+
+            <div class="erklarung-step">
+                <span class="step-nr">6</span>
+                <span class="step-title">Residuen und Modellassumptionen</span>
+                <div class="step-content">
+                    <strong>Output zeigt Residuen-Summaries:</strong><br>
+                    Min = -6.49, Max = 8.33<br>
+                    Median ≈ -0.29 (knapp asymmetrisch)<br>
+                    <br>
+                    <strong>Was bedeutet das?</strong><br>
+                    • Residuals = Fehler des Modells<br>
+                    • Max-Abweichung: 8.33 Punkte (relativ groß)<br>
+                    • → Einige Fälle werden schlecht vorhergesagt<br>
+                    <br>
+                    <strong>Assumptions zu überprüfen:</strong><br>
+                    • Normalverteilung der Residuen (Q-Q Plot)<br>
+                    • Homoskedastizität (konstante Varianz)<br>
+                    • Keine Autokorrelation (Durbin-Watson)
+                </div>
+            </div>
+
+            <div class="antwort-box">
+                <div class="antwort-title">💪 Deine komplette Antwort:</div>
+                <ul>
+                    <li><strong>Regressionsgleichung:</strong> WS1 = 5.47 + 0.584×IG1 - 0.190×IG2 - 0.086×DU1</li>
+                    <li><strong>Signifikanz:</strong> IG1 (p<0.001***), IG2 (p=0.011*), DU1 (p=0.38, nicht signifikant)</li>
+                    <li><strong>Stärkste Variable:</strong> IG1 mit t = 5.70 (hochsignifikant positiv)</li>
+                    <li><strong>Modellgüte:</strong> R² = 22.61% erklärt (moderat, könnte besser sein)</li>
+                    <li><strong>F-Statistik (14.9, p=1.48e-08):</strong> Testet ob mindestens 1 Koeff. ≠ 0 → Hochsignifikant, Modell hat Vorhersagekraft</li>
+                    <li><strong>Empfehlung:</strong> DU1 entfernen (nicht signifikant), weitere Prädiktoren suchen</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- FOOTER -->
+        <div class="chapter">
+            <p style="text-align: center; font-style: italic; color: var(--text-light); margin-top: 40px;">
+                <strong>Viel Erfolg beim Lernen! 💪</strong><br>
+                Arbeite jede Aufgabe durch und versuche sie ERST alleine zu lösen, DANN schau dir die Erklärung an.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function toggleDarkMode() {
+            const isDark = document.body.getAttribute('data-theme') === 'dark';
+            document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+            document.getElementById('btn-darkmode').textContent = isDark ? '🌙' : '☀️';
+        }
+
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.body.setAttribute('data-theme', savedTheme);
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.getElementById('btn-darkmode').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        document.getElementById('btn-darkmode').addEventListener('click', toggleDarkMode);
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('progress-bar').style.width = scrollPercent + '%';
+        });
+    </script>
+</body>
+</html>
