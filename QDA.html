@@ -935,11 +935,15 @@ mean in group weiblich mean in group maennlich
                 <ul>
                     <li><strong>Testverfahren:</strong> Welch Two Sample t-Test</li>
                     <li><strong>Begründung:</strong> 2 Gruppen, metrische AV, normalverteilt</li>
-                    <li><strong>t-Statistik:</strong> t = 4.41 zeigt moderaten bis großen Unterschied</li>
-                    <li><strong>p-Wert:</strong> p < 0.001 → hochsignifikant</li>
-                    <li><strong>Praktische Bedeutung:</strong> Frauen nutzen SM intensiver (Diff. 0.158)</li>
-                    <li><strong>Konfidenzintervall:</strong> [0.088, 0.228] bestätigt Signifikanz</li>
-                    <li><strong>Fazit:</strong> Es gibt einen echten, signifikanten Unterschied</li>
+                    <strong>DEINE ANTWORT (wörtlich so schreiben):</strong><br><br>
+                    <strong>Testverfahren:</strong> Welch Two Sample t-Test<br>
+                    <strong>Begründung:</strong> 2 unabhängige Gruppen (m/w), metrische AV, Normalverteilung gegeben<br><br>
+                    <strong>Hypothesen:</strong> H0: μ_w = μ_m | Ha: μ_w ≠ μ_m<br><br>
+                    <strong>Ergebnisse interpretieren:</strong><br>
+                    • Frauen MW = 3.797, Männer MW = 3.639 → Diff. 0.158<br>
+                    • t(287) = 4.41, p < 0.001*** → SIGNIFIKANT<br>
+                    • 95% CI [0.088, 0.228] enthält NOT 0 → bestätigt Signifikanz<br><br>
+                    <strong>Fazit:</strong> Frauen nutzen Social Media signifikant intensiver als Männer.
                 </ul>
             </div>
 
@@ -1036,9 +1040,13 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</div>
                 <ul>
                     <li><strong>Forschungsfrage:</strong> [Konkrete Frage mit 7 Gruppen]</li>
                     <li><strong>DF = 6:</strong> Es gibt 7 Gruppen</li>
-                    <li><strong>F = 2.812:</strong> Moderater Unterschied zwischen Gruppen</li>
-                    <li><strong>p = 0.017:</strong> Signifikant (es gibt Unterschiede)</li>
-                    <li><strong>NICHT bekannt:</strong> Welche Gruppen unterscheiden sich, Effektgröße</li>
+                    <strong>DEINE ANTWORT:</strong><br><br>
+                    <strong>Warum ANOVA:</strong> 7 Gruppen → t-Test würde zu Mehrfachvergleichsproblem führen<br><br>
+                    <strong>Output-Interpretation:</strong><br>
+                    • DF = 6 (= 7 Gruppen - 1)<br>
+                    • F = 2.812, p = 0.017* → SIGNIFIKANT<br>
+                    • Es gibt statistisch nachweisbare Unterschiede zwischen den Gruppen<br><br>
+                    <strong>Was der Output NICHT sagt:</strong> Welche Gruppen genau unterscheiden sich (Post-hoc Test nötig), Effektgröße, praktische Bedeutung
                 </ul>
             </div>
 
@@ -1164,13 +1172,16 @@ F-statistic: 17.42 on 4 and 137 DF,  p-value: 1.41e-11</div>
             <div class="antwort-box">
                 <div class="antwort-title">💪 Deine komplette Antwort:</div>
                 <ul>
-                    <li><strong>Regressionsgleichung:</strong> ASQ001 = 9.62 + 0.199×UQ003 + 0.415×UQ006</li>
-                    <li><strong>Signifikant:</strong> UQ003 (p=0.0015), UQ006 (p<0.001)</li>
-                    <li><strong>Nicht signifikant:</strong> UQ002 (p=0.997), UQ004 (p=0.057)</li>
-                    <li><strong>Stärkster Effekt:</strong> UQ006 (Effekt = 6.74)</li>
-                    <li><strong>Modellgüte R²:</strong> 33.71% Varianz erklärt (moderat)</li>
-                    <li><strong>F-Statistik:</strong> p < 0.001 → Modell hochsignifikant</li>
-                    <li><strong>Interpretation:</strong> UQ006 ist die wichtigste Variable</li>
+                    <strong>DEINE ANTWORT (mit Begründungen):</strong><br><br>
+                    <strong>Regressionsgleichung (α=5%):</strong><br>
+                    ASQ001 = 9.62 + 0.199×UQ003 + 0.415×UQ006<br>
+                    (UQ002 und UQ004 rausnehmen, da nicht signifikant)<br><br>
+                    <strong>Signifikante Variablen:</strong> UQ003 (p=0.0015**), UQ006 (p<0.001***)<br>
+                    <strong>Nicht signifikant:</strong> UQ002 (p=0.997), UQ004 (p=0.057)<br><br>
+                    <strong>Stärkste Variable:</strong> UQ006 (t-Wert = 6.74) → größter Einfluss<br><br>
+                    <strong>Modellgüte:</strong> R² = 33.71% → moderat (67% andere Faktoren)<br>
+                    <strong>F-Test:</strong> F(4,137) = 17.42, p < 0.001*** → Modell hochsignifikant<br><br>
+                    <strong>Begründung:</strong> UQ006 ist Schlüsselvariable für ASQ001-Vorhersage
                 </ul>
             </div>
         </div>
@@ -1258,11 +1269,13 @@ F-statistic: 17.42 on 4 and 137 DF,  p-value: 1.41e-11</div>
             <div class="antwort-box">
                 <div class="antwort-title">💪 Deine komplette Antwort:</div>
                 <ul>
-                    <li><strong>Kernidee:</strong> Verifikation unmöglich, Falsifikation möglich</li>
-                    <li><strong>Asymmetrie:</strong> Eine Beobachtung widerlegt, viele Beobachtungen beweisen nicht</li>
-                    <li><strong>Falsifizierbarkeit:</strong> Notwendiges Kriterium für wissenschaftliche Theorien</li>
-                    <li><strong>Forschungsprozess:</strong> Hypothesen aufstellen, testen, ggf. falsifizieren</li>
-                    <li><strong>Bedeutung:</strong> Wissenschaft ist kritischer Prozess, nicht endgültige Wahrheit</li>
+                    <strong>DEINE ANTWORT:</strong><br><br>
+                    <strong>Kernaussagen des Falsifikationsansatzes:</strong><br><br>
+                    1. <strong>Verifikation ist unmöglich:</strong> Du kannst eine Theorie nicht durch positive Beispiele beweisen (z.B. "Alle Schwäne sind weiß" - du kannst nicht alle Schwäne überprüfen)<br><br>
+                    2. <strong>Falsifikation ist möglich:</strong> EINE Beobachtung widerlegt eine Theorie (ein schwarzer Schwan widerlegt die Theorie komplett)<br><br>
+                    3. <strong>Asymmetrie:</strong> Viele positive Bestätigungen = noch kein Beweis; aber ein Gegenbeispiel = Widerlegung<br><br>
+                    4. <strong>Falsifizierbarkeit als Kriterium:</strong> Nur falsifizierbare Theorien sind wissenschaftlich (z.B. "SM-Nutzer sind depressiver" ist falsifizierbar; "Gott existiert" nicht)<br><br>
+                    5. <strong>Wissenschaft als Prozess:</strong> Forschung = ständiges Testen und Falsifizieren, nicht Suche nach endgültiger Wahrheit
                 </ul>
             </div>
 
@@ -1362,10 +1375,13 @@ F-statistic: 17.42 on 4 and 137 DF,  p-value: 1.41e-11</div>
             <div class="antwort-box">
                 <div class="antwort-title">💪 Deine komplette Antwort:</div>
                 <ul>
-                    <li><strong>Qualitativ (3 Stärken):</strong> Tiefgang, Flexibilität, realistische Daten</li>
-                    <li><strong>Quantitativ (3 Stärken):</strong> Objektivität, Generalisierbarkeit, Effizienz</li>
-                    <li><strong>Qualitative Frage:</strong> "Wie erleben Entwickler agile Transformationen?"</li>
-                    <li><strong>Quantitative Frage:</strong> "Unterscheidet sich Produktivität zwischen agile und Wasserfall?"</li>
+                    <strong>DEINE ANTWORT:</strong><br><br>
+                    <strong>3 Stärken QUALITATIV:</strong> Tiefgang & Verständnis (Warum?), Flexibilität (neue Themen folgen), realistische Daten (natürliche Umgebung)<br><br>
+                    <strong>3 Stärken QUANTITATIV:</strong> Objektivität & Messbarkeit, Generalisierbarkeit (auf größere Populationen), Effizienz & Skalierung<br><br>
+                    <strong>Forschungsfrage QUALITATIV (dein Kontext):</strong><br>
+                    "Wie erleben IT-Fachleute die Einführung von agilen Methoden? Welche Hürden sehen sie?" → Interview/Fallstudie<br><br>
+                    <strong>Forschungsfrage QUANTITATIV (dein Kontext):</strong><br>
+                    "Gibt es einen signifikanten Unterschied in der Projektproduktivität zwischen agilen und Wasserfall-Teams?" → Messung & statistischer Test
                 </ul>
             </div>
 
@@ -1607,11 +1623,18 @@ X-squared = 3.7, df = 1, p-value = 0.0515</div>
             <div class="antwort-box">
                 <div class="antwort-title">💪 Deine komplette Antwort:</div>
                 <ul>
-                    <li><strong>Forschungsfrage:</strong> Gibt es Zusammenhang zwischen Geschlecht und Mobile Banking-Nutzung?</li>
-                    <li><strong>Begründung:</strong> Zwei kategorische Variablen, χ² testet Unabhängigkeit</li>
-                    <li><strong>X² = 3.7:</strong> Moderate Abweichung von Unabhängigkeit</li>
-                    <li><strong>p = 0.0515:</strong> NICHT signifikant (p > 0.05), aber Grenzfall</li>
-                    <li><strong>Conclusion:</strong> Kein signifikanter Zusammenhang auf α = 5%</li>
+                    <strong>DEINE ANTWORT:</strong><br><br>
+                    <strong>Forschungsfrage:</strong> "Gibt es einen Zusammenhang zwischen Geschlecht (m/w) und Nutzung von mobilem Online-Banking (ja/nein)?"<br><br>
+                    <strong>Begründung der Wahl:</strong><br>
+                    • Geschlecht = nominal (2 Kategorien)<br>
+                    • Nutzung = nominal (2 Kategorien)<br>
+                    • χ² testet Unabhängigkeit zwischen zwei kategorischen Variablen<br>
+                    • df = 1 passt zu 2×2 Kontingenztabelle<br><br>
+                    <strong>Was der Output sagt:</strong><br>
+                    • X² = 3.7 → moderate Abweichung<br>
+                    • p = 0.0515 > 0.05 → NICHT signifikant auf α = 5%<br>
+                    • Aber: GRENZFALL\! (knapp über Grenze)<br><br>
+                    <strong>Schluss:</strong> Geschlecht und Mobile Banking sind statistisch unabhängig (kein signifikanter Zusammenhang)
                 </ul>
             </div>
 
@@ -1729,11 +1752,16 @@ Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
             <div class="antwort-box">
                 <div class="antwort-title">💪 Deine komplette Antwort:</div>
                 <ul>
-                    <li><strong>Warum ANOVA:</strong> 6 Länder = >2 Gruppen, vermeidet Mehrfachvergleichsproblem</li>
-                    <li><strong>DF:</strong> 5 (= 6 Länder - 1)</li>
-                    <li><strong>F = 3.185, p = 0.0072:</strong> Signifikant (p < 0.05)</li>
-                    <li><strong>Interpretation:</strong> Länder unterscheiden sich signifikant in Kassenlos-Akzeptanz</li>
-                    <li><strong>NICHT bekannt:</strong> Welche Länder unterscheiden sich, Effektgröße (nur 0.72%), 370 fehlende Fälle</li>
+                    <strong>DEINE ANTWORT:</strong><br><br>
+                    <strong>Warum ANOVA?</strong> 6 Länder = 6 Gruppen. t-Test nur für 2 Gruppen. Mit 6 Gruppen: C(6,2)=15 Tests → Mehrfachvergleichsproblem → ANOVA ist richtig\!<br><br>
+                    <strong>DF = 5:</strong> (6 Länder - 1)<br><br>
+                    <strong>F = 3.185, p = 0.0072**:</strong> SIGNIFIKANT (p < 0.05)<br>
+                    → Es gibt statistisch nachweisbare Unterschiede zwischen den Ländern<br>
+                    → Länder unterscheiden sich signifikant in Kassenlos-Akzeptanz<br><br>
+                    <strong>Was der Output NICHT sagt:</strong><br>
+                    ✗ Welche Länder genau unterscheiden (Post-hoc Test: Tukey, Scheffé)<br>
+                    ✗ Effektgröße η² = nur 0.72% (sehr klein\!)<br>
+                    ✗ Wichtig: 370 Beobachtungen gelöscht (fehlende Werte\!)
                 </ul>
             </div>
 
@@ -1844,11 +1872,17 @@ Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
             <div class="antwort-box">
                 <div class="antwort-title">💪 Deine komplette Antwort:</div>
                 <ul>
-                    <li><strong>Testverfahren:</strong> Independent Samples t-Test (ungepaarter t-Test, ggf. Welch)</li>
-                    <li><strong>Begründung 1:</strong> 1 metrische AV (6-stufige Skala mit gleichen Abständen)</li>
-                    <li><strong>Begründung 2:</strong> 2 unabhängige Gruppen (Frauen vs. Männer)</li>
-                    <li><strong>Begründung 3:</strong> Normalverteilung gegeben → parametrischer Test berechtigt</li>
-                    <li><strong>Alternativ ohne Normalverteilung:</strong> Mann-Whitney-U Test</li>
+                    <strong>DEINE ANTWORT:</strong><br><br>
+                    <strong>Testverfahren:</strong> Independent Samples t-Test (Welch's t-Test)<br><br>
+                    <strong>Begründung:</strong><br>
+                    1. Abhängige Variable: Work-Life-Balance auf 6-stufiger Skala mit gleichen Abständen = METRISCH<br>
+                    2. Unabhängige Variable: Geschlecht (Frauen vs. Männer) = 2 UNABHÄNGIGE Gruppen<br>
+                    3. Normalverteilung gegeben (Aufgabe) = parametrischer Test berechtigt<br>
+                    → Deshalb Independent Samples t-Test\!<br><br>
+                    <strong>Hypothesen:</strong><br>
+                    H0: μ_Frauen = μ_Männer<br>
+                    Ha: μ_Frauen ≠ μ_Männer<br><br>
+                    <strong>Alternativ (wenn KEINE Normalverteilung):</strong> Mann-Whitney-U Test (nichtparametrisch)
                 </ul>
             </div>
 
@@ -2001,12 +2035,22 @@ F-statistic: 14.9 on 3 and 153 DF, p-value: 1.475e-08</div>
             <div class="antwort-box">
                 <div class="antwort-title">💪 Deine komplette Antwort:</div>
                 <ul>
-                    <li><strong>Regressionsgleichung:</strong> WS1 = 5.47 + 0.584×IG1 - 0.190×IG2 - 0.086×DU1</li>
-                    <li><strong>Signifikanz:</strong> IG1 (p<0.001***), IG2 (p=0.011*), DU1 (p=0.38, nicht signifikant)</li>
-                    <li><strong>Stärkste Variable:</strong> IG1 mit t = 5.70 (hochsignifikant positiv)</li>
-                    <li><strong>Modellgüte:</strong> R² = 22.61% erklärt (moderat, könnte besser sein)</li>
-                    <li><strong>F-Statistik (14.9, p=1.48e-08):</strong> Testet ob mindestens 1 Koeff. ≠ 0 → Hochsignifikant, Modell hat Vorhersagekraft</li>
-                    <li><strong>Empfehlung:</strong> DU1 entfernen (nicht signifikant), weitere Prädiktoren suchen</li>
+                    <strong>DEINE ANTWORT:</strong><br><br>
+                    <strong>Regressionsgleichung (α=5%):</strong><br>
+                    WS1 = 5.47 + 0.584×IG1 - 0.190×IG2 - 0.086×DU1<br><br>
+                    <strong>Signifikante Variablen:</strong><br>
+                    ✓ IG1: p < 0.001*** (hochsignifikant, POSITIV)<br>
+                    ✓ IG2: p = 0.011* (signifikant, NEGATIV)<br>
+                    ✗ DU1: p = 0.38 >> 0.05 (NICHT signifikant, kann raus)<br><br>
+                    <strong>Stärkste Variable:</strong> IG1 mit t(153)=5.70 → größter Effekt<br><br>
+                    <strong>Güte des Modells:</strong><br>
+                    R² = 22.61% → Modell erklärt nur ca. 23% der Varianz<br>
+                    Adjusted R² = 21.09% (bereinigt)<br>
+                    → MODERAT, nicht besonders gut, aber akzeptabel<br><br>
+                    <strong>F-Statistik (14.9, p=1.48e-08):</strong><br>
+                    Testet: H0 "Alle Koeff. = 0" (Modell nutzlos)<br>
+                    p < 0.001 → H0 ablehnen → Modell ist HOCHSIGNIFIKANT, hat Vorhersagekraft<br><br>
+                    <strong>Empfehlung:</strong> DU1 entfernen, weitere Prädiktoren hinzufügen (um R² zu erhöhen)
                 </ul>
             </div>
 
